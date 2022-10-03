@@ -1,0 +1,35 @@
+<section class="dashboard" >
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6">
+        <h1 class="main-heading">Submitted Forms</h1>
+        <p class="sub-heading">One place for all your submitted forms.</p>
+      </div>
+      <div class="col-sm-6">
+        <img [src]="userDataService.getUserData().organization_logo || 'assets/user.png'" class="float-right user-img">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="line"></div> 
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <h1 class="heading">Filter by status</h1>
+      </div>
+      <div class="col-sm-12 button-section">
+        <input type="button" class ="approved-btn buttons btn-hover-anim" value="Approved">
+        <input type="button" class="review-btn buttons btn-hover-anim" value="Send for Review">
+        <input type="button" class="review-btn buttons btn-hover-anim" value="Pending/Overdue">
+      </div>
+    </div>
+    <div class="row form-list">
+      <div class="col-sm-3 wow fadeInUp" *ngFor="let form of submittedForms; let index=index " [attr.data-wow-delay]="(0.2*(index%10)) + 's'">
+        <app-submitted-form-stamp [form]= "form"></app-submitted-form-stamp>
+        <!-- <app-chapter-stamp></app-chapter-stamp> -->
+        <!-- <app-form-stamp></app-form-stamp> -->
+      </div>
+    </div>
+  </div>
+</section>

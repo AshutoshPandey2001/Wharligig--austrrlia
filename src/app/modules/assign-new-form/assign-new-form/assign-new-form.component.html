@@ -1,0 +1,100 @@
+<div id="assignForm" class="overlay assign-form-template" [ngClass]="{'super-nav-open': userDataService.getSelectedOrg()}" >
+  <div class="overlay-content">
+    <a href="javascript:void(0)" class="close-btn" (click)="closeOverlay('assignForm')">
+      <div>
+        <span class="close-icon">
+          &times;<br>
+        </span>
+        <span class="close-label">Close</span>
+      </div>
+    </a>
+    <div class="overlay-body slim-scrollbar" >
+      <div class="row">
+        <div class="col-sm-9">
+          <div class="heading">Assign Form</div>
+          <p class="info">Select Team Member who has to be allotted the form. They will be notified through email and notification on their dashboard.
+           <br>If your Team Member has not been added yet,<a class="click-add-tag" href="javascript:void(0)">Click here to Add them.</a>
+          </p>  
+        </div>
+      </div>
+      <form novalidate>
+        <div class="row">
+          <div class="col-sm-5">
+            <div class="form-group">
+              <label class="" for="members">Select Team Members</label>
+              <div class="input-border">
+                <ng-select [(ngModel)]="userSelectionDrop" id="members" class="custom" [items]="userList" bindLabel="name" bindValue="id" name="members" (change)="onUserSelect($event)" required placeholder="Select assignee">
+                </ng-select> 
+              </div>
+            </div>
+          </div>
+
+          <div class="offset-sm-2 col-sm-5">
+            <div class="form-group">
+              <label class="" for="members">Due Date</label>
+              <div>
+                <div class="date-picker-cont">
+                  <img class="down-arrow" src="/assets/Chevron - Down.svg">
+                  <ng-datepicker [(ngModel)]="date" #dateselect="ngModel" name="dateselect" [options]="options"></ng-datepicker>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>  
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="assignees" for="policy">Assignees</label>
+              <div class="row">
+                <div class="col-sm-6" *ngFor="let user of selectedUsers">
+                  <section class="stamp">
+                    <div class="remove-btn">
+                      <a href="javascript:void(0)" (click)="removePolicy(user)">
+                        <img src="/assets/cross-out.png">
+                      </a>
+                    </div>
+                    <div>
+                      <div class="organization-details">
+                        <img [src]="user.userimage" class="circle" onError="this.src='/assets/user.png'"/>
+                        <div class="org-right">
+                          <p class="profile-name">{{user.name}}</p>
+                          <p class="designation">{{user.designation}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-1 text-right">
+            <div class="v-line" style=""></div>
+          </div>
+          <div class="col-sm-5">
+            <div>
+              <label class="assignees">Assigned Form</label>
+              <div class="">
+                <h2 class="form-heading">Form Name</h2>
+                <h3 class="form-Name">{{selectedTemplate.title}}</h3>
+                <h2 class="form-heading">Description</h2>
+                <h3 class="form-description">{{selectedTemplate.description}}</h3>
+                <h2 class="form-heading">Created On</h2>
+                <h3 class="form-date">{{commonService.getFormatedDate(selectedTemplate.createdate)}}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-7"></div>
+          <div class="col-sm-2">
+            <button class="stepper-btn cancel" type="button" (click)="closeOverlay('assignForm')">CANCEL</button>
+          </div>
+          <div class="col-sm-2">
+            <button type="button" class="stepper-btn create" (click)="onClickedAssignForm()" >ASSIGN FORM</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>

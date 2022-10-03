@@ -1,0 +1,86 @@
+#hubspotForm{
+  margin-top: 15px;
+}
+.section-1{
+  background: url('/assets/Rectangle 35.jpg');
+  padding: 60px 40px;
+}
+.section-1 .text-3{
+  margin-top: 5%;
+  max-width: 80%;
+}
+
+/*Section 2 start*/
+.section-2{
+  /*padding: 60px 40px;*/
+}
+.section-2 .text-1, .section-2 .text-2{
+  font-size: 28px;
+}
+.section-2 form{
+  /*margin-top: 25px;*/
+}
+.section-2 .left-section{
+  background: url('/assets/Group 147.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  padding: 80px 60px;
+}
+.section-2 .left-section .text-3{
+  margin-top: 5%;
+}
+.section-2 .right-section{
+  padding: 30px 50px;
+  padding-bottom: 0;
+}
+.section-2 form label{
+  font-family: Montserrat-SemiBold;
+  font-size: 16px;
+  letter-spacing: -0.6px;
+  color: #202020;
+  margin-bottom: 5px;
+}
+.section-2 form input, .section-2 form textarea{
+  border: solid 1px #b6b6b6;
+  background-color: #f3f3f3;
+  font-family: Montserrat-Regular;
+  font-size: 14px;
+  letter-spacing: -0.54px;
+  color: #acacac;
+  resize: none;
+  border-radius: 0;
+}
+.section-2 form .form-group{
+  margin-top: 25px;
+}
+/*Section 2 end*/
+
+/*Media queries  start*/
+/* Portrait tablets and small desktops */
+@media screen and (max-width: 1199px) {
+}
+
+@media screen and (max-width: 992px) {
+}
+
+/* Landscape phones and portrait tablets */
+@media screen and (max-width: 767px) {
+  .section-1, .section-2{
+    padding: 15px;
+  }
+  .section-1 .text-3{
+    max-width: 100%;
+  }
+  .section-2 form .form-group{
+    margin-top: 0px;
+  }
+  .section-2 form label{
+    font-size: 13px;
+  }
+}
+
+/* Portrait phones and smaller */
+@media screen and (max-width: 480px) {
+
+}

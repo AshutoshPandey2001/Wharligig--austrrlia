@@ -1,0 +1,99 @@
+.color-verify-text{
+  font-size: 24px;
+  font-family: HKGrotesk-Bold;
+  color: #4a4a4a;
+}
+.verify-email-text{
+  margin: 0px;
+  font-size: 24px;
+  font-family: HKGrotesk-Light;
+  color: #4a4a4a;
+}
+.email-verify-page{
+  display: flex;
+  align-items: center;
+}
+.text-field{
+  padding-right: 45px;
+}
+.left-section{
+  padding-left: 5%;
+  padding-right: 5%;
+  align-items: center;
+  padding-top: 25px;
+}
+.btn-verifi{
+  padding-top: 35px;
+}
+.right-section{
+  min-height: calc(100vh - 60px);
+  background-position: center;
+  background-size: cover;
+  align-items: center;
+}
+.verifi-email-field{
+  margin-top: 20px;
+  padding-bottom: 10px;
+}
+.valid-icon-header{
+  position: relative; 
+}
+.valid-success-icon{
+  position: absolute;
+  z-index: 1;
+  right: 20px;
+  top: 43px;
+  font-size: 30px;
+  color: #7B7B7B;
+  width: 20px;
+}
+.valid-error-icon{
+  position: absolute;
+  z-index: 1;
+  right: 20px;
+  top: 43px;
+  font-size: 30px;
+  width: 20px;
+}
+.reset-pass.resend-mail{
+  padding: 0;
+}
+/*Media queries  start*/
+/* Landscape*/
+
+@media only screen and (min-device-width: 1366px) and (max-device-height: 1024px) and (-webkit-min-device-pixel-ratio: 2)  and (orientation: landscape)  {
+  
+}
+
+/* Portrait*/
+@media only screen and (min-device-width: 1024px) and (max-device-height: 1366px) and (-webkit-min-device-pixel-ratio: 2)  and (orientation: portrait)  {
+  
+}
+
+/* Portrait tablets and small desktops */
+@media screen and (max-width: 1199px) {
+  
+}
+
+@media screen and (max-width: 992px) {
+
+
+}
+
+/* Landscape phones and portrait tablets */
+@media screen and (max-width: 767px) {
+  .email-verify-page{
+    display: block;
+  }
+  .left-section{
+    padding: 10px 15px 20px 15px;
+  }
+  .right-section{
+    padding: 0px !important;
+  }
+}
+
+/* Portrait phones and smaller */
+@media screen and (max-width: 480px) {
+  
+}

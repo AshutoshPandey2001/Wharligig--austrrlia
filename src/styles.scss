@@ -1,0 +1,431 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+.modal-open .modal{
+  z-index: 999999;
+}
+body{
+  margin: 0px !important;
+}
+html, body { height: 100%; }
+/*Buttons start*/
+.red-border-btn{
+  border-radius: 28px;
+  border: solid 3px #d81f29;
+}
+.red-bg-btn{
+  border-radius: 46px;
+  background-color: #d81f29;
+  color: #fff;
+  padding: 12px 30px;
+  font-size: 15px;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: bold;
+  font-family: HKGrotesk-Bold;
+  border: none;
+}
+.red-bg-btn:hover{
+  color: #fff;
+  text-decoration: none;
+}
+.red-bg-btn:focus{
+  outline: none;
+}
+.white-bg-btn{
+  border-radius: 46px;
+  background-color: #fff;
+  color: #d81f29;
+  padding: 15px 30px;
+  font-size: 15px;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: bold;
+  font-family: HKGrotesk-Bold;
+}
+.white-bg-btn:hover{
+  color: #d81f29;
+  text-decoration: none;
+}
+.green-bg-btn{
+  border-radius: 46px;
+  background-color: #3adb64;
+  color: #fff;
+  padding: 10px 30px;
+  font-size: 15px;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: bold;
+  font-family: HKGrotesk-Bold;
+  outline: none;
+}
+.green-bg-btn:hover, .green-bg-btn:focus{
+  text-decoration: none;
+  outline: none;
+}
+.cancel-btn{
+  color: #8d8d8d;
+  padding: 10px 25px;
+  background: transparent;
+  outline: none;
+}
+.cancel-btn:focus{
+  outline: none;
+}
+/*Buttons end*/
+
+/*text start*/
+.text-1{
+  font-family: HKGrotesk-Bold;
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 1.2;
+  letter-spacing: -1.65px;
+  margin: 0;
+}
+.text-2{
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: -1.65px;
+  font-family: HKGrotesk-Light;
+  font-size: 36px;
+  margin: 0;
+}
+.text-3{
+  font-family: HKGrotesk-Light;
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.56;
+  letter-spacing: -0.75px;
+}
+/*Color text*/
+.text-black{
+  color: #4a4a4a;
+}
+.text-red{
+  color: #d81f29;
+}
+.text-white{
+  color: #fff;
+}
+/*text end*/
+
+/*Error message*/
+.error{
+  color: red;
+  font-size: 14px;
+  margin-top: 1px;
+  font-family: HKGrotesk-Bold;
+}
+
+/*Text1 css start*/
+.onboarding .text-1{
+  font-size: 27px;
+  font-family: PlayfairDisplay-Bold;
+  color: #4a4a4a;
+}
+/*Text1 css end*/
+/*label-heading css start*/
+.onboarding .label-heading{
+  font-size: 15px;
+  font-weight: 500;
+  font-family: HKGrotesk-Bold;
+  color: #797979;
+}
+/*label-heading css end*/ 
+/*text-field css start*/
+.onboarding .text-field{
+  width: 100%;
+  padding: 15px 15px;
+  font-size: 14px;
+  font-family: HKGrotesk-Regular;
+  display: block;
+  color: #131313;
+  border: solid 1px #e8e8e8;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+}
+/*text-field css end*/
+/*Button css start*/
+.red-btn{
+  background-color: #d81f29;
+  color: white;
+  padding: 15px 30px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  font-family: HKGrotesk-Bold;
+  margin: 1px;
+  cursor: pointer;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  min-width: 150px;
+}
+.red-border-btn{
+  background-color: #fff;
+  color: #d81f29;
+  padding: 8px 30px;
+  text-align: center;
+  display: inline-block;
+  font-size: 14px;
+  font-family: HKGrotesk-Bold;
+  margin: 1px;
+  cursor: pointer;
+  border-radius: 50px;
+  border: 2px solid #d81f29 !important;
+  outline: none;
+}
+/*Button css end*/
+
+/*anchor-text css start*/
+.resend-mail{
+  padding-top: 15px;
+  color: #a1a1a1;
+  font-size: 14px;
+  font-family: HKGrotesk-Regular;
+}
+.anchor-text,.anchor-text:hover{
+  color: #a1a1a1;
+  font-family: HKGrotesk-Regular;
+  text-decoration: underline;
+}
+/*anchor-text css End*/
+
+/* Error Message validation Start*/
+.err-msg{
+  color: red;
+  padding-top: 5px;
+  font-size: 14px;
+  font-family: HKGrotesk-Light;
+}
+/*Error Message validation End*/
+
+/*Slim scrollbar*/
+.slim-scrollbar::-webkit-scrollbar-track
+{
+ -webkit-box-shadow: inset 0 0 6px rgba(195,195,195,0.6);
+  background-color: #fff;
+}
+
+.slim-scrollbar::-webkit-scrollbar
+{
+  width: 3px;
+  background-color: #F5F5F5;
+}
+
+.slim-scrollbar::-webkit-scrollbar-thumb
+{
+  background-color: #FFF;
+  background-image: -webkit-linear-gradient(90deg,rgb(211, 207, 207) 0%,rgb(187, 183, 183) 25%, transparent 100%, rgb(232, 225, 225) 75%, transparent);
+  border-radius: 10px;
+}
+
+/* start button hover effect */
+.btn-hover-anim {
+  overflow: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  transition: transform .6s cubic-bezier(.19, 1, .22, 1), opacity .2s ease;
+  transition: transform .6s cubic-bezier(.19, 1, .22, 1), opacity .2s ease, -webkit-transform .6s cubic-bezier(.19, 1, .22, 1)
+}
+
+.btn-hover-anim:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  height: 101%;
+  padding-top: 101%;
+  border-radius: 50%;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+  transition: background-color .1s linear, -webkit-transform .4s ease;
+  transition: transform .4s ease, background-color .1s linear;
+  transition: transform .4s ease, background-color .1s linear, -webkit-transform .4s ease;
+  z-index: -1;
+  background-color: hsla(0, 0%, 92%, 0.37)
+}
+
+.btn-hover-anim:hover:after {
+  -webkit-transform: scale(1);
+  transform: scale(1)
+}
+/* end button hover effect */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body.overlay-open{
+  overflow: hidden;
+}
+/*Toaster start*/
+#toast-container{
+  font-family: HKGrotesk-Medium;
+  width: 100%;
+  bottom: 0px;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+#toast-container>.toast-success {
+  background: #14DEBF;
+  border-radius: 50px;
+}
+#toast-container>.toast-error{
+  background: #FE5C5E;
+  border-radius: 50px;
+}
+#toast-container>.toast{
+  border-radius: 0px;
+  width: 100%;
+  box-shadow: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: 0;
+}
+#toast-container .ngx-toastr{
+  width: 100%;
+  box-shadow: none;
+  margin: 0;
+  border-radius: 0;
+}
+/*Toaster end*/
+/*Confirmation overlay start*/
+.confirmation-overlay{
+  top: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  left: 0;
+  background-color: rgba(26, 26, 26, 0.8);
+  z-index: 1111;
+  transition: opacity 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s, background-color 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s;
+  font-family: HKGrotesk-Regular;
+  -webkit-animation: fadeInFromNone 0.5s ease-out;
+  -moz-animation: fadeInFromNone 0.5s ease-out;
+  -o-animation: fadeInFromNone 0.5s ease-out;
+  animation: fadeInFromNone 0.5s ease-out;
+}
+.confirmation-overlay > div{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+}
+.confirmation-overlay h2{
+  display: inline-block;
+  vertical-align: middle;
+  color: #fff;
+  margin: 0;
+  margin-right: 10px;
+}
+.confirmation-overlay button{
+  display: inline-block;
+  vertical-align: middle;
+  background-color: rgb(255, 255, 255);
+  border: none;
+  transition: background-color 0.2s cubic-bezier(0.23, 1, 0.32, 1) 0s, border-color 0.2s cubic-bezier(0.23, 1, 0.32, 1) 0s, color 0.2s cubic-bezier(0.23, 1, 0.32, 1) 0s, opacity 0.2s cubic-bezier(0.23, 1, 0.32, 1) 0s;
+  border-radius: 50px;
+  padding: 9px 20px;
+  margin: 0 3px;
+  font-size: 16px;
+  font-family: HKGrotesk-Medium;
+}
+/*Block confirmation style*/
+.confirmation-overlay .block{
+  text-align: center;
+}
+.confirmation-overlay .block h2{
+  display: block;
+  margin-bottom: 35px;
+}
+@-webkit-keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}
+/*Confirmation overlay end*/
+
+/*Animation*/
+@-webkit-keyframes fadeInFromZero {
+  0%   { height: 0; }
+  100% { height: 210px; }
+}
+@-moz-keyframes fadeInFromZero {
+  0%   { height: 0; }
+  100% { height: 210px; }
+}
+@-o-keyframes fadeInFromZero {
+  0%   { height: 0; }
+  100% { height: 210px; }
+}
+@keyframes fadeInFromZero{
+  0%   { height: 0; }
+  100% { height: 210px; }
+}

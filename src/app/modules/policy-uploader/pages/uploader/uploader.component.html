@@ -1,0 +1,203 @@
+<section class="top-space uploader policy-uploader">
+  <div class="container-fluid">
+    <form name="postForm" #postForm="ngForm" (ngSubmit)="postForm.form.valid && (policyEndPoint == undefined ? createPolicy() : editPolicy())" novalidate>
+      <div class="row">
+        <div class="col-md-3 col-sm-6 left-section slim-scrollbar">
+          <div class="form-group">
+            <!-- <img style="top: 15px;" class="ng-select-right-icon" src="assets/Chevron - Down.svg"> -->
+            <label class="">Chapter number</label>
+            <div class="input-border">
+              <ng-select id="chapterSelect" class="custom" [items]="chapters" name="chapter" [(ngModel)]="postData.chapterid" #chapter="ngModel" placeholder="Select Chapter from List" bindLabel="chapter_name" required> <!-- (change)="onChapterSelect($event)" -->
+              </ng-select>
+            </div>
+            <div class="validation-container">
+              <div *ngIf="postForm.submitted && chapter.invalid" class="error">
+                <div *ngIf="chapter.errors.required" class="error vld-box">
+                  <span class="vld-msg">Please select chapter</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="form-group">
+            <label class="">Select Sub-Chapter</label>
+            <div class="input-border">
+              <ng-select id="subChapterSelect" class="custom" [items]="subChapters" name="subChapter" [(ngModel)]="postData.subchapterid" #subChapter="ngModel" placeholder="" bindLabel="subchapter_name" required>
+              </ng-select>
+            </div>
+            <div class="validation-container">
+              <div *ngIf="postForm.submitted && subChapter.invalid" class="error">
+                <div *ngIf="subChapter.errors.required" class="error vld-box">
+                  <span class="vld-msg">Please select sub-chapter</span>
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label class="">sub chapter number</label>
+                <div class="">
+                  <input id="subchapterid" type="text" class="text-input" name="subchapterid" [(ngModel)]="postData.subchapterid" placeholder="Enter sub chapter number" #subchapterid="ngModel" required/>
+                </div>
+                <div class="validation-container">
+                  <div *ngIf="postForm.submitted && subchapterid.invalid" class="error">
+                    <div *ngIf="subchapterid.errors.required" class="error vld-box">
+                      <span class="vld-msg">Please sub chapter number</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label class="">sub sub chapter number</label>
+                <div class="">
+                  <input id="ssuid" type="text" class="text-input" name="ssuid" placeholder="Enter sub sub chapter number" [(ngModel)]="postData.ssuid" #ssuid="ngModel" [required]="!(postData.policyid == undefined || postData.policyid == '')"/>
+                </div>
+                <div class="validation-container">
+                  <div *ngIf="postForm.submitted && ssuid.invalid" class="error">
+                    <div *ngIf="ssuid.errors.required" class="error vld-box">
+                      <span class="vld-msg">Please Enter sub sub chapter number</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label class="">Document number</label>
+                <div class="">
+                  <input id="policyNumber" type="text" class="text-input" name="policyid" [(ngModel)]="postData.policyid" #policyid="ngModel" placeholder="Enter Document number"/>
+                </div>
+                <div class="validation-container">
+                  <div *ngIf="postForm.submitted && policyid.invalid" class="error">
+                    <div *ngIf="policyid.errors.required" class="error vld-box">
+                      <span class="vld-msg">Please Enter policy number</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <!-- <img style="top: 15px;" class="ng-select-right-icon" src="assets/Chevron - Down.svg"> -->
+                <label class="">tags</label>
+                <div class="input-border">
+                  <ng-select id="tags" class="custom" [items]="tagList" name="tags" [(ngModel)]="postData.tags" #tags="ngModel" [multiple]="true" bindLabel="tagname" placeholder="Select Tags" required>
+                  </ng-select>
+                </div>
+                <div class="validation-container">
+                  <div *ngIf="postForm.submitted && tags.invalid" class="error">
+                    <div *ngIf="tags.errors.required" class="error vld-box">
+                      <span class="vld-msg">Please select tag</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <!-- <img style="top: 15px;" class="ng-select-right-icon" src="assets/Chevron - Down.svg"> -->
+                <label class="">Associated Form</label>
+                <div class="input-border">
+                  <ng-select id="associatedForms" class="custom" [items]="associatedFormList" placeholder="Select form Associated" name="associatedForms" [(ngModel)]="postData.formids" #associatedForms="ngModel" bindLabel="title" [multiple]="true">
+                  </ng-select>
+                </div>
+                <div class="validation-container">
+                  <div *ngIf="postForm.submitted && associatedForms.invalid" class="error">
+                    <div *ngIf="associatedForms.errors.required" class="error vld-box">
+                      <span class="vld-msg">Please select associated forms</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <!-- <img style="top: 15px;" class="ng-select-right-icon" src="assets/Chevron - Down.svg"> -->
+                <label class="">Associated SOP and GUIDES</label>
+                <div class="input-border">
+                  <ng-select id="SOP" class="custom" [items]="sopList" placeholder="Select SOPs & Guides" name="SOP" [(ngModel)]="postData.sopids" #SOP="ngModel" bindLabel="title" [multiple]="true">
+                  </ng-select>
+                </div>
+                <div class="validation-container">
+                  <div *ngIf="postForm.submitted && SOP.invalid" class="error">
+                    <div *ngIf="SOP.errors.required" class="error vld-box">
+                      <span class="vld-msg">Please select sop</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <!-- <img style="top: 15px;" class="ng-select-right-icon" src="assets/Chevron - Down.svg"> -->
+                <label class="">categories</label>
+                <div class="input-border">
+                  <ng-select id="category" class="custom" [items]="categoryList" name="category" [(ngModel)]="postData.category" #category="ngModel" [multiple]="true" placeholder="Select Category" bindLabel="category" required>
+                  </ng-select>
+                </div>
+                <div class="validation-container">
+                  <div *ngIf="postForm.submitted && category.invalid" class="error">
+                    <div *ngIf="category.errors.required" class="error vld-box">
+                      <span class="vld-msg">Please select category</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-9 col-sm-6 gray-bg right-section">
+          <div class="from-content">
+            <div class="col-sm-12 buttons-section">
+              <input type="file" name="" id="uploadFeaturedFile" (change)="AddFeaturedImage($event)" accept="image/png,image/jpeg" style="display: none;">
+
+              <div *ngIf="isAdmin">
+                <button type="button"  data-toggle="modal" (click)="cancel()" class="cancel-btn">Cancel</button>
+                <button type="submit" class="green-bg-btn btn-hover btn-hover-anim">Reject</button>
+              </div>
+              <div *ngIf="!isAdmin">
+                <button type="button"  data-toggle="modal" (click)="cancel()" class="cancel-btn">CANCEL</button>
+                <button type="submit" class="green-bg-btn btn-hover btn-hover-anim">{{policyEndPoint == undefined ? 'PUBLISH POLICY' : 'UPDATE POLICY'}}</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="post-editor">
+            <!-- <label class="input-label" for="projectTitle"></label> -->
+            <textarea class="title-uploader" rows="1" (keyup)="autogrow('projectTitle')" id="projectTitle" name="title" [(ngModel)]="postData.title" #title="ngModel" maxlength="90" placeholder="Enter your Policy Title Here"></textarea>
+            <quill-editor name="content" [(ngModel)]="postData.content" [options]="editorOptions" (ready)="onEditorCreated($event)" id="projectUploader">
+            </quill-editor>
+            <button type="button" class="quill-custom-buttons upload-image" (click)="editorImageHandler()">
+              <img [src]="env.S3_BASE_URL + '/production/assets/Cam.svg'">
+            </button>
+            <button type="button" class="quill-custom-buttons upload-video" (click)="addMagicTag()">
+              <img [src]="env.S3_BASE_URL + '/production/assets/Magic%20Tag%20Button.svg'">
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

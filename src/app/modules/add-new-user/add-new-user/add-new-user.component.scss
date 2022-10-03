@@ -1,0 +1,345 @@
+/*Overlay start*/
+.user-img{
+  border-radius: 100px;
+  height: 50px;
+  width: 50px;
+}
+.overlay {
+  height:  calc(100% - 65px);
+  width: 0%;
+  position: fixed;
+  z-index: 1;
+  bottom: 0;
+  right: 0;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.45);
+  overflow: hidden;
+  transition: 0.5s;
+  font-family: HKGrotesk-Regular;
+  &.super-nav-open{
+    height:  calc(100% - 119px);
+  }
+}
+.overlay .overlay-content{
+  width: 86%;
+  height: 100%;
+  position: relative;
+  background: #f8f8f8;
+  right: -14%;
+  padding: 40px;
+
+  &.small-width{
+    width: 68%;
+    right: -32%;
+  }
+}
+.overlay .overlay-content .close-btn{
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: white;
+  height: 85px;
+  width: 85px;
+  display: inline-block;
+  border-radius: 100px;
+  top: 30px;
+  left: -132px;
+  position: absolute;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  color: #d81f29;
+}
+.add-new-user.overlay .overlay-content .error{
+  font-family: HKGrotesk-Light;
+}
+.overlay .overlay-content .close-btn div{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.overlay .overlay-content .close-btn div .close-icon{
+  font-size: 30px;
+  display: block;
+  line-height: 21px;
+}
+.overlay .overlay-content .close-btn div .close-label{
+  display: block;
+  font-size: 12px;
+  font-family: HKGrotesk-Regular;
+}
+.overlay .overlay-content .overlay-body{
+  position: absolute;
+  left: 0%;
+  min-height: 100vh;
+  top: 0;
+  overflow-y: auto;
+  max-height: 100vh;
+  padding: 30px;
+  width: 100%;
+
+  &.super-nav-open{
+    min-height:  calc(100vh - 54px);
+    max-height:  calc(100vh - 54px);
+  }
+}
+.overlay .overlay-content .overlay-body .step-no{
+  font-family: HKGrotesk-Bold;
+  font-size: 14px;
+  color: #db3a3a;
+}
+.overlay .overlay-content .overlay-body .heading{
+  font-family: HKGrotesk-Light;
+  font-size: 27px;
+  color: #4a4a4a;
+}
+.overlay .overlay-content .overlay-body .info{
+  font-family: HKGrotesk-Regular;
+  font-size: 12px;
+  color: #181818;
+  margin-top: 4px;
+}
+.overlay .overlay-content .overlay-body .info-details{
+  padding: 50px 0;
+}
+.info-note{
+  font-family: HKGrotesk-Italic;
+  display: block;
+}
+.overlay .overlay-content .overlay-body form {
+  margin-top: 45px;
+}
+.overlay .overlay-content .overlay-body form label{
+  font-family: HKGrotesk-Bold;
+  color: #797979;
+}
+.overlay .overlay-content .overlay-body form input{
+  border-radius: 10px;
+  border: solid 1px #a1a1a1;
+  background: transparent;
+  outline: none;
+  padding: 22px 10px;
+  color: #181818;
+  font-family: HKGrotesk-Light;
+  font-size: 14px;
+}
+.add-new-user.overlay .overlay-content .overlay-body form ng-select.member-list{
+  border-radius: 10px;
+  background: transparent;
+  outline: none;
+  background-color: #f8f8f8;
+  color: #181818;
+  font-family: HKGrotesk-Light;
+  font-size: 17px;
+}
+.add-new-user.overlay .overlay-content .overlay-body form ng-select.member-list ::ng-deep .ng-select-container{
+  background-color: #f8f8f8;
+  padding: 22px 10px;
+  border-radius: 10px;
+  border: solid 1px #a1a1a1;
+  background: transparent;
+  outline: none;
+  color: #181818;
+  font-family: HKGrotesk-Light;
+  font-size: 14px;
+}
+.overlay .overlay-content .overlay-body form .form-group{
+  margin-bottom: 25px; 
+}
+.addEmail-btn{
+  font-family: HKGrotesk-Bold;
+  font-size: 14px;
+  border: none;
+  outline: none;
+  background: no-repeat;
+  color: #d81f29;
+}
+.addEmail-btn.plus-sign{
+  border-radius: 20px;
+}
+.overlay .overlay-content .overlay-body form .stepper-btn{
+  font-family: HKGrotesk-Bold;
+  font-size: 12px;
+  border: none;
+  padding: 12px;
+  border-radius: 50px;
+  margin-top: 25px;
+  width: 100%;
+  outline: none;
+}
+.overlay .overlay-content .overlay-body form .stepper-btn.cancel{
+  background: #e8e8e8;
+  color: #a1a1a1;
+}
+.overlay .overlay-content .overlay-body form .stepper-btn.create{
+  background-color: #d81f29;
+  color: #fff;
+}
+.overlay .overlay-content .overlay-body .remove-btn{
+  background: transparent;
+  border: none;
+  color: #a1a1a1;
+  font-size: 27px;
+  outline: none;
+}
+/*Slim scrollbar*/
+.slim-scrollbar::-webkit-scrollbar
+{
+  width: 8px;
+}
+/*Stepper*/
+.overlay  ::ng-deep .mat-horizontal-stepper-header {
+    display: none !important;
+}
+.overlay  ::ng-deep .mat-stepper-horizontal-line{
+  display: none !important;
+}
+.overlay  ::ng-deep .mat-stepper-horizontal{
+  background: transparent;
+}
+
+.left-side-heading{
+  color: #4a4a4a;
+  font-size: 26px;
+  font-family: HKGrotesk-Light;
+}
+
+
+/* Edit user start */
+.add-new-user.overlay{
+  .self-info {
+    .edit-view-btn{
+      position: absolute;
+      text-decoration: underline;
+      top: 0;
+      right: 15px;
+      color: #000;
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .circle{
+      width: 75px;
+      height: 75px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 50%;
+      display: inline-block;
+      left: 10px;
+    }
+    .org-right{
+      margin-left: 25px;
+      vertical-align: middle;
+      display: inline-block;
+      width: calc(100% - 130px);
+    }
+
+    .profile-name{
+      color: #181818;
+      font-family: HKGrotesk-Bold;
+      font-size: 21px;
+      margin: 0px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .designation{
+      color: #181818;
+      font-family: HKGrotesk-Regular;
+      font-size: 16px;
+      margin: 0px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .joined-date{
+      color: #a1a1a1;
+      font-family: HKGrotesk-Regular;
+      font-size: 12px;
+      margin: 0px;
+      margin-top: 2px;
+    }
+  }
+
+  .details-section{
+    background: #fff;
+    padding: 25px 20px;
+    margin: 15px 0;
+
+    .details-heading{
+      font-family: HKGrotesk-Italic;
+      font-weight: bold;
+    }
+
+    .save-btn{
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      text-decoration: underline;
+      font-family: 'HKGrotesk-Bold';
+      font-size: 12px;
+      color: #d81f29;
+      margin-top: 20px;
+      text-transform: uppercase;
+      outline: none;
+    }
+
+    .select-user ::ng-deep{
+      text-align: left;
+      width: auto;
+      display: inline-block;
+
+      .ng-clear-wrapper{
+        display: none;
+      }
+
+      .ng-select-container{
+        padding: 15px 5px !important;
+      }
+    }
+
+    .slected-user-list{
+      margin-top: 25px;
+      .slected-user-stamp{
+        position: relative;
+        border-bottom: 1px solid #ccc;
+        font-size: 14px;
+        padding: 5px;
+        .close{
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: 0;
+          cursor: pointer;
+          font-size: 16px;
+          font-weight: 100;
+        }
+      }
+      &.small-margin{
+        margin-top: 0px;
+        .slected-user-stamp{
+          border-bottom: 0;
+          // font-family: HKGrotesk-SemiBold;
+        }
+      }
+    }
+
+    .no-selected-message{
+      font-family: HKGrotesk-Italic;
+      font-size: 13px;
+    }
+  }
+  .basic-details-section{
+    form{
+      margin-top: 0px !important;
+
+      label{
+        font-family: HKGrotesk-Bold !important;
+        font-size: 14px !important;
+      }
+      .ng-select{
+        background: transparent !important;
+      }
+    }
+  }
+}
+/* Edit user end */
+/*Overlay end*/

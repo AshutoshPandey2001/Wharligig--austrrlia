@@ -1,0 +1,95 @@
+<footer class="footer" *ngIf="isFooter">
+  <div class="">
+    <div class="row">
+      <div class="col-sm-4">
+        <h1 class="footer-heading">Schedule a Demo</h1>
+        <p style="margin: 0;">
+          <span class="footer-text-2 text-white">Call </span>
+          <span class="footer-text-1">1300 767 731</span>
+        </p>
+        <p style="margin: 0;">
+          <span class="footer-text-2 text-white">or email us on </span>
+          <a href="mailto:support@pwcompliance.com.au" class="footer-text-1">support@pwcompliance.com.au</a>
+        </p>
+        <p style="margin: 0;margin-top: 8%;" class="footer-text-3">
+          A Division of PW Compliance Private Limited.
+        </p>
+        <p style="margin: 0" class="footer-text-4">
+          All Right Reserved. Developed &amp; Designed by Surfing Monkey
+        </p>
+      </div>
+      <div class="col-sm-4">
+        <h1 class="footer-heading">SITEMAP</h1>
+        <div class="row">
+          <div class="col-sm-5">
+            <ul>
+              <li>
+                <a routerLink="/">Home</a>
+              </li>
+              <li>
+                <a routerLink="/about">About Us</a>
+              </li>
+              <li>
+                <a routerLink="/feature">Features</a>
+              </li>
+              <li>
+                <a routerLink="/">PW Compliance</a>
+              </li>
+              <li>
+                <a style="font-family: HKGrotesk-Bold;" href="">Schedule a Demo</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <ul>
+              <li>
+                <a routerLink="/disclaimer">Disclaimer</a>
+              </li>
+              <li>
+                <a routerLink="/terms">Terms &amp; Conditions</a>
+              </li>
+              <li>
+                <a routerLink="/privacy-policy">Privacy Policy</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <p style="margin: 0">
+          <span class="footer-text-3">Subscribe to our Newsletter</span>
+          <span class="footer-text-4"> and stay on top of compliance changes and other essential news.</span>
+        </p>
+        <form name="subscribeForm" (ngSubmit)="f.form.valid && subscribe()"  #f="ngForm" novalidate>
+          <div class="row">
+            <div class="col-sm-10 col-9">
+              <input type="email" class="text-field" [(ngModel)]= "user.email" #email="ngModel" name="email" placeholder="example@company.com" required email>
+              <div *ngIf="f.submitted && email.errors">
+                <div class="err-msg" *ngIf="email.errors.required">Email is required</div>
+                <div class="err-msg" *ngIf="email.errors.email">Email must be a valid email address</div>
+              </div>
+            </div>
+            <div class="col-sm-2 col-3"  style="padding-left: 0;">
+              <button>
+                <i class="fa fa-check" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <div class="divider"></div>
+        <div class="social-section">
+          <span class="footer-text-3">Find us on Social Media!</span>
+          <a href="https://www.facebook.com/pwcompliance" target="_blanck">
+            <i class="fa fa-facebook-f"></i>
+          </a>
+          <a href="https://www.instagram.com/pwcconsulting" target="_blanck">
+            <i class="fa fa-instagram"></i>
+          </a>
+          <a href=" https://www.linkedin.com/company/pw-compliance-consulting-pty-ltd" target="_blanck">
+            <i class="fa fa-linkedin"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

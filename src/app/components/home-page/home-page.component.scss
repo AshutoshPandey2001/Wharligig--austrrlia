@@ -1,0 +1,134 @@
+/*Section 1 start*/
+.section-1{
+  padding: 0 70px;
+}
+.section-1 > .row{
+  display: flex;
+  align-items: center;
+}
+.section-1 .left-section{
+}
+.section-1 .left-section .red-bg-btn, .section-1 .left-section .text-3{
+  margin-top: 5%;
+}
+.section-1 .right-section{
+  height: calc(100vh - 69px);
+  padding: 15px;
+}
+.section-1 .right-section img{
+  max-height: 100%;
+  max-width: 100%;
+}
+/*Section 1 end*/
+
+/*section-2 start*/
+.section-2{
+  padding: 50px 70px;
+  background-color: #f3f3f3;
+}
+.section-2 .whirligig-stamp{
+  padding-top: 45px;
+}
+.section-2 .whirligig-stamp img{
+  max-width: 35%;
+}
+.section-2 .whirligig-stamp h4{
+  font-family: HKGrotesk-Bold;
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 1.56;
+  letter-spacing: -0.75px;
+  color: #3f3f3f;
+  margin-top: 20px
+}
+.section-2 .whirligig-stamp p{
+  font-family: HKGrotesk-Light;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.39;
+  letter-spacing: -0.54px;
+  color: #3f3f3f;
+  max-width: 65%;
+}
+/*section-2 end*/
+
+/*Section 3 start*/
+.section-3{
+  padding: 40px 70px;
+}
+.section-3 .owl-carousel-container{
+  margin-top: 50px;
+  margin-bottom: 15px;
+}
+.section-3 ::ng-deep .owl-carousel .owl-item img{
+  max-width: 60%;
+}
+/*Section 3 end*/
+/*Section 4 start*/
+.section-4{
+  padding: 40px 70px;
+  background: #d81f29;
+}
+.section-4 > .row{
+  align-items: center;
+}
+.section-4 .left-section{
+}
+.section-4 .left-section .white-bg-btn, .section-4 .left-section .text-3{
+  margin-top: 5%;
+}
+.section-4 .right-section{
+  padding: 15px;
+  text-align: center;
+}
+.section-4 .text-3{
+  max-width: 75%;
+}
+.section-4 .right-section img{
+  max-width: 60%;
+}
+/*Section 4 end*/
+/*Media queries  start*/
+/* Portrait tablets and small desktops */
+@media screen and (max-width: 1199px) {
+}
+
+@media screen and (max-width: 992px) {
+}
+
+/* Landscape phones and portrait tablets */
+@media screen and (max-width: 767px) {
+  .section-1, .section-2, .section-3, .section-4{
+    padding: 15px;
+    padding-top: 30px;
+  }
+  .section-1 .right-section{
+    height: auto;
+  }
+  .section-3{
+    padding: 45px 15px;
+  }
+  .section-3 .owl-carousel-container{
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  .section-3 ::ng-deep .owl-carousel .owl-item img{
+    max-width: 90%;
+  }
+  .section-4 .right-section img{
+    max-width: 100%;
+    margin-top: 15px;
+  }
+
+  .section-2 .whirligig-stamp{
+    text-align: center;
+  }
+  .section-2 .whirligig-stamp p{
+    display: inline-block;
+  }
+}
+
+/* Portrait phones and smaller */
+@media screen and (max-width: 480px) {
+
+}

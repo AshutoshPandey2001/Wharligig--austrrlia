@@ -1,0 +1,57 @@
+<section class="chapter" >
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-8">
+        <h1 class="main-heading">Your repository of procedures and protocols.</h1>
+        <p class="sub-heading">Your repository of procedures and protocols.</p>
+      </div>
+      <div class="col-sm-4">
+        <img src="assets/Group 1.png" class="float-right user-img">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="line"></div> 
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="chapter-heading" style="" [style.backgroundImage]="'url('+ chapter.chapter.secondimage +')'"> <!-- background-image: url(/assets/chapterbg.jpg); -->
+          <div class="overlay">
+            <a routerLink="/chapters" class="back-to-all btn-hover-anim">Back to All Chapters</a>
+            <div class="id">{{chapter.chapter.chapterid}}</div>
+            <h1 class="name">{{chapter.chapter.chapter_name}}</h1>
+            <div class="policy-count">{{chapter.policy.length}} Policies</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 chapter-body">
+        <div class="row">
+          <div class="col-sm-8 left-part">
+            <h3>Chapter No. {{chapter.currentsubchapter.subchapterid}}</h3>
+            <div class="accountability">{{chapter.currentsubchapter.subchapter_name}}</div>
+            <div class="row">
+              <div class="col-sm-6">
+                <ul>
+                  <li *ngFor="let item of chapter.policy">
+                    <a [routerLink]="'/policy/' + item.id">{{item.policyid}} {{item.title}}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4 right-part">
+            <div class="sub-chapter-section">
+              <div class="heading">Other Sub Chapters</div>
+              <ul>
+                <li *ngFor="let item of chapter.othersubchapter">
+                  <a [routerLink]="'/chapter/' + item.id">{{item.subchapterid}} {{item.subchapter_name}}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

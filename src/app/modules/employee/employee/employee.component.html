@@ -1,0 +1,157 @@
+<section class="dashboard" >
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6">
+        <h1 class="main-heading">Manage your Organisation</h1>
+        <p class="sub-heading">Here is the list of all your Employees</p>
+      </div>
+      <div class="col-sm-6">
+        <img [src]="userData.getUserData().organization_logo || 'assets/user.png'" class="float-right user-img">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="line"></div> 
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <input type="text" class=" search-org-name" placeholder="Search by Name of the Employee" name="search" id="empSearch">
+        <img class="search-icon" src="assets/search-icon-img.png">
+      </div>
+      <div class="col-sm-6"></div>
+      <div class="col-sm-2">
+        <button *ngIf="currentUser.role == constants.ADMIN" type="button" class ="button-section btn-hover-anim" (click)="openOverlay()">
+          <img class="plus-icon" src="assets/Group 163.svg">
+          <span>ADD NEW USER</span>
+        </button> 
+      </div>
+    </div>
+    <div class="row form-list">
+      <div class="col-20 wow fadeInUp" *ngFor="let item of employees; let i=index " [attr.data-wow-delay]="(0.2*(i%10)) + 's'">
+        <app-employee-stamp [isAction]="true" (onRemove)="onRemoveEmployee($event)" (onClickedEmpStamp)="onClickedEmpStamp($event)" [employee]="item"></app-employee-stamp>
+      </div>
+      <div class="col-sm-12" *ngIf="employees.length == 0">
+        <app-empty-placeholder [title]="searchTerm != '' ? undefined : 'Oops! There are no members of your team here.'" [message]="searchTerm != '' ? undefined : 'Invite your organisation members to Whirligig by visiting Manage Organisation'" ></app-empty-placeholder>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-add-new-user (onAddNewUser)="initData()" ></app-add-new-user>
+
+<!-- change user role Modal start -->
+<div class="modal fade edit-user-modal" id="editUserModal" >
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <img src="/assets/Close Button.svg">
+        </button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body text-center">
+        <div class="">
+          <img [src]="selectedEmp.userimage" onError="this.src='/assets/user.png'" class="user-img" >
+        </div>
+        <div class="user-name">{{selectedEmp.name}}</div>
+        <div class="user-info">{{selectedEmp.designation}}</div>
+        <div class="">
+          <ng-select class="member-list custom" [items]="members" [(ngModel)]="selectedEmp.role" #role="ngModel" [name]="'utype'" bindValue="id" bindLabel="name">
+          </ng-select>
+        </div>
+        <div class="">
+          <button (click)="updateUserRole()" class="red-bg-btn">
+            Update Designation
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- change user role Modal end -->
+
+<!-- Overlay employee list start -->
+<div id="viewEmpDtl" class="overlay view-user-list" [ngClass]="{'super-nav-open': userData.getSelectedOrg()}" >
+  <div class="overlay-content">
+    <a href="javascript:void(0)" class="close-btn" (click)="closeViewEmpOverlay()">
+      <div>
+        <span class="close-icon">
+          &times;<br>
+        </span>
+        <span class="close-label">Close</span>
+      </div>
+    </a>
+    <div class="overlay-body slim-scrollbar" >
+      <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+          <div class="self-info">
+            <img [src]="selectedEmp.userimage" class="circle" onError="this.src='/assets/user.png'"/>
+            <div class="org-right">
+              <p class="profile-name">{{selectedEmp.name}}</p>
+              <p class="designation">{{selectedEmp.designation}}</p>
+              <p class="joined-date">Joined on {{commonService.getDDMMYYYYFormatedDate(selectedEmp.userdate)}}</p>
+            </div>
+          </div>
+
+          <div class="listing-part">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="key-value-cont">
+                  <div class="key">Current Role</div>
+                  <div class="value">
+                    {{commonService.getUserRoleById(selectedEmp.role)}}
+                  </div>
+                </div>
+
+                <div class="key-value-cont" *ngIf="userDetails.manager != undefined && selectedEmp.role != constants.MANAGER">
+                  <div class="key">Manager</div>
+                  <a class="value" href="javascript:void(0)" >
+                    {{userDetails.manager.name}}
+                  </a>
+                </div>
+
+                <div class="key-value-cont" *ngIf="userDetails.teamleader != undefined && selectedEmp.role != constants.TEAM_TEAD && userDetails.teamleader.length > 0">
+                  <div class="key">Team leaders</div>
+                  <div class="" *ngFor="let tl of userDetails.teamleader" >
+                    <a class="value" href="javascript:void(0)" >
+                      {{tl.name}}
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="key-value-cont" *ngIf=" userDetails.emp != undefined &&  userDetails.emp.length > 0" >
+                  <div class="key">employees</div>
+                  <div class="" *ngFor="let emp of userDetails.emp" >
+                    <a class="value" href="javascript:void(0)" >
+                      {{emp.name}}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="button-part" *ngIf="currentUser.role == constants.ADMIN">
+            <div class="row">
+              <div class="col-sm-4">
+                <a (click)="onClickedEdit()" href="javascript:void(0)" class="bottom-btn enter" >EDIT details</a>
+              </div>
+              <div class="col-sm-4">
+                <a (click)="onRemoveEmployee(selectedEmp)" href="javascript:void(0)" class="bottom-btn remove">remove</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Overlay employee list end -->

@@ -1,0 +1,117 @@
+.notification{
+   background-color: #f8f8f8;
+   padding: 40px 40px;
+  font-family: HKGrotesk-Light;
+}
+.user-img{
+  border-radius: 100px;
+  height: 50px;
+  width: 50px;
+}
+.notification h1.heading{
+  font-family: HKGrotesk-Bold;
+  font-size: 27px;
+  color: #d81f29;
+  margin-bottom: 0px;
+}
+.notification .sub-text{
+  font-family: HKGrotesk-Light;
+  color: #181818;
+  font-size: 18px;
+  margin-bottom: 25px;
+}
+.notification ul{
+  padding: 0;
+}
+.notification ul li{
+  list-style: none;
+  border-radius: 9px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  padding: 15px;
+  margin-bottom: 15px;
+  background: #fff;
+  white-space: nowrap;
+  position: relative;
+  margin-right: 20px;
+}
+.notification ul li .text{
+  font-family: HKGrotesk-Regular;
+  font-size: 14px;
+  color: #181818;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 15px;
+  white-space: initial;
+  margin-right: 60px;
+}
+.notification ul li .time-since{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 15px;
+  font-family: HKGrotesk-Bold;
+  font-size: 14px;
+  color: #737373;
+}
+.notification ul li .close-btn{
+  position: absolute;
+  right: -30px;
+  background: transparent;
+  border: none;
+  top: 50%;
+  transform: translateY(-50%);
+  outline: none;
+  color: #a1a1a1;
+  font-weight: 100;
+}
+.notification ul li .text a{
+  color: #d81f29;
+  text-decoration: underline;
+}
+.notification ul li:hover{
+  box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.4);
+}
+.notification ul li .icon{
+  max-width: 30px;
+}
+/*Right section start*/
+.notification .right-card{
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background: #fff;
+  padding: 25px 20px;
+  white-space: nowrap;
+  vertical-align: middle;
+  margin-bottom: 15px;
+}
+.notification .right-card img{
+  max-width: 70px;
+}
+.notification .right-card .right-part{
+  display: inline-block;
+  white-space: initial;
+  vertical-align: middle;
+  font-family: HKGrotesk-Light;
+  margin-left: 15px;
+  width: calc(100% - 80px);
+}
+.notification .right-card .right-part p{
+  margin: 0;
+  color: #181818;
+  font-size: 14px;
+}
+.notification .right-card .right-part .see-more{
+  text-transform: uppercase;
+  color: #d81f29;
+  display: inline-block;
+  font-size: 12px;
+  text-decoration: underline;
+  font-family: HKGrotesk-Bold;
+}
+.notification .right-card.color{
+  background: #d81f29;
+}
+.notification .right-card.color .right-part p, .notification .right-card.color .right-part .see-more{
+  color: #fff;
+}
+/*Right section end*/
+

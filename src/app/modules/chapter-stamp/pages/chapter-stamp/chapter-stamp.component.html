@@ -1,0 +1,14 @@
+<a class="stamp" [routerLink]="'/chapter/' + chapter.id">
+  <div class="chapter-form-start">
+    <div class="chapter-form">
+      <div class="chapter-img">
+        <img [src]="chapter.chapterimage || 'assets/chapter.png'">
+      </div>
+      <div class="content">
+        <h3 class="chapter-name">{{chapter.chapterid}}</h3>
+        <h5 class="chapter-description">{{chapter.chapter_name}}</h5>
+        <h3 class="no-of-policies">{{chapter.id}} Sub Chapters</h3>
+      </div>
+    </div>
+  </div>
+</a>

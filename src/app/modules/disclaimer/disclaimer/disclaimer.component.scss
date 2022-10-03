@@ -1,0 +1,39 @@
+.section-1{
+  background: url('/assets/Rectangle 35.jpg');
+  padding: 60px 40px;
+}
+.section-1 .text-3{
+  margin-top: 5%;
+  max-width: 80%;
+}
+.section-2{
+  padding: 45px;
+  font-family: HKGrotesk-Light;
+  font-size: 18px;
+  letter-spacing: -0.50px;
+}
+.heading{
+  font-size: 22px;
+  color: #d81f29;
+  font-family: HKGrotesk-Bold;
+  margin-top: 40px;
+  letter-spacing: -0.96px;
+}
+/* Portrait tablets and small desktops */
+@media screen and (max-width: 1199px) {
+}
+
+@media screen and (max-width: 992px) {
+}
+
+/* Landscape phones and portrait tablets */
+@media screen and (max-width: 767px) {
+  .section-2{
+    padding: 15px;
+  }
+}
+
+/* Portrait phones and smaller */
+@media screen and (max-width: 480px) {
+
+}

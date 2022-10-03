@@ -1,0 +1,49 @@
+.cookie{
+  padding: 40px 30px;
+  background-color: #6a0005;
+  color: #fff;
+  font-family: HKGrotesk-Regular;
+  transition: all 0.5s;
+  /*height: 210px;*/
+  animation-name: fadeInFromZero;
+  animation-duration: 0.5s;
+}
+.cookie.cookie-close{
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.cookie h1{
+  font-family: HKGrotesk-Bold;
+  font-size: 25px;
+}
+.cookie a{
+  color: #fff;
+  text-decoration: underline;
+}
+.cookie p{
+  font-size: 16px;
+}
+button{
+  color: #fff;
+  text-transform: uppercase;
+  outline: none;
+}
+.accept-btn{
+  background-color: #d81f29;
+  border: none;
+  border-radius: 36px;
+  font-family: Montserrat-SemiBold;
+  font-size: 12px;
+  padding: 10px 20px;
+}
+.close-btn{
+  background: transparent;
+  border: none;
+  font-size: 13px;
+  text-decoration: underline;
+  margin-top: 30px;
+}
+.cookie .row{
+  align-items: center;
+}

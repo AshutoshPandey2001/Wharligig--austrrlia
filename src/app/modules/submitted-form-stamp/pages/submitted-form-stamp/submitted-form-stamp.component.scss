@@ -1,0 +1,79 @@
+.rectangle{
+  background-color: white;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  margin: 10px 0;
+  padding: 20px;
+}
+.rectangle:hover{
+  background-color: white;
+  box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.4);
+  margin: 10px 0;
+  padding: 20px;
+}
+.form-list{
+  font-size: 11px;
+  font-family: HKGrotesk-Light;
+  color: #a1a1a1;
+  margin-bottom: 2px;
+}
+.check-list{
+  font-family: HKGrotesk-Bold;
+  color: #181818;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 18px;
+}
+.check-list-1{
+  width: 72px;
+  height: 17px;
+  font-family: HKGrotesk-Medium;
+  font-size: 10px;
+  font-weight: 500;
+  text-align: left;
+  color: #181818;
+  margin-bottom: 10px;
+
+}
+.name-section{
+  text-align: left;
+  color: #181818;
+  font-family: HKGrotesk;
+}
+.name-section p{
+  display: inline;
+  margin-left: 5px;
+  font-family: HKGrotesk-Medium;
+  color: #181818;
+  font-size: 12px;
+}
+.line{
+  background-color: #dedbdb;
+  height: 1px;
+  margin-bottom: 5px;
+}
+.circle{
+  height: 17px;
+  width: 17px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.circle-checkbox{
+  border: 3px solid #db3a3a;
+  background-color: #FFFFFF;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+}
+/* Red circular checkbox starts*/
+/*input[type="checkbox"]:checked + label {
+  border-color: #3adb64;
+}*/
+.pr-0{
+  padding-right: 0 !important;
+}
+.pl-0{
+  padding-left: 0 !important;
+}

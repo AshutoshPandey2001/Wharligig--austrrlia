@@ -1,0 +1,119 @@
+<div class="header fixed-top" [ngStyle]="{ 'pointerEvents':  selectedOrg ? 'none' : 'auto'}" >
+  <div *ngIf="isCookieOpen">
+    <app-cookie-policy (onCloseCookie)="onCloseCookie()"></app-cookie-policy>
+  </div>
+  <nav class="navbar navbar-expand-md  navbar-light">
+    <a class="navbar-brand" href="#">
+      <img src="/assets/Group 148.svg">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item" *ngIf="!userData.isUserLoggedin()">
+          <a class="nav-link" routerLink="/">Home</a>
+        </li>
+        <li class="nav-item" *ngIf="!userData.isUserLoggedin()">
+          <a class="nav-link" routerLink="/about">About</a>
+        </li>
+        <li class="nav-item" *ngIf="!userData.isUserLoggedin()">
+          <a class="nav-link" routerLink="/feature">Features</a>
+        </li>
+        <li class="nav-item" *ngIf="!userData.isUserLoggedin()">
+          <a class="nav-link" href="http://pwcompliance.com.au">Consulting</a>
+        </li>
+        <li class="nav-item" *ngIf="userData.isUserLoggedin()">
+          <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item" *ngIf="userData.isUserLoggedin()">
+          <a class="nav-link" routerLink="/chapters">Policies</a>
+        </li>
+        <li class="nav-item" *ngIf="userData.isUserLoggedin()">
+          <a class="nav-link" routerLink="/form-templates">Form Templates</a>
+        </li>
+        <li class="nav-item" *ngIf="userData.isUserLoggedin()">
+          <a class="nav-link" routerLink="/sop">SOPs</a>
+        </li>
+        <li class="nav-item" *ngIf="userData.isUserLoggedin() && userData.getUserData().role == constants.ADMIN">
+          <a class="nav-link" routerLink="/employee">Manage Organisations</a>
+        </li>
+        <li class="nav-item" *ngIf="userData.isUserLoggedin() && (userData.getUserData().role != constants.SUPER_ADMIN)">
+          <a class="nav-link" routerLink="/my-forms">Status</a>
+        </li>
+        <li class="nav-item" *ngIf="!userData.isUserLoggedin()">
+          <a class="nav-link" routerLink="/login">Login</a>
+        </li> 
+
+        <li *ngIf="userData.isUserLoggedin() && userData.getUserData().role == constants.SUPER_ADMIN" class="dropdown nav-item create-menu">
+          <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <span>CREATE</span>
+            <img src="/assets/Chevron Red.svg" class="drop-img">
+          </a>
+          <ul class="dropdown-menu">
+            <a class="dropdown-item" routerLink="/create-template">Form Template</a>
+            <a class="dropdown-item" routerLink="/create-sop">SOP Document</a>
+            <a class="dropdown-item" routerLink="/create-policy">Policy Document</a>
+            <a class="dropdown-item" routerLink="/organizations">Organisation</a>
+          </ul>
+        </li>
+
+        <li *ngIf="userData.isUserLoggedin()" class="dropdown nav-item notification-menu">
+          <a href="#" class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <img *ngIf="!isUnseenNotification" [src]="'https://pwcb.s3.ap-south-1.amazonaws.com/production/assets/Notification+Inactive.svg'" #img class="">
+            <img *ngIf="isUnseenNotification" [src]="'https://pwcb.s3.ap-south-1.amazonaws.com/production/assets/Notification+Active.svg'" #img class="">
+          </a>
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li class="dropdown-item">Sam Smith sent you a reminder about a pending form that was assigned to you.</li>
+            <li class="dropdown-item">Threat Checklist is due tomorrow. <a href=""> Fill out</a> the form today.</li>
+            <li class="dropdown-item">Leave Policy was due yesterday. <a href=""> Fill out</a> the form.</li>
+            <a routerLink="/notification" class="dropdown-item see-all text-center">SEE ALL NOTIFICATIONS</a>
+          </ul>
+        </li>
+
+        <li *ngIf="userData.isUserLoggedin()" class="dropdown nav-item profile-menu">
+          <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <img [src]="userData.getUserData().userimage || 'assets/user.png'" #img class="profile-img"
+            onerror="this.src='assets/user.png'">
+            <span style="text-transform: capitalize;" >{{userData.getUserData().name}}</span>
+            <img src="/assets/Chevron Black.svg" class="drop-img">
+          </a>
+          <ul class="dropdown-menu">
+            <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#editProfileModal">Edit Profile Info</a>
+            <a class="dropdown-item" href="javascript:void(0)" (click)="userData.logout()">Logout</a>
+          </ul>
+        </li>
+        <li *ngIf="!userData.isUserLoggedin()" class="nav-item shedule">
+          <a class="nav-link red-border-btn" routerLink="/contact">Request Demo</a>
+        </li>
+      </ul>
+    </div>  
+  </nav>
+</div>
+
+<!-- Confirmation overlay start -->
+<div class="confirmation-overlay" *ngIf="isConfirmationOverlayOpen">
+  <div *ngIf="confirmationOverlayData.inline" class="inline">
+    <h2>{{confirmationOverlayData.heading}}</h2>
+    <button class="btn-hover btn-hover-anim" (click)="confirmation(true)">Yes</button>
+    <button class="btn-hover btn-hover-anim" (click)="confirmation(false)" >No</button>
+  </div>
+  <div *ngIf="!confirmationOverlayData.inline" class="block">
+    <h2>{{confirmationOverlayData.heading}}</h2>
+    <button class="btn-hover btn-hover-anim" (click)="confirmation(true)">Yes</button>
+    <button class="btn-hover btn-hover-anim" (click)="confirmation(false)" >No</button>
+  </div>
+</div>
+<!-- Confirmation overlay end -->
+
+<!-- app-edit-profile-modal start -->
+<app-edit-profile-modal></app-edit-profile-modal>
+<!-- app-edit-profile-modal end -->
+
+<!-- Login modal start -->
+<app-login-modal></app-login-modal>
+<!-- Login modal end -->
+
+<!-- Super admin org navigations start -->
+<app-super-admin-navigations-org></app-super-admin-navigations-org>
+<!-- Super admin org navigations end -->

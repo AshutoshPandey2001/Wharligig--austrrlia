@@ -1,0 +1,18 @@
+<div class="rectangle">
+  <h1 class="form-list">Form Name</h1>
+  <h1 class="check-list">{{form.title}}</h1>
+  <h1 class="form-list">Assigned on</h1>
+  <h1 class="check-list-1">{{commonService.getDDMMYYYYFormatedDate(form.assigntime)}}</h1>
+  <div class="line"></div>
+  <div class="name-section">
+    <div class="row">
+      <div class="col-sm-10 pr-0">
+        <img [src]="form.userimage || 'assets/user.png'" class="circle"/>
+        <p>{{form.name}}</p>
+      </div>
+      <div class="col-sm-2 pl-0 text-right">
+        <label class="circle-checkbox"></label>
+      </div>
+    </div>
+  </div>
+</div>  

@@ -1,0 +1,84 @@
+<section class="top-space uploader sop-uploder">
+  <div class="container-fluid">
+    <form name="postForm" #postForm="ngForm" (ngSubmit)="postForm.form.valid && (sopId == undefined ? createSOP(postForm) : editSOP())" novalidate>
+      <div class="row">
+        <div class="col-md-3 col-sm-6 left-section slim-scrollbar">
+          <!-- <div class="org-img">
+            <img src="/assets/Brett Welland Photo.png">
+          </div> -->
+
+          <!-- If super admin only -->
+          <!-- *ngIf="userRole == constants.SUPER_ADMIN" -->
+          <div class="form-group" style="margin-top: 8%;">
+            <label class="">Associated Policy</label>
+            <div class="input-border">
+              <ng-select id="associatedPolicySelect" class="custom" [items]="policies" name="associatedPolicy" [(ngModel)]="sopData.policy" #associatedPolicy="ngModel" placeholder="Select the policy" bindLabel="title" [multiple]="true" [searchFn]="customSearchFnPolicy">
+                <ng-template ng-option-tmp let-item="item">
+                  {{item.suid}}
+                  {{item.title}}
+                </ng-template>
+              </ng-select>
+            </div>
+            <div class="validation-container">
+              <div *ngIf="postForm.submitted && associatedPolicy.invalid" class="error">
+                <div *ngIf="associatedPolicy.errors.required" class="error vld-box">
+                  <span class="vld-msg">Please select policy</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tags start -->
+          <div class="form-group" style="">
+            <label class="">Legislation tags</label>
+            <div class="input-border">
+              <ng-select id="legislationTagSelect" class="custom" [items]="tagList" name="legislationTagSelect" [(ngModel)]="sopData.tags" #legislationTagSelect="ngModel" placeholder="Select the legislation" bindLabel="tagname" [multiple]="true">
+              </ng-select>
+            </div>
+            <div class="validation-container">
+              <div *ngIf="postForm.submitted && legislationTagSelect.invalid" class="error">
+                <div *ngIf="legislationTagSelect.errors.required" class="error vld-box">
+                  <span class="vld-msg">Please select legislation</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Tags end -->
+        </div>
+
+        <div class="col-md-9 col-sm-6 gray-bg right-section">
+          <div class="from-content">
+            <div class="col-sm-12 buttons-section">
+              <input type="file" name="" id="uploadFeaturedFile" (change)="AddFeaturedImage($event)" accept="image/png,image/jpeg" style="display: none;">
+
+              <!-- <div *ngIf="isAdmin">
+                <button type="button"  data-toggle="modal" (click)="cancel()" class="cancel-btn">Cancel</button>
+                <button type="submit" class="green-bg-btn btn-hover btn-hover-anim">Reject</button>
+              </div> -->
+              <div>
+                <button type="button"  data-toggle="modal" (click)="cancel()" class="cancel-btn">CANCEL</button>
+                <button type="submit" class="green-bg-btn btn-hover btn-hover-anim">{{sopId == undefined ? 'PUBLISH SOP' : 'UPDATE SOP'}}</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="post-editor">
+            <!-- <label class="input-label" for="projectTitle"></label> -->
+            <textarea class="title-uploader" rows="2" (keyup)="autogrow('projectTitle')" id="projectTitle" name="title" [(ngModel)]="sopData.title" #title="ngModel" maxlength="90" placeholder="Enter your Title Here"></textarea>
+            <quill-editor name="content" [(ngModel)]="sopData.content" [options]="editorOptions" (ready)="onEditorCreated($event)" id="projectUploader">
+            </quill-editor>
+            <!-- <button type="button" class="quill-custom-buttons upload-image" (click)="addMagicTag()">
+              <img src="https://dysco1.s3-us-west-1.amazonaws.com/production/assets/Cam.svg">
+            </button> -->
+            <button type="button" class="quill-custom-buttons upload-image" (click)="editorImageHandler()">
+              <img [src]="env.S3_BASE_URL + '/production/assets/Cam.svg'">
+            </button>
+            <button type="button" class="quill-custom-buttons upload-video" (click)="addMagicTag()">
+              <img [src]="env.S3_BASE_URL + '/production/assets/Magic%20Tag%20Button.svg'">
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

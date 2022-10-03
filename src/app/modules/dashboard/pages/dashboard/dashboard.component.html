@@ -1,0 +1,246 @@
+<section class="dashboard" >
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6">
+        <h1 class="main-heading">Good Morning, {{userDataService.getUserData().name}}</h1>
+        <p class="sub-heading">Here's {{currentUser.organization_name}}'s dashboard</p>
+      </div>
+      <div class="col-sm-6">
+        <img [src]="userDataService.getUserData().organization_logo || 'assets/user.png'" class="float-right user-img">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="line"></div> 
+      </div>
+    </div>
+
+    <!-- profile dashboard start  -->
+    <div class="row" *ngIf="currentUser.role == constants.SUPER_ADMIN">
+      <div class="col-sm-12">
+        <div class="">
+          <a routerLink="/create-policy" class="action-card">
+            <img class="color-img" src="https://pwcb.s3.ap-south-1.amazonaws.com/production/assets/Policy+Red.svg">
+            <img class="white-img" src="https://pwcb.s3.ap-south-1.amazonaws.com/production/assets/Policy+White.svg">
+            <div class="text">
+              Create Policy
+            </div>
+          </a>
+          <a routerLink="/create-sop" class="action-card">
+            <img class="color-img" src="https://pwcb.s3.ap-south-1.amazonaws.com/production/assets/SOP+Red.svg">
+            <img class="white-img" src="https://pwcb.s3.ap-south-1.amazonaws.com/production/assets/SOP+White.svg">
+            <div class="text">
+              Create SOP&amp; Guide
+            </div>
+          </a>
+          <a routerLink="/create-template" class="action-card create-form">
+            <img class="color-img" src="https://pwcb.s3.ap-south-1.amazonaws.com/production/assets/Form+Red.svg">
+            <img class="white-img" src="https://pwcb.s3.ap-south-1.amazonaws.com/production/assets/Form+White.svg">
+            <div class="text">
+              Create Form
+            </div>
+          </a>
+          <a routerLink="/organizations" class="action-card">
+            <img class="color-img" src="https://pwcb.s3.ap-south-1.amazonaws.com/production/assets/Manage+Organization+Red.svg">
+            <img class="white-img" src="https://pwcb.s3.ap-south-1.amazonaws.com/production/assets/Manage+Organization+White.svg">
+            <div class="text">
+              Create Organisation
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- profile dashboard end  -->
+
+    <!-- quick action  -->
+    <div class="row form-list" *ngIf="currentUser.role == constants.ADMIN">
+      <div class="col-sm-6">
+        <h1 class="heading">Quick Actions</h1>
+      </div>
+      <div class="col-sm-12">
+        <div class="">
+          <a (click)="openOverlay('addEmp', {})" href="javascript:void(0)" class="action-card">
+            <img class="color-img" src="https://pwcb.s3.ap-south-1.amazonaws.com/production/assets/Add+New+Team+Member+Red.svg">
+            <img class="white-img" src="https://pwcb.s3.ap-south-1.amazonaws.com/production/assets/Add+New+Team+Member+White.svg">
+            <div class="text">
+              Add New Team Member
+            </div>
+          </a>
+          <a routerLink="/form-templates" class="action-card assign-form">
+            <img class="color-img" src="https://pwcb.s3.ap-south-1.amazonaws.com/production/assets/Assign+Form+Red.svg">
+            <img class="white-img" src="https://pwcb.s3.ap-south-1.amazonaws.com/production/assets/Assign+Form+White.svg">
+            <div class="text">
+              Assign Form
+            </div>
+          </a>
+          <a routerLink="/employee" class="action-card">
+            <img class="color-img" src="https://pwcb.s3.ap-south-1.amazonaws.com/production/assets/Manage+Organization+Red.svg">
+            <img class="white-img" src="https://pwcb.s3.ap-south-1.amazonaws.com/production/assets/Manage+Organization+White.svg">
+            <div class="text">
+              Manage Organisation
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- quick action end  -->
+
+    <!-- Organizations start -->
+    <div class="row form-list" *ngIf="currentUser.role == constants.SUPER_ADMIN">
+      <div class="col-sm-6">
+        <h1 class="heading">Organisations on Whirligig</h1>
+      </div>
+      <div class="col-sm-6">
+        <a routerLink="/organizations" class="right-heading">Manage your Organisations</a>
+      </div>
+      <div class="col-sm-3 wow fadeInUp" *ngFor="let item of organizations | slice: 0 : 4; let i=index " [attr.data-wow-delay]="(0.2*(i%10)) + 's'">
+        <app-organization-stamp [organization]="item" [isRemove]="false"></app-organization-stamp>
+      </div>
+      <div class="col-sm-12" *ngIf="organizations.length == 0">
+        <app-empty-placeholder [title]="'Oops! There are no members of your team here.'" [message]="'Invite your organisation members to Whirligig by visiting Manage Organisation'" ></app-empty-placeholder>
+      </div>
+    </div>
+    <!-- Organizations end -->
+
+    <!-- My forms start -->
+    <div class="row form-list" *ngIf="currentUser.role != constants.SUPER_ADMIN">
+      <div class="col-sm-6">
+        <h1 class="heading">My Forms</h1>
+      </div>
+      <div class="col-sm-6">
+        <a routerLink="/my-forms" class="right-heading">See All My Forms</a>
+      </div>
+      <div class="col-sm-3" *ngFor="let form of myForms | slice: 0 : 4; let index=$index ">
+        <app-my-form-stamp [form]= 'form'></app-my-form-stamp>
+      </div>
+      <div class="col-sm-12" *ngIf="myForms.length == 0">
+        <app-empty-placeholder [title]="'Oops! No forms found in your dashboard.'" [message]="'Fill your first form by clicking on Form Templates'"></app-empty-placeholder>
+      </div>
+    </div>
+    <!-- My forms end -->
+
+    <!-- Assigned form start -->
+    <div class="row form-list" *ngIf="currentUser.role == constants.MANAGER || currentUser.role == constants.ADMIN || currentUser.role == constants.TEAM_TEAD">
+      <div class="col-sm-6">
+        <h1 class="heading">Assigned Forms</h1>
+      </div>
+      <div class="col-sm-6">
+        <a routerLink="/assigned-forms" class="right-heading">See All Assigned Forms</a>
+      </div>
+      <div class="col-sm-3" *ngFor="let form of assignedForms | slice: 0 : 4; let index=$index ">
+        <app-assigned-form-stamp [form]= "form"></app-assigned-form-stamp>
+      </div>
+      <div class="col-sm-12" *ngIf="assignedForms.length == 0">
+        <app-empty-placeholder [title]="'Oops! No forms found in your dashboard.'" [message]="'Fill your first form by clicking on Form Templates'"></app-empty-placeholder>
+      </div>
+    </div>
+    <!-- Assigned form end -->
+
+    <!-- submitted form start -->
+    <!-- <div class="row form-list" *ngIf="currentUser.role == constants.MANAGER || currentUser.role == constants.EMPLOYEE">
+      <div class="col-sm-6">
+        <h1 class="heading">Submitted Forms</h1>
+      </div>
+      <div class="col-sm-6">
+        <a routerLink="/submitted-form" class="right-heading">See All Assigned Forms</a>
+      </div>
+      <div class="col-sm-3" *ngFor="let form of submittedForms | slice: 0 : 4; let index=$index ">
+        <app-submitted-form-stamp [form]= "form"></app-submitted-form-stamp>
+      </div>
+    </div> -->
+    <!-- submitted form end -->
+
+    <!-- My organization start -->
+    <div class="row form-list" *ngIf="currentUser.role == constants.ADMIN || currentUser.role == constants.MANAGER || currentUser.role == constants.TEAM_TEAD">
+      <div class="col-sm-6">
+        <h1 class="heading">{{currentUser.role == constants.TEAM_TEAD || currentUser.role == constants.MANAGER ? 'Your Team' : 'Your Organisation'}}</h1>
+      </div>
+      <div class="col-sm-6">
+        <a routerLink="/employee" class="right-heading">Manage your Organisations</a>
+      </div>
+      <div class="col-20 wow fadeInUp" *ngFor="let item of employes | slice: 0 : 5; let i=index " [attr.data-wow-delay]="(0.2*(i%10)) + 's'">
+        <app-employee-stamp [employee]="item"></app-employee-stamp>
+      </div>
+      <div class="col-sm-12" *ngIf="employes.length == 0">
+        <app-empty-placeholder [title]="'Oops! There are no members of your team here.'" [message]="'Invite your organisation members to Whirligig by visiting Manage Organisation'" ></app-empty-placeholder>
+      </div>
+    </div>
+    <!-- My organization end -->
+
+    <!-- policy start -->
+    <div class="row form-list">
+      <div class="col-sm-6">
+        <h1 class="heading">Policy Handbook</h1>
+      </div>
+      <div class="col-sm-6">
+        <a routerLink="/chapters" class="right-heading">See all Policies</a>
+      </div>
+      <div class="col-sm-3 wow fadeInUp" *ngFor="let item of chapters | slice: 0 : 4; let i = index " [attr.data-wow-delay]="(0.2*(i%10)) + 's'">
+        <app-chapter-stamp [chapter]="item"></app-chapter-stamp>
+      </div>
+      <div class="col-sm-12" *ngIf="chapters.length == 0">
+        <app-empty-placeholder [title]="'Oops! Looks like you don\'t have access to any Chapters.
+          '" [message]="'Reach out to us on support@pwcompliance.com.au'"></app-empty-placeholder>
+      </div>
+    </div>
+    <!-- policy end -->
+
+    <div class="row form-list">
+      <div class="col-sm-6">
+        <h1 class="heading">{{currentUser.role == constants.SUPER_ADMIN ? 'Form Templates' : 'Company Forms'}}</h1>
+      </div>
+      <div class="col-sm-6">
+        <a routerLink="/form-templates" class="right-heading">See all Templates</a>
+      </div>
+      <div class="col-sm-3 wow fadeInUp" *ngFor="let template of templates | slice: 0 : 4; let i = index " [attr.data-wow-delay]="(0.2*(i%10)) + 's'">
+        <app-form-stamp (onDelete)="onDeleteTemplate($event)" (notify)="openOverlay('assignForm', $event)"  [formtemplate]="template" ></app-form-stamp>
+      </div>
+      <div class="col-sm-12" *ngIf="templates.length == 0">
+        <app-empty-placeholder></app-empty-placeholder>
+      </div>
+    </div>
+
+    <div class="row form-list">
+      <div class="col-sm-6">
+        <h1 class="heading">SOP & Guides</h1>
+      </div>
+      <div class="col-sm-6">
+        <a routerLink="/sop" class="right-heading">See all SOP & Guides</a>
+      </div>
+      <div class="col-sm-3 wow fadeInUp" *ngFor="let item of sopList | slice: 0 : 4; let i = index" [attr.data-wow-delay]="(0.2*(i%10)) + 's'">
+        <div class="stamp">
+          <div class="actions" *ngIf="currentUser.role == constants.SUPER_ADMIN">
+            <div class="dropdown dropdown-menu-right">
+              <button type="button" class="btn" data-toggle="dropdown">
+                <img src="/assets/menu.svg">
+              </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" [routerLink]="'/edit-sop/' + item.id" >Edit SOP</a>
+                <a class="dropdown-item" href="javascript:void(0)" (click)="onDeleteSOP(item)" >Delete SOP</a>
+              </div>
+            </div>
+          </div>
+          <div class="">
+            <h2 class="heading">SOP Title</h2>
+            <h3 class="name">{{item.title}}</h3>
+            <h2 class="heading">Created On</h2>
+            <h3 class="stamp-date">{{commonService.getFormatedDate(item.createdate)}}</h3>
+            <div class="line"></div>  
+            <a class="stamp-btn button-value" [routerLink]="'/sop/' + item.id">View SOP</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12" *ngIf="sopList.length == 0">
+        <app-empty-placeholder></app-empty-placeholder>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Add new user overlay start -->
+<app-add-new-user></app-add-new-user>
+<!-- Add new user overlay end -->
+
+<!-- Assign new form overlay start -->
+<app-assign-new-form [selectedTemplate]="selectedTemplate"></app-assign-new-form>
+<!-- Assign new form overlay end -->

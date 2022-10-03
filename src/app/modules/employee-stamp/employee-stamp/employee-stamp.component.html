@@ -1,0 +1,44 @@
+<section class="stamp emp-stamp">
+  <div class="actions" *ngIf="((userData.getUserData().role == constants.ADMIN && isAction) || (userData.getUserData().role == constants.SUPER_ADMIN && isAction)) && constants.ADMIN != employee.role" >
+    <div class="dropup">
+      <button type="button" class="btn" data-toggle="dropdown">
+        <img src="/assets/menu.svg">
+      </button>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" href="javascript:void(0)" (click)="onClickeStamp(employee, 'view')" >View</a>
+        <a class="dropdown-item" href="javascript:void(0)" (click)="onClickeStamp(employee, 'edit')" >Edit</a>
+        <a class="dropdown-item" href="javascript:void(0)" (click)="onClickeRemoved(employee)">Delete</a>
+        <a *ngIf="employee.suspend == 0" class="dropdown-item" href="javascript:void(0)" (click)="onClickeStamp(employee, 'suspend')" >Suspend</a>
+        <a *ngIf="employee.suspend == 1" class="dropdown-item" href="javascript:void(0)" (click)="onClickeStamp(employee, 'activate')" >Activate</a>
+      </div>
+    </div>
+  </div>
+  <a class="organization-details-cont" (click)="onClickeStamp(employee, 'view')" href="javascript:void(0)">
+    <div class="organization-details">
+      <img [src]="employee.userimage" class="circle" onError="this.src='/assets/user.png'"/>
+      <div class="org-right">
+        <p [ngStyle]="{'color' : employee.act != constants.NOT_VERIFIED ? '#181818' : '#c6c6c6'}" class="profile-name">{{employee.name}}</p>
+
+        <!-- If user not suspended -->
+        <div *ngIf="employee.suspend != 1" >
+
+          <!-- Show details if suer is verified -->
+          <div *ngIf="employee.act != constants.NOT_VERIFIED">
+            <p class="designation">{{employee.designation}}</p>
+            <p class="Joined-date">{{commonService.getUserRoleById(employee.role)}}</p>
+          </div>
+
+          <!-- show not accepted if invitation not accepted -->
+          <div *ngIf="employee.act == constants.NOT_VERIFIED">
+            <p class="inv-not-accepted" >Invite not accepted yet.</p>
+          </div>
+        </div>
+
+        <!-- If user suspended -->
+        <div *ngIf="employee.suspend == 1">
+          <p class="inv-not-accepted" >User suspended</p>
+        </div>
+      </div>
+    </div>
+  </a>
+</section>

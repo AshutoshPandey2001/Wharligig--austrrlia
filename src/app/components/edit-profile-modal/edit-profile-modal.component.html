@@ -1,0 +1,106 @@
+<div class="modal fade add-table-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="editProfileModal" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{isOrgEdit ? 'Edit Organisation Information' : 'Edit Profile Information'}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          <div class="text">Close</div>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form autocomplete="off" name="editProfileForm" #editProfileForm="ngForm" (ngSubmit)="editProfileForm.form.valid && submitProfile()" novalidate>
+          <div *ngIf="!isOrgEdit" >
+            <div class="row">
+              <div class="col-sm-6 left-section">
+                <div class="heading">{{isOrgEdit ? 'Organisation logo' : 'Profile Image'}}</div>
+                <img class="user-img" [src]="profileData.userimage || '/assets/user.png'">
+              </div>
+              <div class="col-sm-6 right-section">
+                <div class="heading">INFORMATION</div>
+                <div class="form-group">
+                  <label for="name" class="col-form-label">Full Name</label>
+                  <input type="text" class="form-control" id="name" required name="name" [(ngModel)]="profileData.name" #name="ngModel" autocomplete="off" >
+                  <div *ngIf="editProfileForm.submitted && name.invalid" class="error">
+                    <div *ngIf="name.errors.required" class="error vld-box">
+                      Please enter name.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="name" class="col-form-label">Designation</label>
+                  <input type="text" class="form-control" id="name" required name="designation" [(ngModel)]="profileData.designation" #designation="ngModel" autocomplete="off" >
+                  <div *ngIf="editProfileForm.submitted && designation.invalid" class="error">
+                    <div *ngIf="designation.errors.required" class="error vld-box">
+                      Please enter designation.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6 text-center left-section-2">
+                <div>
+                  <button (click)="onClickedImageReplace()" class="submit-button btn-hover-anim" type="button" >{{profileData.userimage != undefined && profileData.userimage != null && profileData.userimage != '' ? 'Replace Image' : 'Upload Image'}}</button>
+                </div>
+                <button class="remove-btn" type="button" (click)="OnClickedRemoveImage()" >Remove Image</button>
+              </div>
+              <div class="col-sm-6 right-section-2">
+                <div>
+                  <button class="submit-button btn-hover-anim" type="submit" >Update Profile</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="isOrgEdit" >
+            <div class="row">
+              <div class="col-sm-6 left-section">
+                <div class="heading">{{isOrgEdit ? 'Organisation logo' : 'Profile Image'}}</div>
+                <img class="user-img" [src]="orgData.organization_logo || '/assets/user.png'">
+              </div>
+              <div class="col-sm-6 right-section">
+                <div class="heading">INFORMATION</div>
+                <div class="form-group">
+                  <label for="name" class="col-form-label">Organisation Name</label>
+                  <input type="text" class="form-control" id="name" required name="name" [(ngModel)]="orgData.organization_name" #name="ngModel" autocomplete="off" >
+                  <div *ngIf="editProfileForm.submitted && name.invalid" class="error">
+                    <div *ngIf="name.errors.required" class="error vld-box">
+                      Please enter name.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="name" class="col-form-label">Admin name</label>
+                  <input type="text" class="form-control" id="name" required name="designation" [(ngModel)]="orgData.name" #designation="ngModel" autocomplete="off" >
+                  <div *ngIf="editProfileForm.submitted && designation.invalid" class="error">
+                    <div *ngIf="designation.errors.required" class="error vld-box">
+                      Please enter admin name.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6 text-center left-section-2">
+                <div>
+                  <button (click)="onClickedImageReplace()" class="submit-button btn-hover-anim" type="button" >{{orgData.organization_logo != undefined && orgData.organization_logo != null && orgData.organization_logo != '' ? 'Replace Image' : 'Upload Image'}}</button>
+                </div>
+                <button class="remove-btn" type="button" (click)="OnClickedRemoveImage()" >Remove Image</button>
+              </div>
+              <div class="col-sm-6 right-section-2">
+                <div>
+                  <button class="submit-button btn-hover-anim" type="submit" >Update Organisation</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </form>
+    </div>
+  </div>
+</div>

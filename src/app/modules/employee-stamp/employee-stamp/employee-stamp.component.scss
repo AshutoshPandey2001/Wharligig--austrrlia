@@ -1,0 +1,166 @@
+.stamp{
+  position: relative;
+}
+.stamp:hover{
+  background: #fff;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+}
+
+.remove-btn{
+  position: absolute;
+  top: 50%;
+  left: -5px;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+.stamp:hover .remove-btn{
+  display: block;
+}
+.remove-btn img{
+  max-width: 20px;
+}
+.organization-details{
+  align-items: center;
+}
+.organization-details .org-right{
+  margin-left: 80px;
+}
+.circle{
+  width: 60px;
+  height: 60px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 10px;
+}
+.profile-name{
+  color: #181818;
+  font-family: HKGrotesk-Bold;
+  font-size: 17px;
+  margin: 0px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.designation{
+  color: #181818;
+  font-family: HKGrotesk-Regular;
+  font-size: 13px;
+  margin: 0px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.Joined-date{
+  color: #a1a1a1;
+  font-family: HKGrotesk-Regular;
+  font-size: 12px;
+  margin: 0px;
+  margin-top: 2px;
+}
+.organization-details-cont{
+  display: block;
+  text-decoration: none;
+  padding: 20px 0;
+}
+.inv-not-accepted{
+  color: #db803a;
+  font-size: 12px;
+  font-family: HKGrotesk-Regular;
+  margin-bottom: 6px;
+}
+/*Actions*/
+.emp-stamp:hover .actions{
+  display: block;
+}
+.emp-stamp .actions{
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  display: none;
+}
+.emp-stamp .actions button{
+  background: transparent;
+  outline: none;
+  padding-top: 0;
+  color: #aaa;
+  border: none;
+  padding-right: 15px;
+}
+.emp-stamp .actions button img{
+  max-width: 90%;
+  transform: rotate(90deg);
+}
+.emp-stamp .actions button:focus{
+  outline: none;
+  box-shadow: none;
+}
+.emp-stamp .actions .dropdown-menu{
+  border-radius: 0px;
+  min-width: 110px;
+  padding: 0;
+  margin-bottom: 0;
+  padding-bottom: 5px;
+  border: none;
+  background: transparent;
+}
+.emp-stamp .actions .dropdown-menu a, .emp-stamp .actions .dropdown-menu a:hover{
+  font-family: HKGrotesk-Bold;
+  display: inline-block;
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 20px;
+  border-radius: 0px;
+  font-size: 14px;
+  background: #d81f29;
+}
+/*Media queries  start*/
+/* Landscape*/
+
+@media only screen and (min-device-width: 1366px) and (max-device-height: 1024px) and (-webkit-min-device-pixel-ratio: 2)  and (orientation: landscape)  {
+  
+}
+
+/* Portrait*/
+@media only screen and (min-device-width: 1024px) and (max-device-height: 1366px) and (-webkit-min-device-pixel-ratio: 2)  and (orientation: portrait)  {
+  
+}
+
+/* Portrait tablets and small desktops */
+@media screen and (max-width: 1199px) {
+  
+}
+
+@media screen and (max-width: 992px) {
+
+
+}
+
+/* Landscape phones and portrait tablets */
+@media screen and (max-width: 767px) {
+  .organization-details{
+    text-align: center;
+    display: block;
+  }
+  .circle {
+    width: 50%;
+  }
+  .org-right{
+    padding: 20px 0;    
+  }
+  .remove-btn{
+    display: block;
+    top: 15px;
+    left: 10%;
+    z-index: 101;
+  }
+}
+
+/* Portrait phones and smaller */
+@media screen and (max-width: 480px) {
+  
+}

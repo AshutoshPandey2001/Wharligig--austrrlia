@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-md  navbar-light fixed-top" *ngIf="selectedOrg" >
+  <a class="navbar-brand">
+    Currently viewing for <b>{{selectedOrg.organization_name}}</b>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item" >
+        <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+      </li>
+      <li class="nav-item" >
+        <a class="nav-link" routerLink="/form-templates">Forms</a>
+      </li>
+      <li class="nav-item" >
+        <a class="nav-link" routerLink="/sop">SOPs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/chapters">Policies</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/employee">Manage Organisations</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/assigned-forms">Status</a>
+      </li>
+      <li class="nav-item exit-view">
+        <a class="nav-link" href="javascript:void(0)" (click)="userData.setSelectedOrg(false)" >Exit this view</a>
+      </li>
+    </ul>
+  </div>  
+</nav>

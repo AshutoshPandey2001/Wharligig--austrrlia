@@ -1,0 +1,55 @@
+<a class="rectangle" [routerLink]="redirection(form)">
+  <!-- Icon to show if is there any comment for form -->
+  <img class="comment-icon" *ngIf="form.comments>0 && form.act != constants.APPROVED && form.act != constants.REJECTED" src="/assets/comment.svg">
+  <h1 class="check-list">{{form.title}}</h1>
+  <div class="row">
+    <div class="col-sm-7">
+      <h1 class="form-list">Assigned to</h1>
+      <div class="name-section">
+        <div class="row">
+          <div class="col-sm-12 pr-0">
+            <img [src]="form.userimage" onError="this.src='/assets/user.png'" class="circle"/>
+            <p [title]="form.empid == userService.getUserData().id ? 'Me' : form.name" >{{form.empid == userService.getUserData().id ? 'Me' : form.name}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-5">
+      <div class="date-section">
+        <h1 class="form-list">Due Date</h1>
+        <h1 class="check-list-1 due-date" [ngClass]="{'closed' : form.act == constants.REJECTED || form.act == constants.APPROVED, 'delayed' : form.act != constants.REJECTED && form.act != constants.APPROVED && commonService.getDiffBetweenDate(form.expiretime) < 0, 'deadline' : form.act != constants.REJECTED && form.act != constants.APPROVED && 0 <= commonService.getDiffBetweenDate(form.expiretime) &&  commonService.getDiffBetweenDate(form.expiretime) <= 2 , 'ontrack' : form.act != constants.REJECTED && form.act != constants.APPROVED && commonService.getDiffBetweenDate(form.expiretime) > 2}">{{commonService.getDDMMYYYYFormatedDate(form.expiretime)}}</h1>
+      </div>
+    </div>
+  </div>
+  <div class="line"></div>
+  <div class="row">
+    <div class="col-sm-7">
+      <div class="date-section">
+        <h1 class="form-list">{{form.act == constants.ASSIGNED ? 'Assigned On' : 'Submitted On'}}</h1>
+        <h1 style="font-size: 12px;" class="check-list-1 simple-date">{{commonService.getDDMMYYYYFormatedDate(form.act == constants.ASSIGNED ? form.assigntime : form.submitedate)}}</h1>
+      </div>
+    </div>
+    <div class="col-sm-5" [ngStyle]="{'visibility': form.approvename ? 'visibile' : 'hidden'}" >
+      <h1 class="form-list">Checked by</h1>
+      <div class="name-section">
+        <div class="row">
+          <div class="col-sm-12 pr-0">
+            <img [src]="form.approveimage" style="height: 13px;width: 13px;" onError="this.src='/assets/user.png'" class="circle"/>
+            <p style="font-size: 12px;" [title]="form.approveby == userService.getUserData().id ? 'Me' : form.approvename" >{{form.approveby == userService.getUserData().id ? 'Me' : form.approvename}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="line"></div>
+  <div class="footer-section">
+    <div class="row">
+      <div class="col-sm-7">
+        <button class="assigned" *ngIf="constants.ASSIGNED == form.act" >Not Submitted</button>
+        <button class="submitted" *ngIf="constants.SUBMITTED == form.act" >Under Review</button>
+        <button class="approved" *ngIf="constants.APPROVED == form.act" >Approved</button>
+        <button class="rejected" *ngIf="constants.REJECTED == form.act" >Rejected</button>
+      </div>
+    </div>
+  </div>
+</a>  

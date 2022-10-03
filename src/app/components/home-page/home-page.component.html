@@ -1,0 +1,90 @@
+<section class="section-1 container-fluid">
+  <div class="row">
+    <div class="col-sm-5 left-section wow fadeInUp" data-wow-delay="0.5s">
+      <h1 class="text-2 text-black">
+        You focus on the business.
+      </h1>
+      <h1 class="text-1 text-black">
+        We'll manage the red tape.
+      </h1>
+      <p class="text-3 text-black">
+        Businesses spend over 120 hours a year on managing, verifying, and maintaining their compliance status. With Whirligig, we'll give you that time back.
+      </p>
+      <div>
+        <a href="" class="red-bg-btn btn-hover-anim">
+          CLAIM 120 HOURS
+        </a>
+      </div>
+    </div>
+    <div class="col-sm-7 right-section wow fadeInUp" data-wow-delay="0.5s">
+      <img src="assets/Group 111.svg">
+    </div>
+  </div>
+</section>
+<section class="section-2">
+  <h1 class="text-2 text-black wow fadeInLeft">
+    What will Whirligig
+  </h1>
+  <h1 class="text-1 text-red wow fadeInLeft" data-wow-delay="0.2s">
+    do for you?
+  </h1>
+  <div class="row">
+    <div class="col-sm-4 wow fadeInUp" data-wow-delay="0.2s">
+      <div class="whirligig-stamp">
+        <img src="/assets/Group 112.svg">
+        <h4>NAVIGATE EASILY</h4>
+        <p>The maze of compliance made easy for you by segregating documentation into buckets as per your industry and operations, curated by our team.</p>
+      </div>
+    </div>
+    <div class="col-sm-4 wow fadeInUp" data-wow-delay="0.5s">
+      <div class="whirligig-stamp">
+        <img src="/assets/Group 113.svg">
+        <h4>MANAGE DOCUMENTS EASILY</h4>
+        <p>Get a holistic view of all active and pending compliance using our dashboard which lets you delegate this to Manager and Employee levels.</p>
+      </div>
+    </div>
+    <div class="col-sm-4 wow fadeInUp" data-wow-delay="0.8s">
+      <div class="whirligig-stamp">
+        <img src="/assets/Group 115.svg">
+        <h4>SAVE TIME &amp; MANPOWER</h4>
+        <p>By automating all your compliance requirements, employee management and education all on one platform. Let the platform work for you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section-3">
+  <div>
+    <span class="text-2 text-black wow fadeInLeft">Some of our </span>
+    <span class="text-1 text-red wow fadeInLeft">clients</span>
+  </div>
+  <div class="owl-carousel-container">
+    <owl-carousel [options]="myCarouselOptions" [carouselClasses]="['owl-theme', 'sliding']" >
+      <div class="item" *ngFor="let image of [0,1,2,3,4,5,6,7,8,9,10,11];let i = index ">
+      <img class="circle" [src]="'/assets/clients/1 – ' + image + '.png'">
+     </div> 
+    </owl-carousel>
+  </div>
+</section>
+<section class="section-4 container-fluid wow fadeInDown" data-wow-delay="0.1s">
+  <div class="row">
+    <div class="col-sm-6 left-section">
+      <h1 class="text-2 text-white">
+        Let's save you some time.
+      </h1>
+      <h1 class="text-1 text-white">
+        Schedule a demo call.
+      </h1>
+      <p class="text-3 text-white">
+        Allow our team to understand your business requirements and providing a bespoke experience.
+      </p>
+      <div>
+        <a routerLink="/contact" class="white-bg-btn btn-hover-anim">
+          SCHEDULE DEMO
+        </a>
+      </div>
+    </div>
+    <div class="col-sm-6 right-section">
+      <img src="assets/Group 140.png">
+    </div>
+  </div>
+</section>

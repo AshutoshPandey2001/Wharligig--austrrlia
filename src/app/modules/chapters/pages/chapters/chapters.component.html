@@ -1,0 +1,27 @@
+<section class="template" >
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6">
+        <h1 class="main-heading">Policy Chapters</h1>
+        <p class="sub-heading">Your repository of procedures and protocols.</p>
+      </div>
+      <div class="col-sm-6">
+        <img [src]="userDataService.getUserData().organization_logo || 'assets/user.png'" class="float-right user-img">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="line"></div> 
+      </div>
+    </div>
+    	<div class="row form-list">
+    		<div class="col-sm-3 wow fadeInUp" *ngFor="let item of chapters; let i=index " [attr.data-wow-delay]="(0.2*(i%4)) + 's'">
+        <app-chapter-stamp [chapter]="item"></app-chapter-stamp>
+      	</div> 
+        <div class="col-sm-12" *ngIf="chapters.length == 0">
+          <app-empty-placeholder [title]="'Oops! Looks like you don\'t have access to any Chapters.
+          '" [message]="'Reach out to us on support@pwcompliance.com.au'"></app-empty-placeholder>
+        </div>
+  		</div>
+  </div>
+</section>

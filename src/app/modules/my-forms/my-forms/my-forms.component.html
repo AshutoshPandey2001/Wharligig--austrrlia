@@ -1,0 +1,37 @@
+<section class="dashboard" >
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6">
+        <h1 class="main-heading">My Forms</h1>
+        <p class="sub-heading">One place for all your forms.</p>
+      </div>
+      <div class="col-sm-6">
+        <img [src]="userDataService.getUserData().organization_logo || 'assets/user.png'" class="float-right user-img">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="line"></div> 
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <h1 class="heading">Filter by status</h1>
+      </div>
+      <div class="col-sm-12 button-section">
+        <button (click)="filter=constants.APPROVED;pageNo=1;myFormList();" type="button" class =" buttons btn-hover-anim review-btn" [ngClass]="{'approved-btn' : filter==constants.APPROVED }" value="Approved">Approved</button>
+        <button (click)="filter=constants.SUBMITTED;pageNo=1;myFormList();" type="button" class="review-btn buttons btn-hover-anim" [ngClass]="{'approved-btn' : filter==constants.SUBMITTED }" value="Send for Review"> Under Review</button>
+        <button [ngClass]="{'approved-btn' : filter==constants.ASSIGNED }" (click)="filter=constants.ASSIGNED;pageNo=1;myFormList();" type="button" class="review-btn buttons btn-hover-anim" value="Pending/Overdue">Not Submitted</button>
+        <button [ngClass]="{'approved-btn' : filter==constants.REJECTED }" (click)="filter=constants.REJECTED;pageNo=1;myFormList();" type="button" class="review-btn buttons btn-hover-anim" value="Pending/Overdue">Rejected</button>
+      </div>
+    </div>
+    <div class="row form-list">
+      <div class="col-sm-3 wow fadeInUp" *ngFor="let form of myForms; let index=index " [attr.data-wow-delay]="(0.2*(index%10)) + 's'">
+        <app-my-form-stamp [form]= 'form'></app-my-form-stamp>
+      </div>
+      <div class="col-sm-12" *ngIf="myForms.length == 0">
+        <app-empty-placeholder [title]="filter != undefined ? undefined : 'Oops! No forms found in your dashboard.'" [message]="filter != undefined ? undefined : 'Fill your first form by clicking on Form Templates'"  ></app-empty-placeholder>
+      </div>
+    </div>
+  </div>
+</section>

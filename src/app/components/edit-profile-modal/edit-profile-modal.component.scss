@@ -1,0 +1,123 @@
+.modal .error{
+  font-size: 12px;
+  font-family: HKGrotesk-Regular;
+}
+.modal .error{
+  padding: 0;
+}
+.modal-dialog .close{
+  position: absolute;
+  right: -80px;
+  background: #fff;
+  z-index: 111111;
+  height: 60px;
+  width: 60px;
+  font-size: 31px;
+  opacity: 0.8;
+  color: #d81f29;
+  font-weight: 100;
+  border-radius: 100px;
+  outline: none;
+}
+.modal-content{
+  border: none;
+}
+.modal-dialog .close span{
+  display: block;
+  line-height: 13px;
+}
+.modal-dialog .close .text{
+  font-family: HKGrotesk-Regular;
+  font-size: 10px;
+  line-height: 26px;
+}
+.modal-dialog .close:hover{
+  opacity: 1 !important;
+}
+.modal-header{
+  background: #d81f29;
+  padding: 30px 50px;
+  border: none;
+}
+.modal-header .modal-title{
+  font-family: HKGrotesk-Bold;
+  color: #fff;
+  font-size: 22px;
+}
+.modal-body{
+  padding: 0px 15px;
+}
+.modal-body .right-section{
+  background: #f6f6f6;
+  padding: 30px 15px;
+  padding-bottom: 20px;
+}
+.modal-body .right-section-2{
+  background: #f6f6f6;
+  padding: 20px 15px;
+  padding-top: 0;
+}
+.modal-body .left-section{
+  padding: 30px 15px;
+  background: #fff;
+  text-align: center;
+  padding-bottom: 20px;
+}
+.modal-body .left-section-2{
+  padding: 20px 15px;
+  padding-top: 0;
+}
+.modal-body .heading{
+  text-transform: uppercase;
+  color: #737373;
+  font-size: 14px;
+  font-family: HKGrotesk-Bold;
+  margin-bottom: 15px;
+}
+.modal-body .user-img{
+  height: 140px;
+  width: 140px;
+  border-radius: 100px;
+}
+.modal button.submit-button{
+  background: #d81f29;
+  border: none;
+  border-radius: 50px;
+  outline: none;
+  font-family: HKGrotesk-Bold;
+  color: #fff;
+  padding: 8px 24px;
+  font-size: 12px;
+}
+.modal button.remove-btn{
+  background: transparent;
+  border: none;
+  border-radius: 50px;
+  outline: none;
+  font-family: HKGrotesk-Bold;
+  color: #737373;
+  padding: 8px 24px;
+  font-size: 12px; 
+  margin-top: 10px;
+}
+.modal .col-form-label{
+  font-family: HKGrotesk-Bold;
+  font-size: 13px;
+  line-height: 1.23;
+  color: #797979;
+}
+.modal input{
+  border-radius: 10px;
+  border: solid 1px #d1d1d1;
+  background-color: white;
+  font-family: HKGrotesk-Regular;
+  font-size: 13px;
+  line-height: 1.23;
+  color: #131313;
+  outline: none;
+  padding: 18px 15px;
+}
+.modal input:focus{
+  outline: none;
+  box-shadow: none;
+}

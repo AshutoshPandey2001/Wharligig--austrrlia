@@ -1,0 +1,379 @@
+<div class="custom-toolbar form-uploader">
+  <span class="formats">
+    <button class="cus-bold" (click)="formatDoc('bold', undefined);closeToolbar()" >
+      B
+    </button>
+    <button class="cus-italic" (click)="formatDoc('italic', undefined);closeToolbar()" >
+      I
+    </button>
+    <button class="cus-underline" (click)="formatDoc('underline', undefined);closeToolbar()" >
+      U
+    </button>
+  </span>
+  <span class="formats" >
+    <button class="cus-underline" (click)="formatDoc('insertorderedlist', undefined);closeToolbar()" >
+      1
+    </button>
+  </span>
+  <span class="formats" >
+    <button class="cus-underline" (click)="formatDoc('insertunorderedlist', undefined);closeToolbar()" >
+      ..
+    </button>
+  </span>
+  
+  <span class="formats" >
+    <button class="cus-underline" (click)="isHeadingOpen = !isHeadingOpen" >
+      <span>H1</span>
+    </button>
+    <div class="options expanded" [ngClass]="{'expanded': isHeadingOpen}" >
+      <button (click)="formatDoc('fontsize', 7);isHeadingOpen = !isHeadingOpen;closeToolbar()" >H1</button>
+      <button (click)="formatDoc('fontsize', 5);isHeadingOpen = !isHeadingOpen;closeToolbar()" >H3</button>
+      <button (click)="formatDoc('fontsize', 3);isHeadingOpen = !isHeadingOpen;closeToolbar()">N</button>
+    </div>
+  </span>
+
+  <span class="formats" >
+    <button class="cus-underline" (click)="isAlignedOpen = !isAlignedOpen" >
+      <span>C</span>
+    </button>
+    <div class="options expanded" [ngClass]="{'expanded': isAlignedOpen}" >
+      <button (click)="formatDoc('justifycenter', undefined);isAlignedOpen = !isAlignedOpen;closeToolbar()" >C</button>
+      <button (click)="formatDoc('justifyleft', undefined);isAlignedOpen = !isAlignedOpen;closeToolbar()" >L</button>
+      <button (click)="formatDoc('justifyright', undefined);isAlignedOpen = !isAlignedOpen;closeToolbar()">R</button>
+    </div>
+  </span>
+</div>
+
+<section class="container-fluid uploader form-uploader close-toolbar" [ngClass]="{'super': userRole == constants.SUPER_ADMIN, 'admin': userRole == constants.ADMIN, 'manager': userRole == constants.MANAGER, 'employee': userRole == constants.EMPLOYEE, 'fill-form' : isFillForm}">
+  <form class="row" name="formDataForm" #formDataForm="ngForm" (ngSubmit)="formDataForm.form.valid && superAdminFormSubmit(formDataForm)" novalidate>
+    <div class="col-sm-3 col-md-3 left-section slim-scrollbar">
+      <div>
+        <!-- If super admin only -->
+        <div *ngIf="userRole == constants.SUPER_ADMIN && !isPreviewMode && !userData.getSelectedOrg()" class="form-group">
+          <div>
+            <label class="">Associated Policy</label>
+            <div class="input-border">
+              <ng-select id="associatedPolicySelect" class="custom" [items]="policies" name="associatedPolicy" [(ngModel)]="formData.policyid" #associatedPolicy="ngModel" placeholder="Select the policy" bindLabel="title" [searchFn]="customSearchFnPolicy">
+                <ng-template ng-option-tmp let-item="item">
+                  {{item.suid}}
+                  {{item.title}}
+                </ng-template>
+              </ng-select>
+            </div>
+            <div class="validation-container">
+              <div *ngIf="formDataForm.submitted && associatedPolicy.invalid" class="error">
+                <div *ngIf="associatedPolicy.errors.required" class="error vld-box">
+                  <span class="vld-msg">Please select policy</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <section class="toolbar" *ngIf="!isPreviewMode">
+            <div class="form-field-label">Form Fields</div>
+            <ul>
+              <li>
+                <button class="" type="button"  title="Question" (click)="addNextQuestion()">
+                  <img src="/assets/toolbar/Question Icon.svg">
+                  <span>Question</span>
+                </button>
+              </li>
+              <li>
+                <button class="" type="button" (click)="addNextBlock()" title="Plain Text Area">
+                  <img src="/assets/toolbar/Plain Text.svg">
+                  <span>Plain Text Area</span>
+                </button>
+              </li>
+              <li>
+                <button class="" type="button" (click)="addCheckBoxQuestion()" title="Checkbox">
+                  <img src="/assets/toolbar/Checkbox.svg">
+                  <span>Checkbox</span>
+                </button>
+              </li>
+              <li>
+                <button class="" type="button" (click)="addRadioButtonQuestion()" title="Checkbox">
+                  <img src="/assets/toolbar/Checkbox.svg">
+                  <span>Single Select</span>
+                </button>
+              </li>
+              <li>
+                <button type="button" (click)="addSelectQuestion()" title="Yes/ No/ NA Dropdown" >
+                  <img src="/assets/toolbar/Dropdown.svg">
+                  <span>Yes/ No/ NA Dropdown</span>
+                </button>
+              </li>
+              <li>
+                <button type="button" (click)="addRatingQuestion()" title="Rating Scale" >
+                  <img src="/assets/toolbar/Rating Scale.svg">
+                  <span>Rating Scale</span>
+                </button>
+              </li>
+              <li>
+                <button class="" type="button" (click)="addOrganisationPlaceholder()" title="Magic Tag">
+                  <img src="/assets/toolbar/Magic Tag.svg">
+                  <span>Magic Tag</span>
+                </button>
+              </li>
+              <li>
+                <button class="" type="button" data-toggle="modal" data-target="#addTableModal" title="Table" (click)="selectedTableType=1">
+                  <img src="/assets/toolbar/Table.svg">
+                  <span>Table</span>
+                </button>
+              </li>
+              <li>
+                <button class="" type="button" data-toggle="modal" data-target="#addTableModal" title="Table" (click)="selectedTableType=2">
+                  <img src="/assets/toolbar/Table.svg">
+                  <span>Risk Table</span>
+                </button>
+              </li>
+              <li>
+                <button title="Upload Image" class="" type="button" (click)="addImageQuestion()" >
+                  <img src="/assets/toolbar/Image Upload.svg">
+                  <span>Upload Image</span>
+                </button>
+              </li>
+              <li>
+                <button title="Geo-Location" class="" type="button" (click)="addGeoLocationQuestion()" >
+                  <img src="/assets/toolbar/Geo Location.svg">
+                  <span>Geo-Location</span>
+                </button>
+              </li>
+            </ul>
+          </section>
+        </div>
+
+        <div *ngIf="userRole == constants.SUPER_ADMIN && isPreviewMode">
+          <div class="form-group" style="margin-top: 8%;">
+            <label class="">Associated Policy</label>
+            <p *ngIf="formData.associatedPolicy != undefined" class="title-input">{{formData.associatedPolicy.title}}</p>
+          </div>
+        </div>
+        <!-- If super admin only end -->
+
+        <div *ngIf="userRole != constants.SUPER_ADMIN" class="">
+          <div *ngIf="isReviewForm">
+            <div class="org-img">
+              <img [src]="formData.userimage" onerror="this.src='assets/user.png'">
+            </div>
+            <div class="key-value-container">
+              <div class="key">Organisation Name</div>
+              <div class="value">{{formData.organization_name}}</div>
+            </div>
+
+            <div class="key-value-container">
+              <div class="key">Form Filled By</div>
+              <div class="value">{{formData.name}}</div>
+            </div>
+
+            <div class="line"></div>
+
+            <div class="key-value-container date-info">
+              <div class="key">Assigned Date</div>
+              <div class="value">{{commonService.getDDMMYYYYFormatedDate(formData.assigntime)}}</div>
+            </div>
+
+            <div class="key-value-container date-info">
+              <div class="key">Submitted Date</div>
+              <div class="value">{{commonService.getDDMMYYYYFormatedDate(formData.submitedate)}}</div>
+            </div>
+
+            <div class="line"></div>
+          </div>
+
+          <div class="key-value-container" *ngIf="formData.policy != undefined">
+            <div class="key">Related policy</div>
+            <a target="_blank" *ngFor="let p of formData.policy" style="display: block;" [routerLink]="'/policy/' + p.endpoint" class="value">{{p.title}}</a>
+          </div>
+
+          <!-- <div class="key-value-container">
+            <div class="key">Sub-chapter Number</div>
+            <div class="value">2.4</div>
+          </div>
+
+          <div class="key-value-container">
+            <div class="key">Policy Name</div>
+            <div class="value">2.4.9 Traffic Control</div>
+          </div> -->
+
+          <div *ngIf="(isReviewForm || isFillForm) && formData.comments != undefined && formData.comments != null && formData.comments != '' && formData.act != constants.APPROVED && formData.act != constants.REJECTED" class="comment-section">
+            <div class="key-value-container">
+              <div class="key colour-red">COMMENT</div>
+              <div class="value">{{formData.comments}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-9 col-md-9 right-section">
+      <div class="row button-section" [ngClass]="{'super-nav-open': userData.getSelectedOrg()}" >
+        <div class="col-sm-12 text-right" *ngIf="userRole == constants.SUPER_ADMIN && (!userData.getSelectedOrg())">
+          <button *ngIf="isPreviewMode" class="btn-gray btn-hover-anim" type="button" (click)="isPreviewMode=false;" >BACK TO EDIT</button>
+          <button *ngIf="!isPreviewMode" class="btn-cancel btn-hover-anim" type="button" (click)="exitForm()" >{{templateId == undefined ? 'Cancel &amp; Exit' : 'Cancel &amp; Exit'}}</button>
+          <button *ngIf="!isPreviewMode" class="btn-gray btn-hover-anim" type="button" (click)="isPreviewMode=true;onClickPreview()" >PREVIEW FORM</button>
+          <button *ngIf="!isPreviewMode" type="submit" class="btn-color btn-hover-anim" >{{templateId == undefined ? 'SUBMIT FORM' : 'SAVE FORM'}}</button>
+        </div>
+        <!-- <div class="col-sm-12 text-right" *ngIf="userRole == constants.EMPLOYEE">
+          <button class="btn-gray" type="button" (click)="exitForm()" >EXIT FORM</button>
+          <button type="submit" class="btn-color" (click)="formDataForm.form.valid && submitForm(formDataForm)" >SUBMIT FOR APPROVAL</button>
+        </div> -->
+
+        <!-- <div class="col-sm-12 text-right" *ngIf="userRole == constants.ADMIN">
+          <button class="btn-gray" type="button" (click)="exitForm()" >REJECT FORM</button>
+          <button type="submit" class="btn-color" (click)="formDataForm.form.valid && submitForm(formDataForm)" >APROVE FORM</button>
+        </div> -->
+
+        <!-- Fill form if fill mode open -->
+        <div class="col-sm-12 text-right" *ngIf="isFillForm">
+          <button class="btn-gray" type="button" (click)="exitForm()" >CANCEl FORM</button>
+          <button type="button" class="btn-color" (click)="formDataForm.form.valid && (isMyFormEdit ? editFilledForm(formDataForm) : submitFilledForm(formDataForm) )" >{{isMyFormEdit ? 'UPDATE FORM' : 'SUBMIT FORM'}}</button>
+        </div>
+
+        <!-- review form if review mode open -->
+        <div class="col-sm-12 text-right" *ngIf="isReviewForm && isReadOnly != true">
+          <button class="red-border-btn" type="button" (click)="rejectAssignedForm(formDataForm)" >REJECT FORM</button>
+          <button class="btn-gray" type="button" data-toggle="modal" data-target="#addReworkCommentModal" >SEND FOR REVIEW</button>
+          <button type="button" class="btn-color" (click)="formDataForm.form.valid && approveSubmittedForm(formDataForm)" >APPROVE FORM</button>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-sm-10">
+          <div class="header-section" *ngIf="userRole == constants.SUPER_ADMIN && !isPreviewMode">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="">
+                  <input type="text" name="title" class="form-control title-input" placeholder="Enter Title of form" [(ngModel)]="formData.title" #title="ngModel" required>
+                  <div *ngIf="formDataForm.submitted && title.invalid && title.errors.required" class="error">
+                    Please enter title
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <textarea class="form-control desc-input" name="description" placeholder="Enter description of Form" rows="3" [(ngModel)]="formData.description" #description="ngModel" required></textarea>
+                  <div *ngIf="formDataForm.submitted && description.invalid && description.errors.required" class="error">
+                    Please enter description
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="header-section" *ngIf="userRole != constants.SUPER_ADMIN || isPreviewMode">
+            <div class="row">
+              <div class="col-sm-12">
+                <h1 class="title-input">{{formData.title}}</h1>
+                <p class="desc-input">{{formData.description}}</p>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="userRole == constants.SUPER_ADMIN  && !isPreviewMode" id="formEditor" class="form-editor sortable" [innerHtml]="formData.content">
+            <!-- <div class="question-container">
+              <div class="question" data-text="Enter text here">When is the bomb going to explode? OR When will the substance be released?</div>
+              <div class="answer"></div>
+            </div> -->
+          </div>
+          <!-- <div *ngIf="userRole == constants.SUPER_ADMIN && !isPreviewMode">
+            <div class="row">
+              <div class="col-sm-7">
+                <div class="add-question">
+                  Click to add Block
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+          <div id="formEditor" [ngClass]="{'preview': isPreviewMode}" class="form-editor" *ngIf="userRole != constants.SUPER_ADMIN || isPreviewMode">
+            <div class="" [innerHtml]="formData.content"></div>
+          </div>
+
+          <button *ngIf="userRole == constants.SUPER_ADMIN" type="button" class="quill-custom-buttons upload-image" (click)="onClickedSelectImage(undefined)">
+            <img [src]="env.S3_BASE_URL + '/production/assets/Cam.svg'">
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>
+
+<!-- Add table modal start -->
+<div class="modal fade add-table-modal form-uploader" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="addTableModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        <div class="text">Close</div>
+      </button>
+      <div class="modal-body">
+        <h2>Select Number of Rows &amp; Columns</h2>
+        <form autocomplete="off" name="registerForm" #tableCountForm="ngForm" (ngSubmit)="tableCountForm.form.valid && (selectedTableType == 1 ? addTabel() : addRiskTabel())" novalidate>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Number of rows</label>
+                <input type="number" class="form-control" id="recipient-name" required name="rows" [(ngModel)]="table.rows" #rows="ngModel" autocomplete="off" >
+                <div *ngIf="tableCountForm.submitted && rows.invalid" class="error">
+                  <div *ngIf="rows.errors.required" class="error vld-box">
+                    Please enter number of rows.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Number of columns</label>
+                <input type="number" class="form-control" id="recipient-name" name="column" [(ngModel)]="table.column" #column="ngModel" autocomplete="off" required>
+                <div *ngIf="tableCountForm.submitted && column.invalid" class="error">
+                  <div *ngIf="column.errors.required" class="error vld-box">
+                    Please enter number of column.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <button class="submit-button">Add To Form</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add table modal end -->
+
+<!-- Send for rework modal start -->
+<div class="modal fade add-comment-modal form-uploader" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="addReworkCommentModal" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        <div class="text">Close</div>
+      </button>
+      <div class="modal-body">
+        <div class="text-red text-1" >Send for Rework</div>
+        <p>Explain what is missing in the form and intimate the user to fill up the requested fields</p>
+        <form autocomplete="off" name="addCommentModal" #addCommentModal="ngForm" (ngSubmit)="addCommentModal.form.valid && submitReviewFormComment()" novalidate>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <textarea rows="9" class="form-control" id="commentText" required name="rows" [(ngModel)]="reviewComment.comment" #commentText="ngModel" autocomplete="off" >
+                </textarea>
+                <div *ngIf="addCommentModal.submitted && commentText.invalid" class="error">
+                  <div *ngIf="commentText.errors.required" class="error vld-box">
+                    Please enter review comment
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-right">
+            <a class="cancel-btn" href="javascript:void(0)" data-dismiss="modal" >Cancel</a>
+            <button class="submit-button">Send Feedback</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Send for rework modal end -->

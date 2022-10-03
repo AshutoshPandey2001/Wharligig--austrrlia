@@ -1,0 +1,52 @@
+.stamp{
+	text-decoration: none;
+}
+.chapter-form-start{
+	padding: 10px 0;
+}
+.chapter-form{
+	box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+	background-color: white;
+}
+.chapter-form:hover{
+	box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.4);
+}
+.content{
+	padding: 20px; 
+}
+.chapter-img{
+	overflow: hidden;
+}
+.chapter-img img{
+	width: 100%;
+	transition: all 2s;
+}
+.chapter-img img:hover {
+	-ms-transform: scale(1.2); /* IE 9 */
+	-webkit-transform: scale(1.2); /* Safari 3-8 */
+	transform: scale(1.2);
+	transition: all 1s;
+}
+.chapter-name{
+	font-family: HKGrotesk-Light;
+	color: #db3a3a;
+}
+.chapter-description{
+	font-family: HKGrotesk-SemiBold;
+	color: #181818;
+	font-size: 13px;
+	margin-bottom: 14px;
+	height: 30px; 
+	overflow: hidden;	
+	text-overflow: ellipsis;
+	-webkit-line-clamp: 2;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+}
+
+.no-of-policies{
+	font-family: HKGrotesk-Bold;
+	color: #a1a1a1;
+	font-size: 11px;
+	text-transform: uppercase;
+}

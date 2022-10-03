@@ -1,0 +1,43 @@
+<section class="container-fluid onboarding top-space">
+  <div class="row sign-up-page">
+    <div class="col-sm-5 left-section">
+      <form name="signupForm" (ngSubmit)="f.form.valid && submit()"  #f="ngForm" novalidate>
+        <h2 class="text-1">Verify your Mobile Number</h2>
+        <div class="form-group email-signup-field">
+          <label style="display: block;" class="label-heading" for="email">Phone Number</label>
+          <select class="text-field code-field" [(ngModel)]= "user.code" #code="ngModel" name="code" required>
+            <option value="91" selected="true" >+91</option>
+            <option value="92">+92</option>
+            <option value="93">+93</option>
+            <option value="94">+94</option>
+          </select>
+          <input type="text" class="text-field mobile-number" [(ngModel)]= "user.number" #mobileNumber="ngModel" name="mobileNumber" placeholder="8452031116" required minlength="10" maxlength="10" pattern="[0-9]*" />
+          <div *ngIf="f.submitted && mobileNumber.errors">
+            <div class="err-msg" *ngIf="mobileNumber.errors.required">Mobile number is required</div>
+            <div class="err-msg" *ngIf="mobileNumber.errors.minlength || mobileNumber.errors.maxlength || mobileNumber.errors.pattern">Please enter valid mobile number</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="button" class="red-border-btn btn-hover-anim">Send OTP</button>
+          <p class="resend-mail">OTP Sent.<a href="javascript:void(0)" class="anchor-text">Resend OTP</a></p>
+        </div>
+        <div class="form-group email-signup-field otp-field-container">
+          <label style="display: block;" class="label-heading" for="email">Enter OTP</label>
+          <input id="otp1" (keyup)="onKeyUpEvent(1, $event)" (focus)="onFocusEvent(1)" type="text" class="text-field otp-field" [(ngModel)]= "user.otp1" #otp1="ngModel" name="otp1" required minlength="1" maxlength="1"/>
+          <input id="otp2" (keyup)="onKeyUpEvent(2, $event)" (focus)="onFocusEvent(2)" type="text" class="text-field otp-field" [(ngModel)]= "user.otp2" #otp2="ngModel" name="otp2" required minlength="1" maxlength="1"/>
+          <input id="otp3" (keyup)="onKeyUpEvent(3, $event)" (focus)="onFocusEvent(3)" type="text" class="text-field otp-field" [(ngModel)]= "user.otp3" #otp3="ngModel" name="otp3" required minlength="1" maxlength="1"/>
+          <input id="otp4" (keyup)="onKeyUpEvent(4, $event)" (focus)="onFocusEvent(4)" type="text" class="text-field otp-field" [(ngModel)]= "user.otp4" #otp4="ngModel" name="otp4" required minlength="1" maxlength="1"/>
+          <span class="incorrect-otp resend-mail">Incorrect OTP. Try Again!</span>
+          <div *ngIf="f.submitted && (otp1.errors|| otp2.errors || otp3.errors || otp4.errors)">
+            <div class="err-msg" *ngIf="otp1.errors || otp2.errors || otp3.errors || otp4.errors">Please enter valid OTP</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="red-btn btn-hover-anim">Submit</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-sm-7 right-section" style="background-image: url(assets/otpbg.jpg);">
+    </div>
+  </div>
+</section>

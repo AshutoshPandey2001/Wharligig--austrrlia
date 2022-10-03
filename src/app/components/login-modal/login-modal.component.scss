@@ -1,0 +1,75 @@
+.modal .error{
+  font-size: 12px;
+  font-family: HKGrotesk-Regular;
+}
+.modal .error{
+  padding: 0;
+}
+.modal-dialog .close{
+  position: absolute;
+  right: -80px;
+  background: #fff;
+  z-index: 111111;
+  height: 60px;
+  width: 60px;
+  font-size: 31px;
+  opacity: 0.8;
+  color: #d81f29;
+  font-weight: 100;
+  border-radius: 100px;
+  outline: none;
+}
+.modal-content{
+  border: none;
+}
+.modal-dialog .close span{
+  display: block;
+  line-height: 13px;
+}
+.modal-dialog .close .text{
+  font-family: HKGrotesk-Regular;
+  font-size: 10px;
+  line-height: 26px;
+}
+.modal-dialog .close:hover{
+  opacity: 1 !important;
+}
+.modal-header{
+  background: #d81f29;
+  padding: 20px 30px;
+  border: none;
+}
+.modal-header .modal-title{
+  font-family: HKGrotesk-Bold;
+  color: #fff;
+  font-size: 27px;
+}
+.modal-body{
+  padding: 20px 30px;
+}
+.modal .label-heading{
+  font-family: HKGrotesk-Bold;
+  font-size: 13px;
+  line-height: 1.23;
+  color: #797979;
+}
+.login-modal.modal .red-btn{
+  margin-top: 15px;
+  padding: 10px;
+  outline: none;
+}
+.modal input{
+  border-radius: 10px;
+  border: solid 1px #d1d1d1;
+  background-color: white;
+  font-family: HKGrotesk-Regular;
+  font-size: 13px;
+  line-height: 1.23;
+  color: #131313;
+  outline: none;
+  padding: 18px 15px;
+}
+.modal input:focus{
+  outline: none;
+  box-shadow: none;
+}

@@ -1,0 +1,53 @@
+<section class="container-fluid top-space onboarding">
+  <div class="row profile-completion-page">
+    <div class="col-sm-5 left-section">
+      <form name="profileCompletionForm" (ngSubmit)="f.form.valid && submit()"  #f="ngForm" novalidate>
+        <div class="completion-step">Step 1 out of 2</div>
+        <h1>Customise your Profile</h1>
+        <p class="resend-mail">Add your Job Designation & Display Image</p>
+        <div class="form-group">
+          <label class="label-heading" for="designation">Job Designation</label>
+          <input class="text-field"  type="text" [(ngModel)]= "userData.designation" #designation="ngModel" [ngClass]="{ 'is-invalid': f.submitted && designation.invalid }" placeholder="Angular Developer" name="designation" required designation />
+          <div *ngIf="f.submitted && designation.invalid">
+            <div class="err-msg" *ngIf="designation.errors.required">Designation is required
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="userData.userimage == '' || userData.userimage == undefined || userData.userimage == null" class="row upload-image-page">
+          <div class="form-group" class="col-sm-4 left-section-1">
+            <label class="label-heading">Upload Image</label>
+            <input class="" type="file" style="display: none;" id="chooseFile" name="" (change)="fileChangeEvent($event, 'profileImage')">
+            <label for="chooseFile" class="upload-file" >
+              <div class="plus-sign-container">
+                <h1 class="plus" >+</h1>
+                <h2 class="upload-img-msg">Click here to Upload</h2> 
+              </div>
+            </label>
+          </div>
+          <div class="col-sm-8 right-section-1">
+            <p>NOTE:<p>
+            <p class="note">
+              Please make sure that the Image is in a square format and below 2 MB in size. Since this image will be used across the platform, please ensure that you use an image which will help your team identify you.</p>
+          </div>
+        </div>
+        <div *ngIf="userData.userimage != '' && userData.userimage != undefined && userData.userimage != null" class="profile-logo">
+          <div class="" >
+            <div class="overlay"></div>
+            <label class="edit-label" for="editFile">Edit</label>
+            <input class="" type="file" style="display: none;" id="editFile" name="" (change)="fileChangeEvent($event, 'profileImage')">
+            <img class="" style="width: 100%" [src]="userData.userimage">
+          </div>
+        </div>
+        <div class="create-profile-btn">
+          <button type="submit" class="red-btn btn-hover-anim">Complete Profile</button>
+        </div>
+        <div class="form-group">
+          <p class="resend-mail">Already have an account on Whirligig?<a target="_blank" class="anchor-text" href="">Login Now!</a></p>
+        </div>
+      </form>
+    </div>
+    <div class="col-sm-7 right-section">
+    </div>
+  </div>
+</section>

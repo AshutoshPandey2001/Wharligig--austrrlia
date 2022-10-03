@@ -1,0 +1,25 @@
+.navbar.fixed-top{
+  top: 65px;
+  background: #d81f29;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.navbar-nav .nav-link {
+  font-family: HKGrotesk-Medium;
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1.19;
+  letter-spacing: -0.48px;
+  color: #fff;
+  text-transform: uppercase;
+  padding: 20px;
+}
+.navbar-nav .exit-view .nav-link{
+  padding-left: 40px;
+  text-decoration: underline;
+  text-transform: none;
+}
+.navbar-brand,.navbar-brand:hover{
+  color: #fff !important;
+  font-size: 13px;
+}

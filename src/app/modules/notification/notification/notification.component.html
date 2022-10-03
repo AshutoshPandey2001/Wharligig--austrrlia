@@ -1,0 +1,45 @@
+<section class="notification container-fluid">
+  <div class="row">
+    <div class="col-sm-6">
+      <h1 class="heading">All Notifications</h1>
+      <p class="sub-text" >Reminders, Due Dates, New Assignments. All in one place.</p>
+    </div>
+    <div class="col-sm-6">
+      <img [src]="userDataService.getUserData().organization_logo || 'assets/user.png'" class="float-right user-img">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-8 left-section">
+      <div>
+        <ul>
+          <li *ngFor="let item of notifications; let i = index " >
+            <img [src]="'https://pwcb.s3.ap-south-1.amazonaws.com/production/assets/noun_reminder_1216125.svg'" class="icon">
+            <span class="text" >Sam Smith sent you a reminder about a pending form that was assigned to you. <a href="">Complete form now.</a></span>
+
+            <div class="time-since">{{item+1+'h'}}</div>
+            <button (click)="deleteNotification(i)" class="close-btn">&times;</button>
+          </li>
+          <div *ngIf="notifications.length == 0" class="">
+            No notifications found!!
+          </div>
+        </ul>
+      </div>
+    </div>
+    <div class="col-sm-4 right-section">
+      <div class="right-card color">
+        <img src="/assets/create-policy-white.svg">
+        <div class="right-part">
+          <p class="text" >Read through our immersive collection of policies and compliance information.</p>
+          <a class="see-more" href="">See more</a>
+        </div>
+      </div>
+      <div class="right-card">
+        <img src="https://pwcb.s3.ap-south-1.amazonaws.com/production/assets/create-sop-white.svg">
+        <div class="right-part">
+          <p class="text" >Read through our immersive collection of SOPs, Guides, and Checklists to reduce your redtape.</p>
+          <a class="see-more" href="">See more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

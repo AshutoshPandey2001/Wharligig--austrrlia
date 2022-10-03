@@ -1,0 +1,976 @@
+<section class="dashboard org" >
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6">
+        <h1 class="main-heading">Manage Organisations</h1>
+        <p class="sub-heading">Here is the list of all your Organisations on Whirligig</p>
+      </div>
+      <div class="col-sm-6">
+        <img [src]="userDataService.getUserData().organization_logo || 'assets/user.png'" class="float-right user-img">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="line"></div> 
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <input type="text" class=" search-org-name" placeholder="Search by Name of the Employee" name="search" id="orgSearch">
+        <img class="search-icon" src="assets/search-icon-img.png">
+      </div>
+      <div class="col-sm-3"></div>
+      <div class="col-sm-5 text-right">
+        <button type="button" class ="button-section btn-hover-anim" (click)="openOverlay()">
+          <img class="plus-icon" src="assets/Group 163.svg">
+          <span>CREATE NEW ORGANISATION</span>
+        </button>
+      </div>
+    </div>
+    <div class="row form-list">
+      <div class="col-sm-3 wow fadeInUp" *ngFor="let item of organizations; let i=index " [attr.data-wow-delay]="(0.2*(i%10)) + 's'">
+        <app-organization-stamp [isAction]="true" (onClickedOrg)="onClickedOrganization($event)" [organization]="item"></app-organization-stamp>
+      </div>
+      <div class="col-sm-12" *ngIf="organizations.length == 0">
+        <app-empty-placeholder [title]="'Oops! There are no members of your team here.'" [message]="'Invite your organisation members to Whirligig by visiting Manage Organisation'" ></app-empty-placeholder>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="createOrg" class="overlay org" [ngClass]="{'super-nav-open': selectedSuperAdminOrg}" >
+  <div class="overlay-content">
+    <a href="javascript:void(0)" class="close-btn" (click)="closeOverlay('createOrg');isEditOrg=false;">
+      <div>
+        <span class="close-icon">
+          &times;<br>
+        </span>
+        <span class="close-label">Close</span>
+      </div>
+    </a>
+    <div class="overlay-body slim-scrollbar" >
+      <mat-horizontal-stepper #stepper>
+        <!-- Step 1 create first screen start -->
+        <mat-step >
+          <div class="step-no" >STEP 1/4</div>
+          <div class="heading">Add New Organisation</div>
+          <p class="info">Add the Organisation Admin. This will be person who is responsible for building and managing their teams on Whirligig. <br>Note: Work Email Addresses are preferred and accountable.</p>
+
+          <form name="newOrg1" (ngSubmit)="f1.form.valid && createAccount(stepper)"  #f1="ngForm" novalidate>
+
+            <div class="row">
+              <div class="col-sm-5">
+                <div class="form-group verifi-email-field valid-icon-header">
+                  <label class="" for="orgname">Organisation Name</label>
+                  <input type="text" class="form-control" [(ngModel)]= "newOrganization.organization_name" #orgname="ngModel" name="orgname" required />
+                  <div *ngIf="f1.submitted && orgname.errors">
+                    <div class="err-msg" *ngIf="orgname.errors.required">Name is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-7">
+                <div class="form-group verifi-email-field valid-icon-header">
+                  <label class="" for="orgname">Organisation Logo</label>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <img class="org-logo" [src]="newOrganization.organization_logo || '/assets/user.png'">
+                      <button (click)="onClickedImageReplace()" class="submit-button btn-hover-anim" type="button" >{{newOrganization.organization_logo != undefined && newOrganization.organization_logo != null && newOrganization.organization_logo != '' ? 'Replace Logo' : 'Upload Logo'}}</button>
+                      <button class="remove-btn" type="button" (click)="newOrganization.organization_logo=undefined" >Remove Logo</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-5">
+                <div class="form-group verifi-email-field valid-icon-header">
+                  <label class="" for="email">Admin's Email Address</label>
+                  <input type="email" class="form-control" [(ngModel)]= "newOrganization.email" #email="ngModel" name="email" required email/>
+                  <div *ngIf="f1.submitted && email.errors">
+                    <div class="err-msg" *ngIf="email.errors.required">Email is required</div>
+                    <div class="err-msg" *ngIf="email.errors.email">Email must be a valid email address</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group verifi-email-field valid-icon-header">
+                  <label class="" for="fullname">Full Name</label>
+                  <input type="text" class="form-control" [(ngModel)]= "newOrganization.name" #fullname="ngModel" name="fullname" required />
+                  <div *ngIf="f1.submitted && fullname.errors">
+                    <div class="err-msg" *ngIf="fullname.errors.required">Name is required</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-10">
+                <div>
+                  <label class="">Select Jurisdiction</label>
+                  <p class="info">Select the regions that the Organisation operates in</p>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="input-border">
+                        <ng-select id="regions" class="custom" [items]="regionList" name="regions" [(ngModel)]="newOrganization.location" #regions="ngModel" placeholder="Select Jurisdiction" [multiple]="true" bindLabel="region" required>
+                        </ng-select>
+                      </div>
+                      <div *ngIf="f1.submitted">
+                        <div class="err-msg" *ngIf="newOrganization.location.length == 0">Please select regions</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-3">
+                <button type="submit" class="stepper-btn create">CREATE ACCOUNTS</button>
+              </div>
+              <div class="col-sm-3">
+                <button class="stepper-btn cancel" type="button" (click)="closeOverlay('createOrg')">CANCEL</button>
+              </div>
+            </div>
+          </form>
+        </mat-step>
+        <!-- Step 1 create first screen end -->
+
+        <!-- Step 2 create second screen start -->
+        <mat-step>
+          <div *ngIf="!isEditOrg" class="step-no" >STEP 2/4</div>
+
+          <form name="newOrg1" (ngSubmit)="assignPolicy(stepper)"  #f2="ngForm" novalidate>
+
+            <div style="margin-top: 30px;">
+              <div class="heading">Select Policies that apply</div>
+              <p class="info">Select the policies that apply to the Organisation</p>
+              <div class="row">
+                <div class="col-sm-7">
+                  <div class="form-group">
+                    <label class="" for="policy">Select Policies</label>
+
+                    <div class="policy-content slim-scrollbar">
+                    <!-- Chapter accordion start -->
+                      <div id="accordion">
+                        <div *ngFor="let chapter of chapters; let index = index " class="card">
+                          <div class="card-header">
+                            <a (click)="onClickedSelectChapter(chapter)" href="javascript:void(0)" class="select-icon-cont" >
+                              <img class="select-icon chapter" *ngIf="isChapterSelected(chapter)" src="/assets/checked.svg">
+                              <img class="select-icon chapter" *ngIf="!isChapterSelected(chapter)" src="/assets/not-checked.svg">
+                            </a>
+                            <a (click)="getSubchapterOfChapter(chapter.id);selectedChapter=chapter" class="card-link chapter collapsed" data-toggle="collapse" [href]="'#collapse' + index">
+                              {{chapter.chapterid}} {{chapter.chapter_name}}
+                              <i class="fa fa-angle-up" aria-hidden="true"></i>
+                            </a>
+                          </div>
+                          <div [id]="'collapse' + index" class="collapse" data-parent="#accordion">
+                            <div class="card-body chapter">
+
+                              <!-- Sub chapter accordion start -->
+                              <div *ngIf="selectedChapter.id == chapter.id" id="accordionsubchapter">
+                                <div *ngFor="let subchapter of subChapters; let index = index " class="card">
+                                  <div class="card-header">
+                                    <a (click)="getSectionOfChapter(subchapter);selectedSubChapter=subchapter" class="card-link collapsed" data-toggle="collapse" [href]="'#subcollapse' + index">
+                                      {{subchapter.suid}} {{subchapter.title}}
+                                      <i class="fa fa-angle-up" aria-hidden="true"></i>
+                                    </a>
+
+                                    <!-- This filed when parent is selected -->
+                                    <a *ngIf="isChapterSelected(chapter)" (click)="onClickedSelectSubChapter(subchapter)" href="javascript:void(0)" class="select-icon-cont" >
+                                      <img class="select-icon chapter" *ngIf="isSubChapterSelected(subchapter)" src="/assets/checked.svg">
+                                      <img class="select-icon chapter" *ngIf="!isSubChapterSelected(subchapter)" src="/assets/not-checked.svg">
+                                    </a>
+
+                                    <!-- This filed if parent is not selected. Just showing non selected icon and on clicked showing error to select it's parent first -->
+                                    <a *ngIf="!isChapterSelected(chapter)" (click)="errorToSelectParent(1)" href="javascript:void(0)" class="select-icon-cont" >
+                                      <img class="select-icon chapter" src="/assets/not-checked.svg">
+                                    </a>
+
+                                  </div>
+                                  <div [id]="'subcollapse' + index" class="collapse" data-parent="#accordionsubchapter">
+                                    <div class="card-body">
+
+                                      <!-- Section accordion start -->
+                                      <div *ngIf="selectedSubChapter.id == subchapter.id" id="accordionSection">
+                                        <div *ngFor="let section of sectionList; let index = index " class="card">
+                                          <div class="card-header">
+                                            <a (click)="getSectionOfChapter(section);selectedSection=section;" class="card-link collapsed" data-toggle="collapse" [href]="'#sectioncollapse' + index">
+                                              {{section.ssuid}} {{section.title}}
+                                              <i class="fa fa-angle-up" aria-hidden="true"></i>
+                                            </a>
+
+                                            <!-- This filed when parent is selected -->
+                                            <a *ngIf=" isChapterSelected(chapter) && isSubChapterSelected(subchapter)" (click)="onClickedSelectSection(section)" href="javascript:void(0)" class="select-icon-cont" >
+                                              <img class="select-icon chapter" *ngIf="isSectionSelected(section)" src="/assets/checked.svg">
+                                              <img class="select-icon chapter" *ngIf="!isSectionSelected(section)" src="/assets/not-checked.svg">
+                                            </a>
+
+                                            <!-- This filed if parent is not selected. Just showing non selected icon and on clicked showing error to select it's parent first -->
+                                            <a *ngIf="!(isChapterSelected(chapter) && isSubChapterSelected(subchapter))" (click)="errorToSelectParent(2)" href="javascript:void(0)" class="select-icon-cont" >
+                                              <img class="select-icon chapter" src="/assets/not-checked.svg">
+                                            </a>
+
+                                          </div>
+                                          <div [id]="'sectioncollapse' + index" class="collapse" data-parent="#accordionSection">
+                                            <div class="card-body">
+                                              <!-- Element accordion start -->
+                                              <div *ngIf="selectedSection.id == section.id" id="accordionElement">
+                                                <div *ngFor="let element of elementList; let index = index " class="card">
+                                                  <div class="card-header">
+                                                    <a class="card-link" data-toggle="collapse" [href]="'#elementcollapse' + index">
+                                                      {{element.policyid}} {{element.title}}
+                                                    </a>
+
+                                                    <!-- This filed when parent is selected -->
+                                                    <!-- (click)="getSectionOfChapter(section)" -->
+                                                    <a *ngIf=" isChapterSelected(chapter) && isSubChapterSelected(subchapter) && isSectionSelected(section)" (click)="onClickedSelectElement(element)" href="javascript:void(0)" class="select-icon-cont" >
+                                                      <img class="select-icon chapter" *ngIf="isElementSelected(element)" src="/assets/checked.svg">
+                                                      <img class="select-icon chapter" *ngIf="!isElementSelected(element)" src="/assets/not-checked.svg">
+                                                    </a>
+
+                                                    <!-- This filed if parent is not selected. Just showing non selected icon and on clicked showing error to select it's parent first -->
+                                                    <a *ngIf="!(isChapterSelected(chapter) && isSubChapterSelected(subchapter) && isSectionSelected(section))" (click)="errorToSelectParent(3)" href="javascript:void(0)" class="select-icon-cont" >
+                                                      <img class="select-icon chapter" src="/assets/not-checked.svg">
+                                                    </a>
+
+                                                  </div>
+                                                  <div [id]="'elementcollapse' + index" class="collapse" data-parent="#accordionElement">
+                                                    <div class="card-body">
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <!-- Element accordion end -->
+
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <!-- Section accordion end -->
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- Sub chapter accordion end -->
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Chapter accordion end -->
+
+                    <!-- <div class="input-border">
+                      <ng-select id="policy" class="custom" [items]="policyList" name="policy" (change)="onPolicySelect($event)" [(ngModel)]="newOrganization.policy" #policy="ngModel" placeholder="" bindLabel="title" required>
+                      </ng-select>
+                    </div> -->
+                    <!-- <div *ngIf="f2.submitted">
+                      <div class="err-msg" *ngIf="assignedPolicy.length == 0">Please select policy</div>
+                    </div> -->
+                  </div>
+                </div>
+                <!-- <div class="col-sm-1 text-center">
+                  <div class="v-line" style=""></div>
+                </div>
+                <div class="col-sm-5">
+                  <div>
+                    <label class="">Assigned Policies</label>
+                    <ul>
+                      <li *ngFor="let policy of assignedPolicy">
+                        <a href="javascript:void(0)" (click)="removePolicy(policy)" class="policy-remove">&times;</a>
+                        {{policy.title}}
+                      </li>
+                    </ul>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+            <div class="row" *ngIf="!isEditOrg" >
+              <div class="col-sm-3">
+                <button type="submit" class="stepper-btn create">ASSIGN POLICIES</button>
+              </div>
+              <div class="col-sm-3">
+                <button class="stepper-btn cancel" type="button" (click)="cancel(stepper)">CANCEL</button>
+              </div>
+            </div>
+            <div class="row" *ngIf="isEditOrg" >
+              <div class="col-sm-3">
+                <button type="submit" class="stepper-btn create">ASSIGN POLICIES</button>
+              </div>
+              <div class="col-sm-3">
+                <button class="stepper-btn cancel" type="button" (click)="stepper.selectedIndex=constants.ORG_VIEW_INFO;isEditOrg=false;">CANCEL</button>
+              </div>
+            </div>
+          </form>
+        </mat-step>
+        <!-- Step 2 create second screen end -->
+
+        <!-- Step 3 create third screen start -->
+        <mat-step>
+          <div *ngIf="!isEditOrg" class="step-no" >STEP 3/4</div>
+
+          <form name="newOrgFormForm" (ngSubmit)="assignForms(stepper)"  #assignFormF="ngForm" novalidate>
+
+            <div style="margin-top: 30px;">
+              <div class="heading">Select forms that apply</div>
+              <p class="info">Select the forms that apply to the Organisation</p>
+              <div class="row">
+                <div class="col-sm-7">
+                  <div class="form-group">
+                    <label class="" for="policy">Select Forms</label>
+
+                    <div class="policy-content slim-scrollbar">
+                      <div>
+                        <div *ngFor="let template of allTemplates; let index = index " class="card">
+                          <div class="card-header" (click)="onClickedSelectForm(template)" >
+                            <a href="javascript:void(0)" class="select-icon-cont" >
+                              <img class="select-icon chapter" *ngIf="isFormSelected(template)" src="/assets/checked.svg">
+                              <img class="select-icon chapter" *ngIf="!isFormSelected(template)" src="/assets/not-checked.svg">
+                            </a>
+                            <a href="javascript:void(0)" class="card-link chapter">
+                              {{template.title}}
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-5">
+                  <div class="form-group">
+                    <label class="" for="policy">Selected Forms</label>
+
+                    <div class="policy-content slim-scrollbar">
+                      <div>
+                        <div *ngFor="let template of selectedTemplates; let index = index " class="card">
+                          <div class="card-header">
+                            <a href="javascript:void(0)" class="card-link chapter">
+                              {{template.title}}
+                              <i (click)="removeSelectedForm(template)" class="fa fa-close" aria-hidden="true"></i>
+                            </a>
+                          </div>
+                        </div>
+                        <div *ngIf="selectedTemplates.length == 0" >
+                          <span style="font-family: HKGrotesk-Italic;font-size: 12px;" >No forms selected </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="!isEditOrg" >
+              <div class="col-sm-3">
+                <button type="submit" class="stepper-btn create">ASSIGN FORMS</button>
+              </div>
+              <div class="col-sm-3">
+                <button class="stepper-btn cancel" type="button" (click)="cancel(stepper)">CANCEL</button>
+              </div>
+            </div>
+            <div class="row" *ngIf="isEditOrg" >
+              <div class="col-sm-3">
+                <button type="submit" class="stepper-btn create">UPDATE FORMS</button>
+              </div>
+              <div class="col-sm-3">
+                <button class="stepper-btn cancel" type="button" (click)="stepper.selectedIndex=constants.ORG_VIEW_INFO;isEditOrg=false;">CANCEL</button>
+              </div>
+            </div>
+          </form>
+        </mat-step>
+        <!-- Step 3 create third screen end -->
+
+        <!-- Step 4 create third screen start -->
+        <mat-step >
+          <div *ngIf="!isEditOrg" class="step-no" >STEP 4/4</div>
+
+          <form name="newOrgFormForm" (ngSubmit)="assignSOPs(stepper)"  #assignFormF="ngForm" novalidate>
+
+            <div style="margin-top: 30px;">
+              <div class="heading">Select SOPs that apply</div>
+              <p class="info">Select the SOPs that apply to the Organisation</p>
+              <div class="row">
+                <div class="col-sm-7">
+                  <div class="form-group">
+                    <label class="" for="policy">Select SOPs</label>
+
+                    <div class="policy-content slim-scrollbar">
+                      <div>
+                        <div *ngFor="let sop of sopList; let index = index " class="card">
+                          <div class="card-header" (click)="onClickedSelectSOP(sop)" >
+                            <a href="javascript:void(0)" class="select-icon-cont" >
+                              <img class="select-icon chapter" *ngIf="isSOPSelected(sop)" src="/assets/checked.svg">
+                              <img class="select-icon chapter" *ngIf="!isSOPSelected(sop)" src="/assets/not-checked.svg">
+                            </a>
+                            <a href="javascript:void(0)" class="card-link chapter">
+                              {{sop.title}}
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-5">
+                  <div class="form-group">
+                    <label class="" for="policy">Selected SOPs</label>
+
+                    <div class="policy-content slim-scrollbar">
+                      <div>
+                        <div *ngFor="let sop of selectedSOPs; let index = index " class="card">
+                          <div class="card-header">
+                            <a href="javascript:void(0)" class="card-link chapter">
+                              {{sop.title}}
+                              <i (click)="removeSelectedSOP(sop)" class="fa fa-close" aria-hidden="true"></i>
+                            </a>
+                          </div>
+                        </div>
+                        <div *ngIf="selectedSOPs.length == 0" >
+                          <span style="font-family: HKGrotesk-Italic;font-size: 12px;" >No SOPs selected </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="!isEditOrg" >
+              <div class="col-sm-3">
+                <button type="submit" class="stepper-btn create">ASSIGN SOPS</button>
+              </div>
+              <div class="col-sm-3">
+                <button class="stepper-btn cancel" type="button" (click)="cancel(stepper)">CANCEL</button>
+              </div>
+            </div>
+            <div class="row" *ngIf="isEditOrg" >
+              <div class="col-sm-3">
+                <button type="submit" class="stepper-btn create">UPDATE SOPS</button>
+              </div>
+              <div class="col-sm-3">
+                <button class="stepper-btn cancel" type="button" (click)="stepper.selectedIndex=constants.ORG_VIEW_INFO;isEditOrg=false;">CANCEL</button>
+              </div>
+            </div>
+          </form>
+        </mat-step>
+        <!-- Step 4 create third screen end -->
+
+        <!-- Step 5 confirm screen start -->
+        <mat-step>
+
+          <div class="view-org-page" >
+            <form (ngSubmit)="createOrganization(stepper)">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="org-header row" style="align-items: start;" >
+                    <div class="col-sm-12">
+                      <div class="read-heading">
+                        Confirm Details
+                      </div>
+                      <div class="basic-details" style="margin: 0;">
+                        <div class="row">
+                          <div class="col-sm-4">
+                            <div class="key-value">
+                              <div class="basic-details-heading">
+                                Organisation name
+                              </div>
+                              <div class="basic-details-heading value">
+                                {{newOrganization.organization_name}}
+                              </div>
+                            </div>
+
+                            <div class="key-value">
+                              <div class="basic-details-heading">
+                                Organisation admin name
+                              </div>
+                              <div class="basic-details-heading value">
+                                {{newOrganization.name}}
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-4">
+                            <div class="key-value">
+                              <div class="basic-details-heading">
+                                Jurisdiction
+                              </div>
+                              <div class="basic-details-heading value">
+                                <span *ngFor="let jur of newOrganization.location;let i = index" >
+                                  {{jur.region}} {{ i < newOrganization.location.length-1 ? ', ' : '' }}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-sm-4">
+                            <div class="key-value">
+                              <div class="basic-details-heading">
+                                Organisation admin email
+                              </div>
+                              <div class="basic-details-heading value">
+                                {{newOrganization.email}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                    <div>
+                  </div>
+                </div>
+              </div>
+              <div class="row listing-section">
+
+                <!-- selected chapters -->
+                <div class="col-sm-4">
+                  <div class="read-heading">
+                    assigned chapters
+                  </div>
+                  <div class="listing-content">
+                    <div class="listing-scroll">
+                      <div class="list-stamp" *ngFor="let chapter of newAddedPolicies">
+                        <span>
+                          {{chapter.title}}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- selected forms -->
+                <div class="col-sm-4">
+                  <div class="read-heading">
+                    assigned forms
+                  </div>
+                  <div class="listing-content">
+                    <div class="listing-scroll">
+                      <div class="list-stamp" *ngFor="let template of selectedTemplates">
+                        <span>
+                          {{template.title}}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- selected sops -->
+                <div class="col-sm-4">
+                  <div class="read-heading">
+                    assigned sops
+                  </div>
+                  <div class="listing-content">
+                    <div class="listing-scroll">
+                      <div class="list-stamp" *ngFor="let sop of selectedSOPs">
+                        <span>
+                          {{sop.title}}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-sm-3">
+                  <button type="submit" class="stepper-btn create">CREATE ORGANISATION</button>
+                </div>
+                <div class="col-sm-3">
+                  <button class="stepper-btn cancel" type="button" (click)="cancel(stepper)">CANCEL</button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </mat-step>
+        <!-- Step 5 confirm screen end -->
+
+        <!-- Step 6 success screen start -->
+        <mat-step class="success">
+          <form >
+            <div class="row">
+              <div class="col-sm-12">
+                <div>
+                  <i class="fa fa-check" style="font-size: 65px;color: #db3a3a" aria-hidden="true"></i>
+                </div>
+                <p class="success-msg">
+                  Organisation Created Successfully!
+                </p>
+                <p class="success-msg-note">PW Compliance has been created.  The Admin Email Address has been sent the details of how to get onboard with Whirligig Platform. </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-3">
+                <a routerLink="/dashboard" class="stepper-btn cancel" (click)="cancel(stepper)">BACK TO DASHBOARD</a>
+              </div>
+            </div>
+          </form>
+        </mat-step>
+        <!-- Step 6 success screen end -->
+
+        <!-- Step 7 Basic view start -->
+        <mat-step >
+          <div class="view-org-page" >
+            <form name="newOrg1" (ngSubmit)="assignAdmin(stepper2)"  #f3="ngForm" novalidate>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="org-header row" style="align-items: start;" >
+                    <div class="col-sm-7">
+                      <div class="read-heading">
+                        Basic details
+                      </div>
+                      <div class="basic-details" style="margin: 0;">
+                        <div class="row">
+                          <div class="col-sm-5">
+                            <div class="basic-details-heading">
+                              Organisation logo
+                            </div>
+                            <div class="text-center">
+                              <img class="org-img" [src]="selectedOrg.organization_logo || '/assets/Group 1.png'">
+                            </div>
+                            <div class="right-side">
+                              <div class="basic-details-heading">
+                                Organisation name
+                              </div>
+                              <div class="basic-details-heading value" >{{selectedOrg.organization_name}}</div>
+                              <!-- <div class="join-date">Joined on {{commonService.getFormatedDate(selectedOrg.organizationdate)}}</div> -->
+                            </div>
+                          </div>
+                          <div class="col-sm-7">
+                            <div class="key-value">
+                              <div class="basic-details-heading">
+                                Jurisdiction
+                              </div>
+                              <div class="basic-details-heading value">
+                                <span *ngFor="let jur of selectedOrg.location;let i = index" >
+                                  {{jur.location}} {{ i < selectedOrg.location.length-1 ? ', ' : '' }}
+                                </span>
+                              </div>
+                            </div>
+
+                            <div class="key-value">
+                              <div class="basic-details-heading">
+                                Organisation admin name
+                              </div>
+                              <div class="basic-details-heading value">
+                                {{selectedOrg.admin}}
+                              </div>
+                            </div>
+
+                            <div class="key-value">
+                              <div class="basic-details-heading">
+                                Active users
+                              </div>
+                              <div class="basic-details-heading value">
+                                {{selectedOrg.admincount + selectedOrg.managercount + selectedOrg.empcount}}
+                              </div>
+                            </div>
+
+                            <div class="key-value">
+                              <div class="basic-details-heading">
+                                Organisation admin
+                              </div>
+                              <div class="basic-details-heading value">
+                                {{selectedOrg.email}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-1" ></div>
+                    <div class="col-sm-4 actions-section">
+                      <div class="read-heading">
+                        Actions
+                      </div>
+                      <ul>
+                        <li>
+                          <a href="javascript:void(0)" (click)="openOrgEditOverlay(selectedOrg)" class="active" >
+                            View As organisation Admin
+                            <i class='fa fa-chevron-right'></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="javascript:void(0)" (click)="onClikedEditPolicies()" >
+                            Reassign policies
+                            <i class='fa fa-chevron-right'></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="javascript:void(0)" (click)="onClikedEditTemplates()" >
+                            Reassign forms
+                            <i class='fa fa-chevron-right'></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="javascript:void(0)" (click)="onClikedEditSOPs()" >
+                            Reassign SOP & Guides
+                            <i class='fa fa-chevron-right'></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="javascript:void(0)" (click)="editOrgDetails()" >
+                            Edit organisation details
+                            <i class='fa fa-chevron-right'></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="javascript:void(0)" (click)="assignAdmin(stepper)" >
+                            Reassign admin
+                            <i class='fa fa-chevron-right'></i>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    </div>
+                    <div>
+                  </div>
+                </div>
+              </div>
+              <div class="row listing-section">
+                <div class="col-sm-4">
+                  <div class="read-heading">
+                    assigned chapters
+                  </div>
+                  <div class="listing-content">
+                    <div class="listing-scroll">
+                      <div class="list-stamp" *ngFor="let chapter of selectedOrg.policy">
+                        <span>
+                          {{chapter.title}}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-sm-4">
+                  <div class="read-heading">
+                    assigned SOP & Guides
+                  </div>
+                  <div class="listing-content">
+                    <div class="listing-scroll">
+                      <div class="list-stamp" *ngFor="let sop of selectedOrg.sops">
+                        <span>
+                          {{sop.title}}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="read-heading">
+                    assigned forms
+                  </div>
+                  <div class="listing-content">
+                    <div class="listing-scroll">
+                      <div class="list-stamp" *ngFor="let form of selectedOrg.forms">
+                        <span>
+                          {{form.title}}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-sm-10"></div>
+                <div class="col-sm-2">
+                  <a href="javascript:void(0)" class="stepper-btn create" (click)="closeOverlay('createOrg');isEditOrg=false;" >Exit</a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </mat-step>
+        <!-- Step 7 Basic view end -->
+
+        <!-- Step 8 start -->
+        <mat-step>
+          <div class="">
+            <form name="newOrg1" (ngSubmit)="f3.form.valid && reAssignAdmin(stepper)"  #f3="ngForm" novalidate>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="org-header">
+                    <img class="org-img" [src]="newAdmin.organization_logo || '/assets/Group 1.png'">
+                    <div class="right-side">
+                      <div class="org-name" >{{newAdmin.organization_name}}</div>
+                      <div class="join-date">Joined on 12/08/2019</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="read-heading">Assign New Admin</div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group verifi-email-field valid-icon-header">
+                    <label class="" for="fullname3">Full Name</label>
+                    <input type="text" class="form-control" [(ngModel)]= "newAdmin.name" #fullname3="ngModel" name="fullname3" required />
+                    <div *ngIf="f3.submitted && fullname3.errors">
+                      <div class="err-msg" *ngIf="fullname3.errors.required">Name is required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-5">
+                  <div class="form-group verifi-email-field valid-icon-header">
+                    <label class="" for="email">Admin's Email Address</label>
+                    <input type="email" class="form-control" [(ngModel)]= "newAdmin.email" #emailf1="ngModel" name="email" required email/>
+                    <div *ngIf="f3.submitted && email.errors">
+                      <div class="err-msg" *ngIf="emailf1.errors.required">Email is required</div>
+                      <div class="err-msg" *ngIf="emailf1.errors.email">Email must be a valid email address</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-2">
+                  <button type="submit" class="stepper-btn create">SAVE</button>
+                </div>
+                <div class="col-sm-2">
+                  <button class="stepper-btn cancel" type="button" (click)="cancel(stepper)">CANCEL</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </mat-step>
+        <!-- Step 8 end -->
+
+      </mat-horizontal-stepper>
+    </div>
+  </div>
+</div>
+
+<div id="editOrg" class="overlay" [ngClass]="{'super-nav-open': selectedSuperAdminOrg}" >
+  <div class="overlay-content">
+    <a href="javascript:void(0)" class="close-btn" (click)="closeOverlay('editOrg')">
+      <div>
+        <span class="close-icon">
+          &times;<br>
+        </span>
+        <span class="close-label">Close</span>
+      </div>
+    </a>
+    <div class="overlay-body slim-scrollbar" >
+      <mat-horizontal-stepper #stepper2>
+
+        <!-- Step 5 start -->
+        <mat-step >
+          <form name="newOrg1" (ngSubmit)="assignAdmin(stepper2)"  #f3="ngForm" novalidate>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="org-header row">
+                  <div class="col-sm-8">
+                    <div class="org-header" style="margin: 0;">
+                      <img class="org-img" src="/assets/Group 1.png">
+                      <div class="right-side">
+                        <div class="org-name" >{{selectedOrg.organization_name}}</div>
+                        <div class="join-date">Joined on {{commonService.getFormatedDate(selectedOrg.organizationdate)}}</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div style="display: inline-block;">
+                      <div>
+                        <button type="button" class ="button-section" (click)="onClikedEditPolicies()" style="margin: 0;margin-bottom: 15px;">
+                          <img class="plus-icon" src="assets/plus-sign.png">
+                          <span>ASSIGN NEW CHAPTERS</span>
+                        </button>
+                      </div>
+                      <div class="">
+                        <button class="reassign-btn" type="button" (click)="assignAdmin(stepper2)">RE-ASSIGN ADMIN</button>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                  <div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="form-group view-info">
+                  <div class="read-heading">Organisation Admin</div>
+                  <div class="confirm-value">{{selectedOrg.name}}</div>
+                </div>
+
+                <div class="form-group view-info">
+                  <div class="read-heading">Organisation Strength </div>
+                  <div class="confirm-value">{{selectedOrg.admincount}} Admin</div>
+                  <div class="confirm-value">{{selectedOrg.managercount}} Managers</div>
+                  <div class="confirm-value">{{selectedOrg.empcount}} Employees</div>
+                </div>
+
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group view-info">
+                  <div class="read-heading" style="margin-bottom: 10px;" >Assigned Chapters</div>
+                  <div *ngFor="let chapter of selectedOrg.policy" class="confirm-value">
+                    {{chapter.title}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-3">
+                <a routerLink="/dashboard" class="stepper-btn cancel" (click)="cancel(stepper)">BACK TO DASHBOARD</a>
+              </div>
+            </div>
+          </form>
+        </mat-step>
+        <!-- Step 5 end -->
+
+        <!-- Step 4 start -->
+        <mat-step>
+          <form name="newOrg1" (ngSubmit)="f3.form.valid && reAssignAdmin(stepper)"  #f3="ngForm" novalidate>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="org-header">
+                  <img class="org-img" src="/assets/Group 1.png">
+                  <div class="right-side">
+                    <div class="org-name" >Surfing Monkey</div>
+                    <div class="join-date">Joined on 12/08/2019</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="read-heading">Assign New Admin</div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group verifi-email-field valid-icon-header">
+                  <label class="" for="fullname3">Full Name</label>
+                  <input type="text" class="form-control" [(ngModel)]= "newAdmin.name" #fullname3="ngModel" name="fullname3" required />
+                  <div *ngIf="f3.submitted && fullname3.errors">
+                    <div class="err-msg" *ngIf="fullname3.errors.required">Name is required</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-5">
+                <div class="form-group verifi-email-field valid-icon-header">
+                  <label class="" for="email">Admin's Email Address</label>
+                  <input type="email" class="form-control" [(ngModel)]= "newAdmin.email" #emailf1="ngModel" name="email" required email/>
+                  <div *ngIf="f3.submitted && email.errors">
+                    <div class="err-msg" *ngIf="emailf1.errors.required">Email is required</div>
+                    <div class="err-msg" *ngIf="emailf1.errors.email">Email must be a valid email address</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <button type="submit" class="stepper-btn create">SAVE</button>
+              </div>
+              <div class="col-sm-2">
+                <button class="stepper-btn cancel" type="button" (click)="closeOverlay('editOrg')">CANCEL</button>
+              </div>
+            </div>
+          </form>
+        </mat-step>
+        <!-- Step 4 end -->
+
+      </mat-horizontal-stepper>
+    </div>
+  </div>
+</div>

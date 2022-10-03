@@ -1,0 +1,142 @@
+.rectangle{
+  background-color: white;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  margin: 10px 0;
+  padding: 20px;
+  display: block;
+  text-decoration: none;
+  padding-bottom: 10px;
+}
+.rectangle .comment-icon{
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  width: 15px;
+}
+.rectangle:hover{
+  box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.4);
+}
+.form-list{
+  font-size: 11px;
+  font-family: HKGrotesk-Light;
+  color: #a1a1a1;
+  margin-bottom: 2px;
+}
+.check-list{
+  font-family: HKGrotesk-Bold;
+  color: #181818;
+  font-size: 20px;
+  margin-bottom: 18px;
+}
+.check-list-1{
+  height: 17px;
+  font-family: HKGrotesk-Medium;
+  font-size: 14px;
+  color: #181818;
+  margin: 0;
+}
+.check-list-1.due-date{
+  color: #db803a;
+  font-family: HKGrotesk-Bold;
+  margin-top: 8px;
+}
+.check-list-1.simple-date{
+  font-family: HKGrotesk-Bold;
+  margin-top: 8px;
+}
+.associated-policy{
+  margin: 0;
+  font-family: HKGrotesk-Medium;
+  color: #181818;
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 10px;
+}
+.name-section{
+  text-align: left;
+  color: #181818;
+  font-family: HKGrotesk;
+}
+.name-section p{
+  display: inline-block;
+  margin: 0;
+  margin-left: 5px;
+  font-family: HKGrotesk-Medium;
+  color: #181818;
+  font-size: 14px;
+}
+.date-section{
+  // margin: 18px 0;
+}
+.date-section .check-list-1.closed{
+  color: #a1a1a1;
+}
+.date-section .check-list-1.delayed{
+  color: #d81f29;
+}
+.date-section .check-list-1.deadline{
+  color: #db803a;
+}
+.date-section .check-list-1.ontrack{
+  color: #181818;
+}
+.line{
+  background-color: rgba(150, 150, 150, 0.2);
+  height: 1px;
+  margin: 10px 0;
+}
+.circle{
+  height: 17px;
+  width: 17px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.circle-checkbox{
+  border: 3px solid #db3a3a;
+  background-color: #FFFFFF;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+}
+.footer-section{
+  margin-top: 10px;
+}
+.footer-section .row{
+  display: flex;
+  align-items: center;
+}
+.footer-section button{
+  padding: 4px 20px;
+  font-family: EncodeSansSemiExpanded-Medium;
+  font-size: 10px;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+}
+.footer-section button.approved{
+  background: #3adb64;
+}
+.footer-section button.rejected{
+  background: #d81f29;
+}
+.footer-section button.submitted{
+  background: #db803a;
+}
+.footer-section button.assigned{
+  background: #a1a1a1;
+}
+.footer-section .check-list-1{
+  font-size: 12px;
+  color: #181818;
+}
+.pr-0{
+  padding-right: 0 !important;
+}
+.pl-0{
+  padding-left: 0 !important;
+}

@@ -1,0 +1,332 @@
+<div id="addEmp" class="overlay add-new-user" [ngClass]="{'super-nav-open': userData.getSelectedOrg()}" >
+  <div class="overlay-content" [ngClass]="{'small-width' : userViewType != constants.NEW_USER}" >
+    <a href="javascript:void(0)" class="close-btn" (click)="closeOverlay()">
+      <div>
+        <span class="close-icon">
+          &times;<br>
+        </span>
+        <span class="close-label">Close</span>
+      </div>
+    </a>
+    <div class="overlay-body slim-scrollbar" *ngIf="userViewType == constants.NEW_USER" [ngClass]="{'super-nav-open': userData.getSelectedOrg()}" >
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="heading">{{ isEditUser ? 'Edit user' : 'Add New Users'}}</div>
+          <p class="info">Add the Organisation Admin. This will be person who is responsible for building and managing their teams on Whirligig. 
+           <span class="info-note">Note: Work Email Addresses are preferred and accountable.</span>
+          </p>  
+        </div>
+        <div class="col-sm-4">
+          <img [src]=" userData.getUserData().organization_logo || 'assets/Group 1.png'" class="float-right user-img">
+        </div>
+      </div>
+      
+      <form name="newOrg1" (ngSubmit)="f1.form.valid && createAccount()" #f1="ngForm">
+        <div class="row">
+          <div class="col-sm-2">
+            <label class="">Type of Member</label>  
+          </div>
+          <div class="col-sm-3">
+            <label class="">Email Address</label>    
+          </div>
+          <div class="col-sm-2">
+            <label class="">Full Name</label>
+          </div>
+          <div class="col-sm-2">
+            <label class="">Team leader</label>
+          </div>
+          <div class="col-sm-2">
+            <label class="">Manager Name</label>
+          </div>
+        </div>
+
+        <div class="row" style="padding-bottom: 15px;" *ngFor="let user of newUserList; let i=index ">
+          <div class="col-sm-2">
+            <ng-select class="member-list" [items]="members"  placeholder="Select user type" [(ngModel)]="user.role" #utype="ngModel" [name]="'utype' + i" bindValue="id" bindLabel="name" required >
+            </ng-select>
+            <div class="">
+              <div *ngIf="f1.submitted && utype.invalid">
+                <div *ngIf="utype.errors.required" class="error">
+                  Please select user type
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <input type="email" class="form-control" [(ngModel)]= "user.email" #email="ngModel" [name]="'email' + i" required (blur)="email.valid && onEmailBlurMethod(user, i)" placeholder="Enter email" email [ngStyle]="{'pointer-events' : isEditUser ? 'none' : 'auto'}" />
+            <div class="">
+              <div *ngIf="f1.submitted && email.invalid">
+                <div *ngIf="email.errors.required" class="error">
+                  Email is required
+                </div>
+                <div class="err-msg" *ngIf="email.errors.email">
+                  Email must be a valid email address
+                </div>
+              </div>
+              <div *ngIf="user.isEmailExist" class="error">
+                This email already exists.
+              </div>
+              <div *ngIf="user.isEmailAllreadyEntered" class="error">
+                This email is already entered
+              </div>
+            </div>
+
+          </div>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" [(ngModel)]= "user.name" #fullname="ngModel" [name]="'fullname' + i" required placeholder="Enter name" required />
+            <div class="">
+              <div *ngIf="f1.submitted && fullname.invalid">
+                <div *ngIf="fullname.errors.required" class="error">
+                  Name is required
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-2">
+            <div *ngIf="user.role != constants.MANAGER && user.role != constants.TEAM_TEAD" >
+              <ng-select [disabled]="user.isAdminSelected" class="member-list" [items]="teamLeaderList" [(ngModel)]="user.tlid" #teamLead="ngModel" [name]="'teamLead' + i" bindValue="tlid" bindLabel="name" placeholder="Select team leader" [required]="(user.managerid == null || user.managerid == undefined || user.managerid == '') && false" (change)="onTeamLeadSelect(user)"></ng-select>
+              <div class="">
+                <div *ngIf="f1.submitted && teamLead.invalid">
+                  <div *ngIf="teamLead.errors.required" class="error">
+                    Select team leader
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-sm-2">
+            <div *ngIf="user.role != constants.MANAGER">
+              <ng-select [disabled]="user.isTeamLeadSelected" class="member-list" [items]="managerList"  [(ngModel)]="user.managerid" #mname="ngModel" [name]="'mname' + i" bindValue="id" bindLabel="name" placeholder="Select manager" [required]="false" (change)="onManagerSelect(user)" ></ng-select>
+              <div class="">
+                <div *ngIf="f1.submitted && mname.invalid">
+                  <div *ngIf="mname.errors.required" class="error">
+                    Select manager
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-1">
+            <button (click)="removeUser(i)" class="remove-btn">&times;</button>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="!isEditUser" >
+          <div class="col-sm-12">
+            <button type="button" class="addEmail-btn" (click)="addNewUser()"><span class="plus-sign">+</span>Add another Email Address</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-3">
+            <button type="submit" class="stepper-btn create">{{ isEditUser ? 'UPDATE ACCOUNTS' : 'CREATE ACCOUNTS'}}</button>
+          </div>
+          <div class="col-sm-3">
+            <button class="stepper-btn cancel" type="button" (click)="closeOverlay()">CANCEL</button>
+          </div>
+        </div>
+      </form>
+      <p class="info info-details">By sharing these email address you provide us consent to email the above listed users for Notifications, System Related, and Registration Information. This data will be treated as confidential <br>and never shared with Third-Party Sources. By adding this email address, the recipient will get automatically added as an Employee of your Organisation.</p>      
+    </div>
+
+    <div class="overlay-body slim-scrollbar" *ngIf="userViewType != constants.NEW_USER" [ngClass]="{'super-nav-open': userData.getSelectedOrg()}" >
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="self-info">
+            <a *ngIf="((userData.getUserData().role == constants.ADMIN) || (userData.getUserData().role == constants.SUPER_ADMIN))" class="edit-view-btn" (click)="userViewType = (userViewType == constants.EDIT_USER ? constants.VIEW_USER : constants.EDIT_USER) " href="javascript:void(0)">
+              {{userViewType == constants.EDIT_USER ? 'View' : 'Edit'}}
+            </a>
+            <img [src]="selectedEmp.userimage" class="circle" onError="this.src='/assets/user.png'"/>
+            <div class="org-right">
+              <p class="profile-name">{{selectedEmp.name}}</p>
+              <p class="designation">{{commonService.getUserRoleById(selectedEmp.role)}}</p>
+              <p class="joined-date">Joined on {{commonService.getDDMMYYYYFormatedDate(selectedEmp.userdate)}}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Basic details start -->
+        <div class="col-sm-12 basic-details-section" *ngIf="userViewType == constants.EDIT_USER" >
+          <div class="details-section">
+            <h6 class="details-heading">Basic details</h6>
+            <form name="basicdetailsForm" (ngSubmit)="f1.form.valid && onSubmitBasicDetails()" #f1="ngForm">
+              <div class="row">
+                <div class="col-sm-4">
+                  <label class="">USER NAME</label>  
+                </div>
+                <div class="col-sm-4">
+                  <label class="">EMAIL ADDRESS</label>    
+                </div>
+                <div class="col-sm-4">
+                  <label class="">CURRENT ROLE</label>
+                </div>
+              </div>
+              <div class="row" style="padding-bottom: 15px;">
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" [(ngModel)]= "selectedEmpBasicDetails.name" #mfullname="ngModel" [name]="'mfullname'" required placeholder="Enter name" required />
+                  <div class="">
+                    <div *ngIf="f1.submitted && mfullname.invalid">
+                      <div *ngIf="mfullname.errors.required" class="error">
+                        Name is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <input type="email" class="form-control" [(ngModel)]= "selectedEmpBasicDetails.email" #email="ngModel" [name]="'email'" required placeholder="Enter email" email [ngStyle]="{'pointer-events' : isEditUser ? 'none' : 'auto'}" />
+                  <div class="">
+                    <div *ngIf="f1.submitted && email.invalid">
+                      <div *ngIf="email.errors.required" class="error">
+                        Email is required
+                      </div>
+                      <div class="err-msg" *ngIf="email.errors.email">
+                        Email must be a valid email address
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <ng-select class="member-list" [items]="members"  placeholder="Select user type" [(ngModel)]="selectedEmpBasicDetails.role" #utype="ngModel" [name]="'utype' + 'i'" bindValue="id" bindLabel="name" required >
+                  </ng-select>
+                  <div class="">
+                    <div *ngIf="f1.submitted && utype.invalid">
+                      <div *ngIf="utype.errors.required" class="error">
+                        Please select user type
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12 text-right">
+                  <button type="submit" class="save-btn">save details</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- Basic details end -->
+
+        <!-- Manager details start -->
+        <div class="col-sm-12 basic-details-section" *ngIf="selectedEmp.role != constants.MANAGER" >
+          <div class="details-section">
+            <div class="row" style="align-items: center;" >
+              <div class="col-sm-6">
+                <h6 class="details-heading">Manager details</h6>
+              </div>
+              <div class="col-sm-6 text-right" *ngIf="userViewType == constants.EDIT_USER" >
+                <form>
+                  <ng-select class="select-user member-list" [items]="managerList" [(ngModel)]="mngEditSelect" #mmngEditSelect="ngModel" name="mmngEditSelect"  placeholder="Assign manager" bindValue="id" bindLabel="name" required (change)="onSelectEditManager($event)" >
+                  </ng-select>
+                </form>
+              </div>
+            </div>
+
+            <div class="slected-user-list" [ngClass]="{'small-margin' : userViewType == constants.VIEW_USER}" >
+              <div class="row">
+
+                <div class="col-sm-4" *ngFor="let manager of selectedManagers" >
+                  <div class="slected-user-stamp">
+                    <span>{{manager.name}}</span>
+                    <span *ngIf="userViewType == constants.EDIT_USER" (click)="onRemoveEditTeamLead(manager)" class="close">&times;</span>
+                  </div>
+                </div>
+
+                <div class="no-selected-message col-sm-12" *ngIf="selectedManagers.length == 0">
+                  No Manager selected
+                </div>
+
+                <div *ngIf="userViewType == constants.EDIT_USER" class="col-sm-12 text-right">
+                  <button (click)="onSubmitManagerDetails()" class="save-btn">save details</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Manager details end -->
+
+        <!-- Team details start -->
+        <div class="col-sm-12 basic-details-section" *ngIf="selectedEmp.role != constants.TEAM_TEAD" >
+          <div class="details-section">
+            <div class="row" style="align-items: center;" >
+              <div class="col-sm-6">
+                <h6 class="details-heading">Team Leader details</h6>
+              </div>
+              <div class="col-sm-6 text-right" *ngIf="userViewType == constants.EDIT_USER" >
+                <form>
+                  <ng-select class="select-user member-list" [items]="teamLeaderList" [(ngModel)]="teamLeadEditSelect" #mteamLeadEditSelect="ngModel" name="mteamLeadEditSelect"  placeholder="Assign teamlead" bindValue="id" bindLabel="name" required (change)="onSelectEditTeamLead($event)" >
+                  </ng-select>
+                </form>
+              </div>
+            </div>
+
+            <div class="slected-user-list" [ngClass]="{'small-margin' : userViewType == constants.VIEW_USER}">
+              <div class="row">
+
+                <div class="col-sm-4" *ngFor="let teamLead of selectedTeamLeaders" >
+                  <div class="slected-user-stamp">
+                    <span>{{teamLead.name}}</span>
+                    <span *ngIf="userViewType == constants.EDIT_USER" (click)="onRemoveEditTeamLead(teamLead)" class="close">&times;</span>
+                  </div>
+                </div>
+
+                <div class="no-selected-message col-sm-12" *ngIf="selectedTeamLeaders.length == 0">
+                  No Team leader selected
+                </div>
+
+                <div *ngIf="userViewType == constants.EDIT_USER" class="col-sm-12 text-right">
+                  <button (click)="onSubmitTeamLeaderDetails()" class="save-btn">save details</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Team details end -->
+
+        <!-- Employee details start -->
+        <div class="col-sm-12 basic-details-section" *ngIf="selectedEmp.role != constants.EMPLOYEE" >
+          <div class="details-section">
+            <div class="row" style="align-items: center;" >
+              <div class="col-sm-6">
+                <h6 class="details-heading">Employee details</h6>
+              </div>
+              <div class="col-sm-6 text-right" *ngIf="userViewType == constants.EDIT_USER" >
+                <form>
+                  <ng-select class="select-user member-list" [items]="employeeList" [(ngModel)]="empEditSelect" #mempEditSelect="ngModel" name="empEditSelect"  placeholder="Assign employee" bindValue="id" bindLabel="name" required (change)="onSelectEditEmp($event)" >
+                  </ng-select>
+                </form>
+              </div>
+            </div>
+
+            <div class="slected-user-list" [ngClass]="{'small-margin' : userViewType == constants.VIEW_USER}" >
+              <div class="row">
+
+                <div class="col-sm-4" *ngFor="let emp of selectedEmps" >
+                  <div class="slected-user-stamp">
+                    <span>{{emp.name}}</span>
+                    <span *ngIf="userViewType == constants.EDIT_USER" (click)="onRemoveEditEmp(emp)" class="close">&times;</span>
+                  </div>
+                </div>
+
+                <div class="no-selected-message col-sm-12" *ngIf="selectedEmps.length == 0">
+                  No employee selected
+                </div>
+
+                <div *ngIf="userViewType == constants.EDIT_USER" class="col-sm-12 text-right">
+                  <button (click)="onSubmitEmployeeDetails()" class="save-btn">save details</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Employee details end -->
+
+      </div> 
+    </div>
+
+  </div>
+</div>

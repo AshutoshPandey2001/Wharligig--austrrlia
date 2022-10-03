@@ -1,0 +1,1074 @@
+.form-uploader .error{
+  padding-left: 15px;
+}
+.form-uploader .uploader{
+  background-color: #f8f8f8;
+}
+.form-uploader.uploader [contentEditable=true]:empty:before{
+  content:attr(data-text);
+  color: #a1a1a1;
+  font-family: HKGrotesk-Regular;
+}
+.form-uploader.uploader table{
+  width: 100%;
+  margin-top: 25px;
+}
+.form-uploader.uploader td{
+  border: 1px solid #737373;
+  font-family: HKGrotesk-Regular;
+  color: #181818;
+  padding: 5px;
+}
+.form-uploader.uploader td.filled{
+  font-family: HKGrotesk-Bold;
+  color: #181818;
+}
+.form-uploader .add-row-btn{
+  background: transparent;
+  border: none;
+  margin-top: 10px;
+  outline: none;
+  padding: 0;
+  display: none;
+}
+.form-uploader.super .add-row-btn{
+  display: inline-block;
+}
+/*Left section start*/
+.form-uploader .left-section{
+  background-color: #fff;
+  height: calc(100vh - 70px);
+  padding: 3% 30px;
+  overflow-y: scroll;
+}
+
+/*non admin view*/
+.form-uploader .left-section .org-img{
+  margin-top: 0px;
+}
+.form-uploader .left-section .org-img img{
+  width: 80px;
+  height: 80px;
+  border-radius: 150px;
+}
+.form-uploader .left-section .key-value-container{
+  margin-top: 15px;
+}
+.form-uploader .left-section .key-value-container.date-info .value{
+  font-family: HKGrotesk-Regular;
+  font-size: 16px;
+}
+.form-uploader .left-section .key{
+  font-family: HKGrotesk-Light;
+  font-size: 12px;
+  color: #a1a1a1;
+}
+.form-uploader .left-section .comment-section{
+  margin-top: 20px;
+}
+.form-uploader .left-section .comment-section .key{
+  color: #d81f29;
+  font-family: HKGrotesk-Bold;
+  font-size: 14px;
+}
+.form-uploader .left-section .comment-section .value{
+  font-size: 14px;
+  font-family: HKGrotesk-Regular;
+}
+.form-uploader .left-section .value{
+  font-family: HKGrotesk-Bold;
+  font-size: 18px;
+  color: #181818;
+}
+.form-uploader .left-section .line{
+  height: 1px;
+  background: rgba(150, 150, 150, 0.2);
+  margin-top: 15px;
+}
+/*non admin view*/
+
+.form-uploader .left-section .form-group{
+  margin-top: 5%;
+  position: relative;
+}
+.form-uploader .left-section .text-input{
+  border: 1px solid #dddddd;
+  min-height: 40px;
+  border-radius: 5px;
+}
+.form-uploader .left-section .input-border{
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+}
+.form-uploader .left-section .feed-back-input{
+  background-color: #f2f2f2;
+  width: 100%;
+  border: none;
+  resize: none;
+  margin-top: 20px;
+}
+.form-uploader .left-section .feedback-btn{
+  font-family: HKGrotesk-Bold;
+  font-size: 13px;
+  text-align: center;
+  color: #d81f29;
+  background-color: transparent;
+  border-radius: 28px;
+  border: solid 2px #d81f29;
+  outline: none;
+  padding: 7px 20px;
+  margin-top: 15px;
+}
+.form-uploader .auth .auth-img{
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  vertical-align: middle;
+}
+.form-uploader .auth .auth-name{
+  margin-left: 5px;
+  font-size: 16px;
+  color: #000000;
+  font-family: HKGrotesk-Regular;
+  vertical-align: middle;
+}
+.form-uploader .left-section label{
+  color:#000;
+  font-family: HKGrotesk-Medium;
+  padding: 0px;
+  font-size: 14px;
+  font-weight: 100;
+}
+.form-uploader .left-section input{
+  padding: 0 10px;
+  font-family: HKGrotesk-Regular;
+  color:#6c6c6c;
+  font-size: 16px;
+}
+/*Ng select start*/
+/*ng-select clear all button start*/
+.form-uploader .ng-select .ng-clear-wrappr .ng-clear{
+  font-family: serif !important;
+}
+.form-uploader .ng-select.ng-select-multiple .ng-clear-wrapper .ng-clear{
+  display: none;
+}
+/*ng-select clear all button end*/
+.form-uploader .ng-arrow-wrapper{
+  /*visibility: hidden;*/
+}
+.form-uploader .ng-select-right-icon{
+  position: absolute;
+  right: 15px;
+  top: 12px;
+  max-width: 15px;
+}
+.form-uploader .ng-select.custom .ng-select-container{
+  font-family: HKGrotesk-Regular;
+  color: #a8a8a8;
+  min-height: 45px;
+  border: none !important;
+  background: transparent;
+  box-shadow: none;
+}
+.form-uploader .ng-select.custom .ng-dropdown-panel .scroll-host::-webkit-scrollbar-track
+{
+ -webkit-box-shadow: inset 0 0 0px rgba(0,0,0,0.6);
+  background-color: transparent;
+}
+.form-uploader .ng-select.custom .ng-dropdown-panel .scroll-host::-webkit-scrollbar
+{
+  width: 6px;
+  background-color: transparent;
+}
+.form-uploader .ng-select.custom .ng-dropdown-panel .ng-dropdown-panel-items{
+  margin-bottom: 0px !important;
+}
+.form-uploader .ng-select.custom .ng-dropdown-panel .ng-dropdown-panel-items .ng-option-marked{
+  background-color:rgba(231, 125, 125, 0.22);
+}
+.form-uploader .ng-select.custom .ng-dropdown-panel .ng-dropdown-panel-items .ng-option:last-child{
+  border-bottom-left-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+}
+.form-uploader .ng-select.custom .ng-dropdown-panel .ng-dropdown-panel-items{
+  border-top: 1px solid #dddddd;
+}
+.form-uploader .ng-select.custom .ng-dropdown-panel .scroll-host::-webkit-scrollbar-thumb
+{
+  background-color: #FFF;
+  background-image: none;
+  background-color: #e5e5e5;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.form-uploader .ng-select.custom .ng-dropdown-panel{
+  position: static;
+  border: none;
+}
+.form-uploader .ng-select.custom .ng-dropdown-panel .ng-option.ng-option-disabled{
+  background: transparent;
+}
+.form-uploader .ng-select.custom .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.disabled{
+  background: transparent;
+  color: #ccc;
+}
+.form-uploader .ng-select.custom .ng-dropdown-panel .ng-dropdown-panel-items .ng-option{
+  padding: 8px 15px;
+  font-size: 13px;
+  font-family: HKGrotesk-Regular;
+}
+.form-uploader .ng-select.custom .ng-select-container .ng-value-container .ng-input{
+  top: 0;
+}
+.form-uploader .ng-select.custom .ng-select-container .ng-value-container .ng-input input{
+  min-height: 40px;
+  padding: 0;
+}
+.form-uploader .ng-select.custom .ng-select-container .ng-value-container .ng-placeholder{
+  top: 15px;
+  padding-left: 10px;
+}
+.form-uploader .ng-select.custom .ng-select-container{
+  border-radius: 50px;
+  border: 1px solid #dddddd;
+  font-family: HKGrotesk-Regular;
+  color: #a8a8a8;
+  min-height: 40px;
+}
+.form-uploader .ng-select.custom .ng-has-value{
+  padding: 8px;
+}
+.form-uploader .ng-select.custom .ng-select-container .ng-value-container{
+  padding-left: 5px;
+}
+.form-uploader .ng-select.custom .ng-select-container .ng-value-container .ng-input{
+  top: 0;
+  left: 5px;
+}
+.form-uploader .ng-select.custom .ng-select-container .ng-value-container .ng-input input{
+  min-height: 40px;
+}
+.form-uploader .ng-select.custom .ng-select-container .ng-value-container .ng-placeholder{
+  top: 15px;
+  font-size: 14px;
+  color: #a8a8a8;
+}
+.form-uploader .ng-select-container .ng-value-container .ng-value .ng-value-icon:hover{
+  background-color: #FE5C5E !important;
+  font-family: "segoe ui";
+}
+.form-uploader .ng-select-container .ng-value-container .ng-value .ng-value-icon{
+  background-color: #FE5C5E !important;
+  font-family: "segoe ui";
+  padding: 0px 5px !important;
+}
+.form-uploader .ng-select-container .ng-value-container .ng-value{
+  padding: 5px;
+  background: #FE5C5E !important;
+  color: white;
+  border-radius: 50px;
+  font-size: 14px;
+}
+.form-uploader .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-input {
+  padding-left: 10px;
+}
+.form-uploader .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value{
+  padding: 0px 5px !important;
+  border-radius: 40px;
+}
+.form-uploader .ng-select.custom.ng-select-multiple .ng-select-container{
+  border-bottom: 1px solid #dddddd !important;
+  border-radius: 0;
+}
+.form-uploader .ng-select.custom.ng-select-multiple .ng-dropdown-panel .ng-dropdown-panel-items{
+  border: 1px solid #dddddd;
+  border-top: none;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+/*styling for single select*/
+.form-uploader .ng-select.ng-select-single .ng-select-container .ng-value-container .ng-value{
+  background-color: transparent !important;
+  /*font-family: "segoe ui";*/
+  color: #a8a8a8;
+  font-size: 14px;
+}
+/*Ng select end*/
+
+/*Left section end*/
+
+/*Right section start*/
+.form-uploader .right-section{
+  background-color: #f8f8f8;
+  height: calc(100vh - 70px);
+  padding: 70px 40px;
+  overflow-y: scroll;
+}
+.form-uploader input[type="checkbox"]{
+  cursor: pointer;
+}
+/*Button section start*/
+.form-uploader .button-section{
+  position: fixed;
+  right: 10px;
+  top: 90px;
+  z-index: 1;
+
+  &.super-nav-open{
+    top: 146px;
+  }
+}
+.form-uploader .button-section button{
+  min-width: 160px;
+  padding: 10px 20px;
+  text-decoration: none;
+  outline: none;
+  font-family: HKGrotesk-Bold;
+  font-size: 12px;
+  border-radius: 30px;
+  display: inline-block;
+  text-align: center;
+  margin: 0 5px;
+  box-shadow: none;
+  border-color: transparent;
+}
+.form-uploader .button-section button.btn-gray{
+  background-color: #e8e8e8;
+  color: #a1a1a1;
+}
+.form-uploader .button-section button.btn-color{
+  background-color: #3adb64;
+  color: #fff;
+}
+.form-uploader .button-section button.btn-cancel{
+  color: #a1a1a1;
+  font-family: HKGrotesk-Bold;
+  text-decoration: underline;
+  background: transparent;
+}
+/*Button section end*/
+
+/*Header section start*/
+.form-uploader .title-input{
+  background: transparent;
+  border: 0;
+  margin: 0;
+  outline: none;
+  font-family: HKGrotesk-SemiBold;
+  color: #4a4a4a;
+  font-size: 20px;
+}
+.form-uploader .title-input::-webkit-input-placeholder { /* Edge */
+  font-family: HKGrotesk-Bold;
+  color: #4a4a4a;
+}
+
+.form-uploader .title-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  font-family: HKGrotesk-Bold;
+  color: #4a4a4a;
+}
+
+.form-uploader .title-input::placeholder {
+  font-family: HKGrotesk-Bold;
+  color: #4a4a4a;
+}
+.form-uploader input:focus,.form-uploader  input:active,.form-uploader  input:hover,.form-uploader  textarea:focus,.form-uploader  textarea:active, .form-uploader textarea:hover{
+  box-shadow: none !important;
+  background: transparent !important;
+  outline: none !important;
+}
+.form-uploader .desc-input{
+  background: transparent;
+  border: 0;
+  margin: 0;
+  outline: none;
+  font-family: HKGrotesk-Regular;
+  color: #181818;
+  resize: none;
+}
+
+.form-uploader h1.title-input{
+  margin: 20px 0;
+  padding: 0 10px;
+}
+.form-uploader p.desc-input{
+  padding: 0 10px;
+  margin-bottom: 40px;
+}
+/*Header section end*/
+
+/*Check box question start*/
+.form-uploader .form-editor .question-container .cb-block{
+  color: #181818;
+  font-family: HKGrotesk-Regular;
+  outline: none;
+  cursor: text;
+}
+.form-uploader .cb-question .cb-block{
+  position: relative;
+  padding-left: 20px;
+  margin-top: 10px;
+}
+.form-uploader .cb-question .cb-block input{
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 16px;
+  width: 16px;
+  top: 50%;
+  left: 0;
+  z-index: 11;
+  transform: translateY(-50%);
+}
+.form-uploader .cb-question .cb-block .checkmark {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  background-color: transparent;
+  border: solid 1px #707070;
+  border-radius: 20px;
+  transform: translateY(-50%);
+}
+.form-uploader .cb-question .cb-block input:checked ~ .checkmark {
+  background-color: #d81f29;
+  border-color: #d81f29;
+}
+.form-uploader .cb-question .cb-block input:checked ~ .cbk-lbl{
+  color: #d81f29;
+  font-family: HKGrotesk-Bold;
+}
+.form-uploader .cb-question .cb-block .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.form-uploader .cb-question .cb-block input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.form-uploader .cb-question .cb-block .checkmark:after {
+  left: 5px;
+  top: 2px;
+  width: 5px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.form-uploader .cb-question .add-cb-btn{
+  background: transparent;
+  border: none;
+  font-size: 13px;
+  text-decoration: underline;
+  color: #aaa;
+  outline: none;
+  position: absolute;
+  bottom: 20px;
+  display: none;
+}
+.form-uploader.super .cb-question .add-cb-btn{
+  display: block;
+}
+.form-uploader .cb-question .cbk-lbl{
+  display: inline-block;
+  min-width: 100px;
+  color: #181818;
+  font-family: HKGrotesk-Regular;
+  outline: none;
+  cursor: text;
+}
+.form-uploader .rm-cb-option-btn{
+  background: transparent;
+  border: none;
+  outline: none;
+  display: none;
+}
+/*Check box question end*/
+
+/*Radio button question start*/
+.form-uploader .form-editor .question-container .radio-block{
+  color: #181818;
+  font-family: HKGrotesk-Regular;
+  outline: none;
+  cursor: text;
+}
+.form-uploader .radio-question .radio-block{
+  position: relative;
+  padding-left: 20px;
+  margin-top: 10px;
+}
+.form-uploader .radio-question .radio-block input{
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 16px;
+  width: 16px;
+  top: 50%;
+  left: 0;
+  z-index: 11;
+  transform: translateY(-50%);
+}
+.form-uploader .radio-question .radio-block .checkmark {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  background-color: transparent;
+  border: solid 1px #707070;
+  border-radius: 20px;
+  transform: translateY(-50%);
+}
+.form-uploader .radio-question .radio-block input:checked ~ .checkmark {
+  background-color: #d81f29;
+  border-color: #d81f29;
+}
+.form-uploader .radio-question .radio-block input:checked ~ .cbk-lbl{
+  color: #d81f29;
+  font-family: HKGrotesk-Bold;
+}
+.form-uploader .radio-question .radio-block .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.form-uploader .radio-question .radio-block input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.form-uploader .radio-question .radio-block .checkmark:after {
+  left: 5px;
+  top: 2px;
+  width: 5px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.form-uploader .radio-question .add-radio-btn{
+  background: transparent;
+  border: none;
+  font-size: 13px;
+  text-decoration: underline;
+  color: #aaa;
+  outline: none;
+  position: absolute;
+  bottom: 20px;
+  display: none;
+}
+.form-uploader.super .radio-question .add-radio-btn{
+  display: block;
+}
+.form-uploader .radio-question .cbk-lbl{
+  display: inline-block;
+  min-width: 100px;
+  color: #181818;
+  font-family: HKGrotesk-Regular;
+  outline: none;
+  cursor: text;
+}
+.form-uploader .rm-radio-option-btn{
+  background: transparent;
+  border: none;
+  outline: none;
+  display: none;
+}
+/*Check box question end*/
+
+/*Rating section start*/
+.form-uploader .rating-btn-container{
+  display: inline-block;
+  padding-right: 12px;
+  margin-top: 10px;
+}
+.form-uploader .rating-btn-container .rating-btn{
+  width: 34px;
+  height: 45px;
+  border-radius: 10px;
+  border: 1px solid #707070;
+  background: transparent;
+  outline: none;
+}
+.form-uploader .rating-btn-container .rat-no{
+  font-family: HKGrotesk-Regular;
+  color: #737373;
+  text-align: center;
+}
+.form-uploader .rating-btn-container .rating-btn.rating-filled{
+  border: solid 1px #941717;
+  background-color: #db3a3a;
+}
+.form-uploader .rating-block{
+  color: #181818;
+  font-family: HKGrotesk-Regular;
+  outline: none;
+  cursor: text;
+}
+/*Rating section end*/
+/*Image section start*/
+.form-uploader .image-block{
+  color: #181818;
+  font-family: HKGrotesk-Regular;
+  outline: none;
+  cursor: text;
+}
+.form-uploader .img-container{
+  height: 120px;
+  border-radius: 22px;
+  border: solid 1px #a1a1a1;
+  background: transparent;
+  display: inline-block;
+  position: relative;
+  margin: 15px;
+  vertical-align: middle;
+}
+.form-uploader .img-container.img-upload-placeholder{
+  width: 130px;
+  cursor: pointer;
+  border: dotted 1px #a1a1a1;
+  display: none;
+}
+.form-uploader.super .img-container.img-upload-placeholder, .form-uploader.fill-form .img-container.img-upload-placeholder{
+  display: inline-block;
+}
+.form-uploader .img-container.img-upload-placeholder .upload-lbl{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.form-uploader .img-container.img-upload-placeholder .upload-lbl .plus{
+  color: #a1a1a1;
+  font-size: 30px;
+}
+.form-uploader .img-container.img-upload-placeholder .upload-lbl .text{
+  font-family: HKGrotesk-Light;
+  font-size: 13px;
+  white-space: nowrap;
+  color: #a1a1a1;
+}
+.form-uploader .img-container .uploaded-img{
+  height: 120px;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: 22px;
+}
+.form-uploader .remove-img-button{
+  position: absolute;
+  right: -6px;
+  top: -6px;
+  border: none;
+  background: #fff;
+  border-radius: 20px;
+  height: 22px;
+  width: 22px;
+  padding: 0px;
+  color: #d81f29;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  outline: none;
+  display: none;
+}
+.form-uploader.super .remove-img-button, .form-uploader.fill-form .remove-img-button{
+  display: block;
+}
+/*Image section end*/
+
+/*geo location section start*/
+.form-uploader .geo-block{
+  margin-top: 15px;
+}
+.form-uploader .geo-block .key{
+  font-family: HKGrotesk-Bold;
+  color: #232323;
+  margin-bottom: 5px;
+  display: inline-block;
+}
+.form-uploader .geo-block .value{
+  font-family: HKGrotesk-Regular;
+  color: #737373;
+  margin-bottom: 5px;
+  display: inline-block;
+  outline: none;
+  min-width: 50px;
+  padding-left: 5px;
+  cursor: text;
+}
+.form-uploader .geo-block .locate-me{
+  border-radius: 46px;
+  border: solid 1px #d81f29;
+  padding: 10px 20px;
+  font-family: HKGrotesk-Bold;
+  font-size: 10px;
+  color: #d81f29;
+  background: transparent;
+  margin-top: 15px;
+  outline: none;
+}
+.form-uploader .geo-block .note{
+  font-family: HKGrotesk-Light;
+  color: #a1a1a1;
+  font-size: 13px;
+  margin-top: 15px;
+}
+/*geo location section start*/
+
+.form-uploader .question-ask{
+  font-family: HKGrotesk-Bold;
+  color: #4a4a4a;
+  padding: 0 10px;
+  font-size: 21px;
+}
+.form-uploader .add-question{
+  padding: 8px 18px;
+  border: 2px dashed #e8e8e8;
+  color: #a1a1a1;
+  font-family: HKGrotesk-Regular;
+  margin: 20px 0;
+  cursor: pointer;
+}
+.form-uploader .block-buttons{
+  margin: 12px 0;
+}
+.form-uploader .block-buttons button{
+  height: 52px;
+  width: 52px;
+  background: #fff;
+  border-radius: 100px;
+  margin-right: 15px;
+  border: none;
+  outline: none;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  color: #d81f29;
+}
+.form-uploader .block-buttons button span{
+  display: block;
+}
+.form-uploader .block-buttons button span:nth-child(1){
+  line-height: 21px;
+  font-size: 24px;
+}
+.form-uploader .block-buttons button span:nth-child(2){
+  font-size: 7px;
+}
+.form-uploader .form-editor{
+  padding: 0 12px;
+}
+.form-uploader .form-editor .question-container{
+  padding: 25px 0;
+  position: relative;
+  border-bottom: 1px solid #dcdcdc;
+}
+.form-uploader .form-editor .question-container:last-child{
+  border: none;
+}
+.form-uploader .form-editor .question-container .question{
+  color: #232323;
+  font-family: HKGrotesk-SemiBold;
+  outline: none;
+  cursor: text;
+  font-size: 20px;
+}
+.form-uploader .form-editor .question-container .block{
+  color: #181818;
+  font-family: HKGrotesk-Regular;
+  outline: none;
+  cursor: text;
+}
+.form-uploader .form-editor .question-container .answer{
+  outline: none;
+  cursor: text;
+  color: #737373;
+  font-family: HKGrotesk-Regular;
+}
+.form-uploader .form-editor .question-container select{
+  border-radius: 7px;
+  border: solid 1px #a1a1a1;
+  background: transparent;
+  min-width: 100px;
+  height: 35px;
+  font-family: HKGrotesk-Regular;
+  color: #737373;
+  outline: none;
+  margin-top: 10px;
+}
+/*For super admin start*/
+.form-uploader.super .form-editor .question-container .answer{
+  display: none;
+}
+.form-uploader.super .form-editor .question-container .question{
+}
+.form-uploader.super .form-editor.preview .question-container .question{
+  background-color: transparent;
+}
+.form-uploader.super .form-editor.preview .question-container .answer{
+  display: block;
+}
+.form-uploader.super .question-container:hover .remove-btn{
+  display: block;
+}
+.form-uploader.super .question-container.cb-question{
+  padding-bottom: 50px;
+}
+.form-uploader.super .question-container.radio-question{
+  padding-bottom: 50px;
+}
+.form-uploader.super .rm-cb-option-btn, .form-uploader.super .rm-radio-option-btn{
+  display: inline-block;
+}
+.form-uploader .remove-btn{
+  position: absolute;
+  top: 0;
+  right: 7px;
+  text-decoration: none;
+  display: none;
+  border: none;
+  padding: 0;
+  background: #d81f29;
+  height: 25px;
+  width: 25px;
+  border-radius: 30px;
+  color: #fff;
+  outline: none;
+}
+.form-uploader .remove-btn:hover{
+  text-decoration: none;
+}
+/*For super admin end*/
+
+/*Right section end*/
+
+/*Tool bar start*/
+.form-uploader .toolbar{
+  border-top: 1px solid #dcdbdb;
+  margin-top: 30px;
+  padding-top: 15px;
+}
+.form-uploader .toolbar .form-field-label{
+  font-family: HKGrotesk-Bold;
+  margin-bottom: 10px;
+}
+.form-uploader .toolbar ul{
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+.form-uploader .toolbar ul li{
+  /*display: inline-block;*/
+}
+.form-uploader .toolbar ul li button{
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  border: solid 1px #a1a1a1;
+  outline: none;
+  font-family: HKGrotesk-Regular;
+  color: #a1a1a1;
+  padding: 12px 15px;
+  margin: 10px 0;
+  width: 200px;
+  border-radius: 14px;
+  text-align: left;
+  letter-spacing: -0.57px;
+}
+.form-uploader .toolbar ul li button span{
+  vertical-align: middle;
+  display: inline-block;
+  margin-left: 12px;
+}
+.form-uploader .toolbar ul li button img{
+  max-width: 20px;
+}
+/*Toolbar end*/
+
+/*Table count modal*/
+.form-uploader.modal .form-control, .modal button, .modal .error{
+  font-size: 12px;
+  font-family: HKGrotesk-Regular;
+}
+.form-uploader.modal button.submit-button{
+  background: #d81f29;
+  border: none;
+  border-radius: 50px;
+  outline: none;
+  font-family: HKGrotesk-Bold;
+  color: #fff;
+  padding: 8px 30px;
+  margin-top: 8%;
+}
+.form-uploader .modal-body{
+  padding: 20px 40px;
+}
+.form-uploader.modal .error{
+  padding: 0;
+}
+.form-uploader .modal-dialog .close{
+  position: absolute;
+  right: -90px;
+  background: #fff;
+  z-index: 111111;
+  height: 60px;
+  width: 60px;
+  font-size: 31px;
+  opacity: 0.8;
+  color: #d81f29;
+  font-weight: 100;
+  border-radius: 100px;
+}
+.form-uploader .modal-dialog .close span{
+  display: block;
+  line-height: 22px;
+}
+.form-uploader .modal-dialog .close .text{
+  font-family: HKGrotesk-Regular;
+  font-size: 10px;
+  line-height: 14px;
+}
+.form-uploader .modal-dialog .close:hover{
+  opacity: 1 !important;
+}
+.form-uploader .modal-dialog h2{
+  font-family: HKGrotesk-Bold;
+  color: #737373;
+  font-size: 26px;
+  border-bottom: 1px solid rgba(0,0,0,0.16);
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+}
+.form-uploader .modal-dialog  label{
+  font-family: HKGrotesk-Bold;
+  font-size: 16px;
+  color: #737373;
+}
+.form-uploader .modal-dialog input{
+  border-radius: 10px;
+  border: solid 1px #d1d1d1;
+  width: 50px;
+  text-align: center;
+  font-size: 16px;
+  padding: 20px;
+}
+.form-uploader .modal-dialog input::-webkit-outer-spin-button,
+.form-uploader .modal-dialog input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.form-uploader .modal-dialog input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/*Custom img upload button*/
+.quill-custom-buttons{
+  position: fixed;
+  right: 25px;
+  background: transparent;
+  border: none;
+}
+.quill-custom-buttons:focus{
+  outline: none;
+}
+.quill-custom-buttons img{
+  width: 60px;
+}
+.upload-image{
+  bottom: 45px;
+}
+
+/*Normal image start*/
+.normal-image{
+  max-width: 100%;
+  margin: 15px 0;
+}
+/*Normal image end*/
+
+/*Editor tool bar start*/
+.form-uploader.custom-toolbar{
+  position:absolute;
+  display:none;
+  z-index: 10000;
+  background-color: #444;
+  border-radius: 25px;
+  color: #fff;
+  white-space: nowrap;
+}
+.form-uploader.custom-toolbar .formats:first-child {
+  margin-left: 12px;
+}
+.form-uploader.custom-toolbar .formats{
+  margin: 8px 12px 8px 0px;
+  display: inline-block;
+  position: relative;
+}
+.form-uploader.custom-toolbar .formats button{
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  float: left;
+  height: 24px;
+  padding: 3px 5px;
+  width: 28px;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+}
+.form-uploader.custom-toolbar .formats .options{
+  background-color: #444;
+  height: 0px;
+  overflow: hidden;
+  position: absolute;
+  transition: all 0.1s;
+  top: 35px;
+}
+.form-uploader.custom-toolbar .formats .options.expanded{
+  height: 75px;
+}
+.form-uploader.custom-toolbar .formats .options span{
+  display: block;
+}
+/*Editor tool bar end*/
+
+/*Add rework comment modal start*/
+.add-comment-modal .text-1{
+  font-size: 24px;
+}
+.add-comment-modal p{
+  font-family: HKGrotesk-Regular;
+  font-size: 12px;
+  line-height: initial;
+  margin-top: 10px;
+}
+.form-uploader.add-comment-modal .modal-body{
+  padding: 30px;
+}
+.form-uploader.add-comment-modal .modal-dialog{
+  max-width: 620px;
+}
+.form-uploader.modal.add-comment-modal button.submit-button{
+  margin-top: 20px;
+  padding: 10px 30px;
+}
+.form-uploader.modal.add-comment-modal .cancel-btn{
+  text-decoration: underline;
+  color: #999;
+  font-family: HKGrotesk-Bold;
+  font-size: 12px;
+  padding: 10px 50px;
+}
+.form-uploader.add-comment-modal .modal-body textarea, .form-uploader.add-comment-modal .modal-body textarea:focus, .form-uploader.add-comment-modal .modal-body textarea:hover, .form-uploader.add-comment-modal .modal-body textarea:active{
+  border: none;
+  resize: none;
+  background: #e8e8e8 !important;
+  margin-top: 20px;
+  font-family: HKGrotesk-Bold;
+  font-size: 14px;
+}
+/*Add rework comment modal end*/

@@ -1,0 +1,164 @@
+<section class="policy">
+  <div class="section-1">
+    <a href="javascript:void(0)" class="related-document" (click)="commonService.scrollToId('relatedSection')">Related document</a>
+    <div class="">
+      <h4 [ngSwitch]="postData.type">
+        <span *ngSwitchCase="1">Sub Chapter {{postData.suid}}</span>
+        <span *ngSwitchCase="2">Section {{postData.ssuid}}</span>
+        <span *ngSwitchCase="3">Element {{postData.policyid}}</span>
+      </h4>
+      <h1>{{postData.title}}</h1>
+      <p>
+        <a [routerLink]="'/chapter/' + postData.chapter.chid" *ngIf="postData.type >= 1" >{{postData.chapter.chapter_name + ' > '}}</a>
+        <a [routerLink]="'/chapter/' + postData.subchapterdetilas.endpoint" *ngIf="postData.type >= 2" >{{postData.subchapterdetilas.title + ' > '}}</a>
+        <a [routerLink]="'/chapter/' + postData.subsubchapterdetails.endpoint" *ngIf="postData.type >= 3" >{{postData.subsubchapterdetails.title + ' > '}}</a>
+        <span>{{postData.title}}</span>
+      </p>
+    </div>
+  </div>
+  <div class="section-2">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-8 left-part">
+          <div class="quill" [innerHtml]="htmlContent"></div>
+
+          <div class="related-section-cont" id="relatedSection">
+            <!-- Legislation start -->
+            <div class="row" *ngIf="postData.legislation != undefined && postData.legislation != null && postData.legislation.length > 0">
+              <div class="col-sm-12">
+                <div class="related-form-list">
+                  <div class="">
+                    <div class="legislation-cont">
+                      <h2 class="related-form-lbl">RELATED LEGISLATION</h2>
+                      <div *ngFor="let cat of postData.legislation">
+                        <p> <a [href]="cat.url">{{cat.name}}
+                        ({{cat.region}})</a> </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Legislation end -->
+
+            <!-- Related form list -->
+            <div class="related-form-list" *ngIf="postData.form != undefined && postData.form.length > 0">
+              <h2 class="related-form-lbl">ASSOCIATED FORM</h2>
+              <div class="row">
+                <div *ngFor="let form of postData.form" class="col-sm-6">
+                  <div class="related-section">
+                    <div class="heading">{{form.title}}</div>
+                    <p>{{form.description}}</p>
+                    <a class="btn" [routerLink]=" userService.getUserData().role == constants.SUPER_ADMIN ? '/edit-template/' + form.formid : '/view-template/' + form.formid">View Form</a>
+                    <a *ngIf="userService.getUserData().role != constants.SUPER_ADMIN" href="javascript:void(0)" (click)="onClickedAssociatedForm(form)" class="btn">
+                      Assign Form
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SOP and guide list -->
+            <div class="related-form-list" *ngIf="postData.sop != undefined && postData.sop.length > 0">
+              <h2 class="related-form-lbl">RELATED GUIDES & SOP</h2>
+              <div class="row">
+                <div *ngFor="let form of postData.sop" class="col-sm-6">
+                  <div class="related-section">
+                    <div class="heading">{{form.title}}</div>
+                    <p>{{form.description}}</p>
+                    <a [routerLink]="'/sop/' + form.id" class="btn">
+                      View sop
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 right-part">
+          <!-- Other chapters -->
+          <div class="row" *ngIf="otherChapterList != undefined && otherChapterList.length > 0">
+            <div class="col-sm-12">
+              <div class="sub-chapter-section">
+                <div [ngSwitch]="postData.type" class="related-form-lbl">
+                  <span *ngSwitchCase="1">OTHER SUB CHAPTERS</span>
+                  <span *ngSwitchCase="2">OTHER  SECTION</span>
+                  <span *ngSwitchCase="3">OTHER  ELEMENT</span>
+                </div>
+                <ul>
+                  <li *ngFor="let item of otherChapterList" class="stamp">
+                    <div class="actions" *ngIf="userService.getUserData().role == constants.SUPER_ADMIN">
+                      <div class="dropdown dropdown-menu-right">
+                        <button type="button" class="btn" data-toggle="dropdown">
+                          <img src="/assets/menu.svg">
+                        </button>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item" [routerLink]="'/edit-policy/' + item.endpoint" >Edit</a>
+                          <a class="dropdown-item" href="javascript:void(0)" (click)="onDeletePolicy(item, 'other')" >Delete</a>
+                        </div>
+                      </div>
+                    </div>
+                    <a [ngSwitch]="item.type" [routerLink]="'/policy/' + item.endpoint">
+                    <span *ngSwitchCase="1">{{item.suid}} {{item.title}}</span>
+                    <span *ngSwitchCase="2">{{item.ssuid}} {{item.title}}</span>
+                    <span *ngSwitchCase="3">{{item.policyid}} {{item.title}}</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sub chapters -->
+          <div class="row" *ngIf="subChapterList != undefined && subChapterList.length > 0">
+            <div class="col-sm-12">
+              <div class="sub-chapter-section">
+                <div [ngSwitch]="postData.type + 1" class="related-form-lbl">
+                  <span *ngSwitchCase="1">SUB CHAPTERS</span>
+                  <span *ngSwitchCase="2">SECTION</span>
+                  <span *ngSwitchCase="3">ELEMENT</span>
+                </div>
+                <ul>
+                  <li *ngFor="let item of subChapterList" class="stamp">
+                    <div class="actions" *ngIf="userService.getUserData().role == constants.SUPER_ADMIN">
+                      <div class="dropdown dropdown-menu-right">
+                        <button type="button" class="btn" data-toggle="dropdown">
+                          <img src="/assets/menu.svg">
+                        </button>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item" [routerLink]="'/edit-policy/' + item.endpoint" >Edit</a>
+                          <a class="dropdown-item" href="javascript:void(0)" (click)="onDeletePolicy(item, 'sub')" >Delete</a>
+                        </div>
+                      </div>
+                    </div>
+                    <a [ngSwitch]="item.type" [routerLink]="'/policy/' + item.endpoint">
+                    <span *ngSwitchCase="1">{{item.suid}} {{item.title}}</span>
+                    <span *ngSwitchCase="2">{{item.ssuid}} {{item.title}}</span>
+                    <span *ngSwitchCase="3">{{item.policyid}} {{item.title}}</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="row" *ngIf="postData.chapter != undefined">
+            <div class="col-sm-12">
+              <div class="chapter-heading" style="background-image: url(/assets/chapterbg.jpg);">
+                <div class="overlay">
+                  <div class="id">Chapter {{postData.chapterid.chapterid}}</div>
+                  <h1 class="name">{{postData.chapterid.chapter_name}}</h1>
+                  <a [routerLink]="'/chapter/' + postData.chapterid.chapterid" class="id" style="border-radius: 15px;" >Go Back</a>
+                </div>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Assign new form overlay start -->
+<app-assign-new-form [selectedTemplate]="selectedTemplate"></app-assign-new-form>
+<!-- Assign new form overlay end -->

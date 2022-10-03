@@ -1,0 +1,59 @@
+<section class="stamp">
+
+  <!-- Actions start -->
+  <div class="actions" *ngIf="userData.getUserData().role == constants.SUPER_ADMIN && isAction" >
+    <div class="dropup">
+      <button type="button" class="btn" data-toggle="dropdown">
+        <img src="/assets/menu.svg">
+      </button>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" href="javascript:void(0)" (click)="onClickedOrgStamp(organization, 'view')" >Edit</a>
+        <a class="dropdown-item" href="javascript:void(0)" (click)="onClickedOrgStamp(organization, 'delete')" >Delete</a>
+        <!-- <a class="dropdown-item" href="javascript:void(0)" (click)="onClickedOrgStamp(organization, 'open')" >View</a> -->
+        <a *ngIf="organization.suspend == 0" class="dropdown-item" href="javascript:void(0)" (click)="onClickedOrgStamp(organization, 'suspend')">Suspend</a>
+        <a *ngIf="organization.suspend == 1" class="dropdown-item" href="javascript:void(0)" (click)="onClickedOrgStamp(organization, 'active')">Activate</a>
+      </div>
+    </div>
+  </div>
+  <!-- Actions end -->
+
+	<div class="">
+    <div class="profile-cont" >
+      <div class="profile-part">
+        <img class="org-img" [src]="organization.organization_logo || 'assets/Group 1.png'" onError="this.src='/assets/Group 1.png'">
+      </div>
+      <div class="info-section">
+        <a class="org-name" [ngStyle]="{'color' : organization.act != constants.NOT_VERIFIED ? '#181818' : '#c6c6c6'}" [title]="organization.organization_name" >{{organization.organization_name}}</a>
+
+        <!-- Show details if org is not suspended -->
+        <div class="" *ngIf="organization.suspend != 1">
+          <div *ngIf="organization.act == constants.NOT_VERIFIED">
+            <p class="org-join-date">Not Joined Yet</p>
+          </div>
+          <div *ngIf="organization.act != constants.NOT_VERIFIED">
+            <p class="org-join-date">Joined on {{commonService.getFormatedDate(organization.organizationdate)}}</p>
+            <p class="org-count" >{{organization.admincount}} Admin | {{organization.managercount}} Managers | {{organization.empcount}} Employees</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-section">
+      <!-- Show details if org is not suspended -->
+      <div class="" *ngIf="organization.suspend != 1">
+        <div *ngIf="organization.act == constants.NOT_VERIFIED">
+          <p class="inv-not-accepted" >Invite not accepted yet.</p>
+        </div>
+        <div *ngIf="organization.act != constants.NOT_VERIFIED">
+          <a href="javascript:void(0)" class="navigation-btn access" (click)="onClickedOrgStamp(organization, 'open')">Access organisation</a>
+          <a href="javascript:void(0)" class="navigation-btn edit" (click)="onClickedOrgStamp(organization, 'view')">Edit organisation</a>
+        </div>
+      </div>
+
+      <!-- Show suspended message if org is suspended -->
+      <div *ngIf="organization.suspend == 1">
+        <p class="inv-not-accepted" >Organisation suspended.</p>
+      </div>
+    </div>
+	</div>
+</section>

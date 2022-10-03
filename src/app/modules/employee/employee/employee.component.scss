@@ -1,0 +1,355 @@
+.dashboard{
+  background-color: #f8f8f8;
+  padding: 40px 30px;
+  min-height: 100vh;
+}
+.dashboard .main-heading{
+  color: #d81f29;
+  font-family: HKGrotesk-Bold;
+  margin: 0;
+  font-size: 26px;
+}
+.dashboard .sub-heading{
+  color: #6c757d;
+  font-family: HKGrotesk-Light;
+  font-size: 17px;
+}
+.dashboard .line{
+  background-color: #dedbdb;
+  height: 1px;
+  margin-top: 15px;
+
+}
+ .user-img{
+  border-radius: 100px;
+  height: 50px;
+  width: 50px;
+}
+
+.form-list{
+  margin-top: 15px;
+  position: relative;
+}
+.col-20{
+  width: 20%;
+  padding: 0 15px;
+}
+.search-org-name{
+  background-color: #f8f8f8;
+  color: #a1a1a1;
+  margin: 30px 0;
+  width: 90%;
+  border-radius: 43px;
+  border: solid 1px #a1a1a1;
+  padding: 10px 35px 10px 25px;
+  font-family: HKGrotesk-Italic;
+  font-size: 15px;
+  outline: none;
+  position: relative;
+}
+.search-icon {
+  position: absolute;
+  top: 50%;
+  right: 15%;
+  margin-top: -7px;
+}
+.button-section{
+  cursor: pointer;
+  font-size: 13px;
+  font-family: HKGrotesk-Bold;
+  color: #ffffff;
+  padding: 8px 25px 8px 11px;
+  outline: none;
+  margin: 30px 0;
+  border-radius: 43px;
+  background-color: #d81f29;
+  position: relative;
+  display: inline-block;
+  border:none;
+}
+.button-section span{
+  padding-left: 15px;
+  vertical-align: middle;
+}
+.plus-icon {
+  width: 28px;
+}
+
+/*edit-user-modal start*/
+.edit-user-modal .modal-header{
+  background-color: #d81f29;
+  padding: 7px;
+}
+.edit-user-modal .modal-header .close{
+  position: absolute;
+  right: -80px;
+  padding-top: 0;
+  opacity: 0.7;
+  outline: none;
+}
+.edit-user-modal .modal-header .close img{
+  width: 70px;
+}
+.edit-user-modal .modal-header .close:hover{
+  opacity: 1;
+}
+.edit-user-modal .modal-body .user-img{
+  width: 120px;
+  height: 120px;
+  border: 2px solid #d81f29;
+}
+.edit-user-modal .modal-body .user-name{
+  font-family: HKGrotesk-Bold;
+  font-size: 21px;
+  color: #d81f29;
+  margin-top: 15px;
+}
+.edit-user-modal .modal-body .user-info{
+  font-family: HKGrotesk-Bold;
+  font-size: 15px;
+  color: #131313;
+}
+.edit-user-modal .modal-body .red-bg-btn{
+  padding: 8px 18px;
+  font-size: 11px;
+  margin-top: 25px;
+}
+.edit-user-modal .member-list {
+  min-width: 125px;
+  display: inline-block;
+  margin: auto;
+  margin-top: 10px;
+  text-align: left;
+}
+
+/*ng select*/
+.edit-user-modal .ng-select.custom ::ng-deep .ng-select-container  {
+  /*border-color: #181818;*/
+  /*border-radius: 35px !important;*/
+  box-shadow: none;
+}
+.edit-user-modal .ng-select.custom ::ng-deep .ng-dropdown-panel-items .ng-option{
+  font-size: 12px;
+  font-family: HKGrotesk-Regular;
+}
+.edit-user-modal .ng-select ::ng-deep .ng-select-container span.ng-arrow-wrapper span.ng-arrow {
+  height: 8px;
+  width: 8px;
+  border-width: 1px;
+  border-color: #999;
+  transform: rotate(45deg);
+  border-left: 0;
+  border-top: 0;
+  transition: all 0.1s;
+  top: -3px;
+}
+.edit-user-modal .ng-select.custom.ng-select-opened ::ng-deep .ng-select-container span.ng-arrow-wrapper span.ng-arrow{
+  transform: rotate(225deg);
+  top: 0;
+}
+.edit-user-modal .ng-select.custom ::ng-deep .ng-select-container.ng-has-value span.ng-arrow-wrapper span.ng-arrow{
+}
+.edit-user-modal .ng-select.custom ::ng-deep .ng-select-container .ng-value{
+  font-family: HKGrotesk-Regular;
+  font-size: 14px;
+}
+.edit-user-modal .ng-select ::ng-deep .ng-clear-wrapper{
+  display: none;
+}
+/*edit-user-modal end*/
+
+/*View user overlay start*/
+.view-user-list.overlay {
+  height:  calc(100% - 65px);
+  width: 0%;
+  position: fixed;
+  z-index: 1;
+  bottom: 0;
+  right: 0;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.45);
+  overflow: hidden;
+  transition: 0.5s;
+  font-family: HKGrotesk-Regular;
+}
+.view-user-list.overlay.super-nav-open{
+  height:  calc(100% - 119px);
+}
+.view-user-list.overlay .overlay-content{
+  width: 50%;
+  height: 100%;
+  position: relative;
+  background: #f8f8f8;
+  right: -50%;
+  padding: 40px;
+}
+.view-user-list.overlay .overlay-content .close-btn{
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: white;
+  height: 85px;
+  width: 85px;
+  display: inline-block;
+  border-radius: 100px;
+  top: 30px;
+  left: -132px;
+  position: absolute;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  color: #d81f29;
+}
+.view-user-list.overlay .overlay-content .close-btn div{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.view-user-list.overlay .overlay-content .close-btn div .close-icon{
+  font-size: 30px;
+  display: block;
+  line-height: 21px;
+}
+.view-user-list.overlay .overlay-content .close-btn div .close-label{
+  display: block;
+  font-size: 12px;
+  font-family: HKGrotesk-Regular;
+}
+.view-user-list.overlay .overlay-content .overlay-body{
+  position: absolute;
+  left: 0%;
+  min-height: 100vh;
+  top: 0;
+  overflow-y: auto;
+  max-height: 100vh;
+  padding: 30px;
+  width: 100%;
+}
+.view-user-list.overlay .self-info .org-right{
+  margin-left: 25px;
+  vertical-align: middle;
+  display: inline-block;
+  width: calc(100% - 130px);
+}
+.view-user-list.overlay .circle{
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  display: inline-block;
+  left: 10px;
+}
+.view-user-list.overlay .profile-name{
+  color: #181818;
+  font-family: HKGrotesk-Bold;
+  font-size: 21px;
+  margin: 0px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.view-user-list.overlay .designation{
+  color: #181818;
+  font-family: HKGrotesk-Regular;
+  font-size: 16px;
+  margin: 0px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.view-user-list.overlay .joined-date{
+  color: #a1a1a1;
+  font-family: HKGrotesk-Regular;
+  font-size: 12px;
+  margin: 0px;
+  margin-top: 2px;
+}
+.view-user-list.overlay .listing-part{
+  margin: 50px 0;
+}
+.view-user-list.overlay .listing-part .key-value-cont{
+  margin-bottom: 20px;
+}
+.view-user-list.overlay .listing-part .key-value-cont .key{
+  text-transform: uppercase;
+  color: #a2a2a2;
+  font-size: 12px;
+}
+.view-user-list.overlay .listing-part .key-value-cont .value{
+  color: #989898;
+  font-size: 16px;
+}
+.view-user-list.overlay .button-part{
+  margin-bottom: 50px;
+}
+.view-user-list.overlay .button-part .bottom-btn{
+  display: block;
+  padding: 10px;
+  border-radius: 30px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-family: HKGrotesk-Bold;
+}
+.view-user-list.overlay .button-part .bottom-btn.enter{
+  color: #fff;
+  background: #737373;
+}
+.view-user-list.overlay .button-part .bottom-btn.remove{
+  background: #e8e8e8;
+  color: #7b7a7a;
+}
+/*Slim scrollbar*/
+.slim-scrollbar::-webkit-scrollbar
+{
+  width: 8px;
+}
+/* view user Overlay end*/
+
+/*Media queries  start*/
+/* Landscape*/
+
+@media only screen and (min-device-width: 1366px) and (max-device-height: 1024px) and (-webkit-min-device-pixel-ratio: 2)  and (orientation: landscape)  {
+  
+}
+
+/* Portrait*/
+@media only screen and (min-device-width: 1024px) and (max-device-height: 1366px) and (-webkit-min-device-pixel-ratio: 2)  and (orientation: portrait)  {
+  
+}
+
+/* Portrait tablets and small desktops */
+@media screen and (max-width: 1199px) {
+  
+}
+
+@media screen and (max-width: 992px) {
+
+
+}
+
+/* Landscape phones and portrait tablets */
+@media screen and (max-width: 767px) {
+  .dashboard{
+     padding: 40px 0;
+  }
+  .organization-details{
+    text-align: center;
+    display: block;
+  }
+  .circle {
+    width: 50%;
+  }
+  .org-right{
+    padding: 20px 0;    
+  }
+  .col-20{
+    width: 100%;
+  }
+}
+
+/* Portrait phones and smaller */
+@media screen and (max-width: 480px) {
+  
+}

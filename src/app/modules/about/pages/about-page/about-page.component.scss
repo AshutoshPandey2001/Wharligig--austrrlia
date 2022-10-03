@@ -1,0 +1,105 @@
+.section-1{
+  background: url('/assets/Rectangle 35.jpg');
+  padding: 60px 40px;
+}
+.section-1 .text-3{
+  margin-top: 5%;
+  max-width: 80%;
+}
+
+/*Section 2 start*/
+.section-2{
+  padding: 60px 40px;
+}
+.section-2 .text-red{
+  font-family: HKGrotesk-Regular;
+  max-width: 90%;
+}
+.section-2 .text-black.text-3{
+  max-width: 80%;
+}
+/*Section 2 end*/
+
+/*Section 3 start*/
+.section-3{
+  padding: 40px;
+}
+.section-3 .about-stamp{
+  padding-top: 40px;
+}
+.section-3 .about-stamp img{
+  max-width: 200px;
+}
+.section-3 .about-stamp .name{
+  margin-top: 25px;
+  font-family: HKGrotesk-Regular;
+  font-size: 30px;
+}
+.section-3 .about-stamp .designation{
+  margin-top: 5px;
+  font-size: 22px;
+}
+.section-3 .about-stamp .text-3{
+  max-width: 75%;
+  margin-top: 15px;
+}
+/*Section 3 end*/
+/*Section 4 start*/
+.section-4{
+  padding: 40px;
+  background: #d81f29;
+}
+.section-4 > .row{
+  align-items: center;
+}
+.section-4 .left-section{
+}
+.section-4 .left-section .white-bg-btn, .section-4 .left-section .text-3{
+  margin-top: 5%;
+}
+.section-4 .right-section{
+  padding: 15px;
+  text-align: center;
+}
+.section-4 .text-3{
+  max-width: 75%;
+}
+.section-4 .right-section img{
+  max-width: 60%;
+}
+/*Section 4 end*/
+/*Media queries  start*/
+/* Portrait tablets and small desktops */
+@media screen and (max-width: 1199px) {
+}
+
+@media screen and (max-width: 992px) {
+}
+
+/* Landscape phones and portrait tablets */
+@media screen and (max-width: 767px) {
+  .section-1, .section-2, .section-3, .section-4{
+    padding: 60px 20px;
+  }
+  .section-1 .text-3{
+    max-width: 100%;
+  }
+  .section-2 .text-red{
+    max-width: 100%;
+  }
+  .section-2 .text-black.text-3{
+    max-width: 100%;
+  }
+  .section-4 .right-section img{
+    max-width: 100%;
+    margin-top: 15px;
+  }
+  .section-3 .about-stamp .text-3{
+    max-width: 100%;
+  }
+}
+
+/* Portrait phones and smaller */
+@media screen and (max-width: 480px) {
+
+}

@@ -1,0 +1,46 @@
+<section class="template" >
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6">
+        <h1 class="main-heading">SOPs and Guidelines</h1>
+        <p class="sub-heading">Browse through our repository of compliance forms.</p>
+      </div>
+      <div class="col-sm-6">
+        <img [src]="userDataService.getUserData().organization_logo || 'assets/user.png'" class="float-right user-img">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="line"></div> 
+      </div>
+    </div>
+    <div class="row form-list">
+      <div class="col-sm-3 wow fadeInUp" *ngFor="let item of sopList; let i=index " [attr.data-wow-delay]="(0.2*(i%4)) + 's'">
+        <div class="stamp">
+          <div class="actions" *ngIf="userData.getUserData().role == constants.SUPER_ADMIN">
+            <div class="dropdown dropdown-menu-right">
+              <button type="button" class="btn" data-toggle="dropdown">
+                <img src="/assets/menu.svg">
+              </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" [routerLink]="'/edit-sop/' + item.id" >Edit SOP</a>
+                <a class="dropdown-item" href="javascript:void(0)" (click)="onDeleteSOP(item)" >Delete SOP</a>
+              </div>
+            </div>
+          </div>
+          <div class="">
+            <h2 class="heading">SOP Title</h2>
+            <h3 class="name">{{item.title}}</h3>
+            <h2 class="heading">Created On</h2>
+            <h3 class="stamp-date">{{commonService.getFormatedDate(item.createdate)}}</h3>
+            <div class="line"></div>  
+            <a class="stamp-btn button-value" [routerLink]="'/sop/' + item.id">View SOP</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12" *ngIf="sopList.length == 0">
+        <app-empty-placeholder></app-empty-placeholder>
+      </div>
+    </div>
+  </div>
+</section>

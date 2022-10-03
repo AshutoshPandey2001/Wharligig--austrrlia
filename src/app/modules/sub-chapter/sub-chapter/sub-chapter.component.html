@@ -1,0 +1,57 @@
+<section class="chapter" >
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-8">
+        <h1 class="main-heading">Policy Chapters</h1>
+        <p class="sub-heading">Your repository of procedures and protocols.</p>
+      </div>
+      <div class="col-sm-4">
+        <img src="assets/Group 1.png" class="float-right user-img">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="line"></div> 
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="chapter-heading" style="" [style.backgroundImage]="'url('+ chapter.secondimage +')'"> <!-- background-image: url(/assets/chapterbg.jpg); -->
+          <div class="overlay">
+            <a routerLink="/chapters" class="back-to-all btn-hover-anim">Back to All Chapters</a>
+            <div class="id">{{chapter.chapterid}}</div>
+            <h1 class="name">{{chapter.chapter_name}}</h1>
+            <div class="policy-count">{{chapter.pccount || 0}} Sub Sub Chapters</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-10">
+        <p class="description">{{chapter.content}}</p>
+      </div>
+    </div>
+    <div class="row sub-chapter-list">
+      <div *ngFor="let sub of chapter.subchapter" class="col-sm-3">
+        <div class="stamp-container">
+          <div class="actions" *ngIf="userData.getUserData().role == constants.SUPER_ADMIN">
+            <div class="dropdown dropdown-menu-right">
+              <button type="button" class="btn" data-toggle="dropdown">
+                <img src="/assets/menu.svg">
+              </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" [routerLink]="'/edit-policy/' + sub.endpoint" >Edit</a>
+                <a class="dropdown-item" href="javascript:void(0)" (click)="onDeleteChapter(sub)" >Delete</a>
+              </div>
+            </div>
+          </div>
+          <a [routerLink]="'/policy/' + sub.endpoint" class="stamp">
+            <h1>{{sub.suid}}</h1>
+            <p>{{sub.title}}</p>
+            <div class="policy-count">{{sub.policycount}} Policies</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

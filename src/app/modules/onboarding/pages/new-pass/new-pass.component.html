@@ -1,0 +1,48 @@
+<section class="container-fluid onboarding top-space">
+  <div class="row sign-up-page">
+    <div class="col-sm-5 left-section">
+      <form *ngIf="!isPasswordSet" name="signupForm" (ngSubmit)="f.form.valid && submit()"  #f="ngForm" novalidate>
+        <h2 class="text-1">Enter your new password</h2>
+        <div class="form-group email-signup-field">
+          <label class="label-heading" for="password">Add password</label>
+          <input (ngModelChange)="checkConfirmPassword(f)" type="password" class="text-field" [(ngModel)]= "user.password" #password="ngModel" name="password" placeholder="********" required/>
+          <div *ngIf="f.submitted && password.errors">
+            <div class="err-msg" *ngIf="password.errors.required">Please enter password</div>
+          </div>
+        </div>
+
+        <div class="form-group email-signup-field">
+          <label class="label-heading" for="password">Confirm password</label>
+          <input (ngModelChange)="checkConfirmPassword(f)" type="password" class="text-field" name="confirmPassword" placeholder="********" [(ngModel)]="user.confirmPassword" #confirmPassword="ngModel" required autocomplete="off"/>
+          <div class="validation-container">
+            <div *ngIf="f.submitted ">
+              <div *ngIf="confirmPassword.invalid && confirmPassword.errors.required" class="err-msg">
+                Please enter confirm password
+              </div>
+              <div *ngIf="confirmPassword.valid && !isPasswordConfirm" class="err-msg">
+                Oops. That doesn’t match your original password
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group btn-verifi">
+          <button type="submit" class="red-btn btn-hover-anim">Set password</button>
+        </div>
+      </form>
+
+      <div class="row" *ngIf="isPasswordSet">
+        <div class="">
+          <h1 class="text-1 text-red winning">
+            #Winning!
+          </h1>
+          <div class="pass-set-text">
+            Your new password is set! <a routerLink="/login">Login</a> to Whirligig again.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-7 right-section" style="background-image: url(assets/ian-dooley.png);">
+    </div>
+  </div>
+</section>

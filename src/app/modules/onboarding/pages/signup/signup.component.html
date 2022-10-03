@@ -1,0 +1,25 @@
+<section class="container-fluid onboarding top-space">
+  <div class="row sign-up-page">
+    <div class="col-sm-5 left-section">
+      <form name="signupForm" (ngSubmit)="f.form.valid && submit()"  #f="ngForm" novalidate>
+        <h2 class="text-1">{{ isForgotPass ? 'Reset your password' : 'Verify your Email now!'}}</h2>
+        <div class="form-group email-signup-field">
+          <label class="label-heading" for="email">E-mail</label>
+          <input type="email" class="text-field" [(ngModel)]= "user.email" #email="ngModel" name="email" placeholder="error@mail.com" required email />
+          <div *ngIf="f.submitted && email.errors">
+            <div class="err-msg" *ngIf="email.errors.required">Email is required</div>
+            <div class="err-msg" *ngIf="email.errors.email">Email must be a valid email address</div>
+          </div>
+        </div>
+        <div class="form-group btn-verifi">
+          <button type="submit" class="red-btn btn-hover-anim">{{ isForgotPass ? 'Send Recovery link' : 'Send Verification Email'}}</button>
+        </div>
+        <div class="form-group" *ngIf="resendEmail >= resendTiming" >
+          <p class="resend-mail">Didn't Receive it? <a  class="anchor-text" href="javascript:void(0)" (click)="submit()" >Resend Email</a></p>
+        </div>
+      </form>
+    </div>
+    <div class="col-sm-7 right-section" style="background-image: url(assets/ian-dooley.png);">
+    </div>
+  </div>
+</section>

@@ -1,0 +1,22 @@
+<section class="policy">
+  <div class="section-1">
+    <div class="">
+      <!-- <h4>Chapter {{sopData.policyid}}</h4> -->
+      <h1>{{sopData.title}}</h1>
+      <!-- <p>
+        <span *ngIf="sopData.chapterid != undefined" >{{sopData.chapterid.chapter_name + ' > '}}</span>
+        <span *ngIf="sopData.subchapterid != undefined" >{{sopData.subchapterid.subchapter_name + ' > '}}</span>
+        <span>{{sopData.title}}</span>
+      </p> -->
+    </div>
+  </div>
+  <div class="section-2">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-8 left-part">
+          <div [innerHtml]="htmlContent"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
