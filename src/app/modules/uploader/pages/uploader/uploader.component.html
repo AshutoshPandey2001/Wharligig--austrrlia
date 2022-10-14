@@ -1,11 +1,4 @@
-<div>
-  <iframe  [src]="defUrl" id="gravityForm" class="w-press"  frameborder="0"  target="_parent" sandbox=" allow-scripts allow-same-origin"  ></iframe>
-</div>
-
-
-
-
-<!-- <div class="custom-toolbar form-uploader">
+ <div class="custom-toolbar form-uploader">
   <span class="formats">
     <button class="cus-bold" (click)="formatDoc('bold', undefined);closeToolbar()" >
       B
@@ -49,14 +42,14 @@
       <button (click)="formatDoc('justifyright', undefined);isAlignedOpen = !isAlignedOpen;closeToolbar()">R</button>
     </div>
   </span>
-</div> -->
+</div> 
 
-<!-- <section class="container-fluid uploader form-uploader close-toolbar" [ngClass]="{'super': userRole == constants.SUPER_ADMIN, 'admin': userRole == constants.ADMIN, 'manager': userRole == constants.MANAGER, 'employee': userRole == constants.EMPLOYEE, 'fill-form' : isFillForm}">
+<section class="container-fluid uploader form-uploader close-toolbar" [ngClass]="{'super': userRole == constants.SUPER_ADMIN, 'admin': userRole == constants.ADMIN, 'manager': userRole == constants.MANAGER, 'employee': userRole == constants.EMPLOYEE, 'fill-form' : isFillForm}">
   <form class="row" name="formDataForm" #formDataForm="ngForm" (ngSubmit)="formDataForm.form.valid && superAdminFormSubmit(formDataForm)" novalidate>
     <div class="col-sm-3 col-md-3 left-section slim-scrollbar">
-      <div> -->
+      <div> 
         <!-- If super admin only -->
-        <!-- <div *ngIf="userRole == constants.SUPER_ADMIN && !isPreviewMode && !userData.getSelectedOrg()" class="form-group">
+        <div *ngIf="userRole == constants.SUPER_ADMIN && !isPreviewMode && !userData.getSelectedOrg()" class="form-group">
           <div>
             <label class="">Associated Policy</label>
             <div class="input-border">
@@ -146,17 +139,17 @@
               </li>
             </ul>
           </section>
-        </div> -->
+        </div> 
 
-        <!-- <div *ngIf="userRole == constants.SUPER_ADMIN && isPreviewMode">
+        <div *ngIf="userRole == constants.SUPER_ADMIN && isPreviewMode">
           <div class="form-group" style="margin-top: 8%;">
             <label class="">Associated Policy</label>
             <p *ngIf="formData.associatedPolicy != undefined" class="title-input">{{formData.associatedPolicy.title}}</p>
           </div>
-        </div> -->
+        </div> 
         <!-- If super admin only end -->
 
-        <!-- <div *ngIf="userRole != constants.SUPER_ADMIN" class="">
+        <div *ngIf="userRole != constants.SUPER_ADMIN" class="">
           <div *ngIf="isReviewForm">
             <div class="org-img">
               <img [src]="formData.userimage" onerror="this.src='assets/user.png'">
@@ -199,9 +192,9 @@
           <div class="key-value-container">
             <div class="key">Policy Name</div>
             <div class="value">2.4.9 Traffic Control</div>
-          </div> -->
+          </div> 
 
-          <!-- <div *ngIf="(isReviewForm || isFillForm) && formData.comments != undefined && formData.comments != null && formData.comments != '' && formData.act != constants.APPROVED && formData.act != constants.REJECTED" class="comment-section">
+          <div *ngIf="(isReviewForm || isFillForm) && formData.comments != undefined && formData.comments != null && formData.comments != '' && formData.act != constants.APPROVED && formData.act != constants.REJECTED" class="comment-section">
             <div class="key-value-container">
               <div class="key colour-red">COMMENT</div>
               <div class="value">{{formData.comments}}</div>
@@ -209,34 +202,34 @@
           </div>
         </div>
       </div>
-    </div> --> 
+    </div> 
 
-    <!-- <div class="col-sm-9 col-md-9 right-section">
+    <div class="col-sm-9 col-md-9 right-section">
       <div class="row button-section" [ngClass]="{'super-nav-open': userData.getSelectedOrg()}" >
         <div class="col-sm-12 text-right" *ngIf="userRole == constants.SUPER_ADMIN && (!userData.getSelectedOrg())">
           <button *ngIf="isPreviewMode" class="btn-gray btn-hover-anim" type="button" (click)="isPreviewMode=false;" >BACK TO EDIT</button>
           <button *ngIf="!isPreviewMode" class="btn-cancel btn-hover-anim" type="button" (click)="exitForm()" >{{templateId == undefined ? 'Cancel &amp; Exit' : 'Cancel &amp; Exit'}}</button>
           <button *ngIf="!isPreviewMode" class="btn-gray btn-hover-anim" type="button" (click)="isPreviewMode=true;onClickPreview()" >PREVIEW FORM</button>
           <button *ngIf="!isPreviewMode" type="submit" class="btn-color btn-hover-anim" >{{templateId == undefined ? 'SUBMIT FORM' : 'SAVE FORM'}}</button>
-        </div> -->
-        <!-- <div class="col-sm-12 text-right" *ngIf="userRole == constants.EMPLOYEE">
+        </div> 
+         <div class="col-sm-12 text-right" *ngIf="userRole == constants.EMPLOYEE">
           <button class="btn-gray" type="button" (click)="exitForm()" >EXIT FORM</button>
           <button type="submit" class="btn-color" (click)="formDataForm.form.valid && submitForm(formDataForm)" >SUBMIT FOR APPROVAL</button>
-        </div> -->
+        </div> 
 
-        <!-- <div class="col-sm-12 text-right" *ngIf="userRole == constants.ADMIN">
+        <div class="col-sm-12 text-right" *ngIf="userRole == constants.ADMIN">
           <button class="btn-gray" type="button" (click)="exitForm()" >REJECT FORM</button>
           <button type="submit" class="btn-color" (click)="formDataForm.form.valid && submitForm(formDataForm)" >APROVE FORM</button>
-        </div> -->
+        </div> 
 
         <!-- Fill form if fill mode open -->
-        <!-- <div class="col-sm-12 text-right" *ngIf="isFillForm">
+        <div class="col-sm-12 text-right" *ngIf="isFillForm">
           <button class="btn-gray" type="button" (click)="exitForm()" >CANCEl FORM</button>
           <button type="button" class="btn-color" (click)="formDataForm.form.valid && (isMyFormEdit ? editFilledForm(formDataForm) : submitFilledForm(formDataForm) )" >{{isMyFormEdit ? 'UPDATE FORM' : 'SUBMIT FORM'}}</button>
-        </div> -->
+        </div> 
 
         <!-- review form if review mode open -->
-        <!-- <div class="col-sm-12 text-right" *ngIf="isReviewForm && isReadOnly != true">
+        <div class="col-sm-12 text-right" *ngIf="isReviewForm && isReadOnly != true">
           <button class="red-border-btn" type="button" (click)="rejectAssignedForm(formDataForm)" >REJECT FORM</button>
           <button class="btn-gray" type="button" data-toggle="modal" data-target="#addReworkCommentModal" >SEND FOR REVIEW</button>
           <button type="button" class="btn-color" (click)="formDataForm.form.valid && approveSubmittedForm(formDataForm)" >APPROVE FORM</button>
@@ -279,9 +272,9 @@
             <div class="question-container">
               <div class="question" data-text="Enter text here">When is the bomb going to explode? OR When will the substance be released?</div>
               <div class="answer"></div>
-            </div> -->
-          <!-- </div> -->
-          <!-- <div *ngIf="userRole == constants.SUPER_ADMIN && !isPreviewMode">
+            </div>
+          </div> 
+          <div *ngIf="userRole == constants.SUPER_ADMIN && !isPreviewMode">
             <div class="row">
               <div class="col-sm-7">
                 <div class="add-question">
@@ -289,9 +282,9 @@
                 </div>
               </div>
             </div>
-          </div> -->
+          </div> 
 
-          <!-- <div id="formEditor" [ngClass]="{'preview': isPreviewMode}" class="form-editor" *ngIf="userRole != constants.SUPER_ADMIN || isPreviewMode">
+          <div id="formEditor" [ngClass]="{'preview': isPreviewMode}" class="form-editor" *ngIf="userRole != constants.SUPER_ADMIN || isPreviewMode">
             <div class="" [innerHtml]="formData.content"></div>
           </div>
 
@@ -302,10 +295,10 @@
       </div>
     </div>
   </form>
-</section> --> 
+</section>  
 
 <!-- Add table modal start -->
-<!-- <div class="modal fade add-table-modal form-uploader" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="addTableModal" aria-hidden="true">
+ <div class="modal fade add-table-modal form-uploader" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="addTableModal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -346,11 +339,11 @@
       </div>
     </div>
   </div>
-</div> -->
+</div> 
 <!-- Add table modal end -->
 
 <!-- Send for rework modal start -->
-<!-- <div class="modal fade add-comment-modal form-uploader" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="addReworkCommentModal" aria-hidden="true">
+ <div class="modal fade add-comment-modal form-uploader" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="addReworkCommentModal" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -382,5 +375,5 @@
       </div>
     </div>
   </div>
-</div> -->
+</div> 
 <!-- Send for rework modal end -->

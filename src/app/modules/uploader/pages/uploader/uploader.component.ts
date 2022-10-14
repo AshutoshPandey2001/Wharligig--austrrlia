@@ -90,13 +90,8 @@ export class UploaderComponent implements OnInit, AfterViewChecked {
 
   selectedTableType;
   reviewComment: any = {};
-  url =
-    "https://tstageserver.com/aniruddh/wp-login.php?loggedout=true&wp_lang=en_US";
-  defUrl: any;
 
   async ngOnInit() {
-    this.defUrl = await this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
-
     this.userRole = this.userData.getUserData().role;
 
     // this.userRole = this.route.snapshot.data['role'];
@@ -1148,6 +1143,7 @@ export class UploaderComponent implements OnInit, AfterViewChecked {
   superAdminAddNewForm(form) {
     let payload = JSON.parse(JSON.stringify(this.formData));
     payload.content = document.getElementById("formEditor").innerHTML;
+    console.log("Form json", payload);
     if (
       payload.policyid != null &&
       payload.policyid != undefined &&
@@ -1220,11 +1216,12 @@ export class UploaderComponent implements OnInit, AfterViewChecked {
   /*Fill form submit*/
   submitFilledForm(form) {
     let payload = JSON.parse(JSON.stringify(this.formData));
-
+    // console.log(form);
     payload["act"] = 0;
     payload["assignid"] = this.assignId;
 
     payload["content"] = document.getElementById("formEditor").innerHTML;
+    // console.log(payload["content"]);
 
     this.loadingService.apiStart();
 
