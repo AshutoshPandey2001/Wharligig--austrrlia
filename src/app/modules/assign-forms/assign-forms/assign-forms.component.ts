@@ -45,7 +45,7 @@ export class AssignFormsComponent implements OnInit {
     this.backendService.getAdminAssignedFormList(term)
     .subscribe(result => {
       this.loadingService.apiStop();
-
+console.log('all assign form', result)
       if(this.pageNo == 1) {
         this.assignedForms = result.data.assignform;
       }else{

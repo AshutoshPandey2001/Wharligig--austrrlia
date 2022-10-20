@@ -31,6 +31,7 @@ export class FormStampComponent implements OnInit {
   }
 
   openOverlay(value){
+    console.log(value)
    	this.notify.emit(value);
   }
 

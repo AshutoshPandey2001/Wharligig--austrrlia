@@ -13,10 +13,10 @@
   <div class="">
     <h2 class="formTemlateHeading">Form Name</h2>
     <h3 class="formTemlateName">{{formtemplate.title}}</h3>
-    <h2 class="formTemlateHeading">Description</h2>
-    <h3 class="formTemlateDescription">{{formtemplate.description}}</h3>
-    <h2 class="formTemlateHeading">Created On</h2>
-    <h3 class="formTemlateDate">{{commonService.getFormatedDate(formtemplate.createdate)}}</h3>
+    <!-- <h2 class="formTemlateHeading">Description</h2>
+    <h3 class="formTemlateDescription">{{formtemplate.description}}</h3> -->
+    <h2 class="formTemlateHeading">Form Id</h2>
+    <h3 class="formTemlateDate">{{formtemplate.id}}</h3>
     <div class="formTemplateline"></div>  
     <a class="formTemplate-btn button-value" [routerLink]=" userDataService.getUserData().role == constants.SUPER_ADMIN ? '/edit-template/' + formtemplate.id : '/view-template/' + formtemplate.id">View Form</a>
     <a *ngIf="userDataService.getUserData().role == constants.ADMIN || userDataService.getUserData().role == constants.MANAGER || userDataService.getSelectedOrg()" class="formTemplate-btn button-value" (click)="openOverlay(formtemplate)">Assign Form</a>

@@ -1,0 +1,9 @@
+{
+    "/aniruddh": {
+    "target": "https://tstageserver.com",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug"
+      
+    }
+}

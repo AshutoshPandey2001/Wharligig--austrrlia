@@ -37,6 +37,8 @@ import { GEOLocationService } from "../../../../services/geo-location.service";
 import { EventService } from "../../../../services/event.service";
 import { environment } from "../../../../../environments/environment";
 import { HtmlAstPath } from "@angular/compiler";
+import {ProxyService} from '../../../../proxy.service'
+
 
 declare var $: any;
 var _this;
@@ -61,10 +63,12 @@ export class UploaderComponent implements OnInit, AfterViewChecked {
     protected sanitizer: DomSanitizer,
     private event: EventService,
     public geo: GEOLocationService,
-    public commonService: CommonService
+    public commonService: CommonService,
+    private procyservice: ProxyService
   ) {
     _this = this;
   }
+  jsonForm: any;  
 
   userRole = 1;
   formData: any = {};
@@ -90,6 +94,7 @@ export class UploaderComponent implements OnInit, AfterViewChecked {
 
   selectedTableType;
   reviewComment: any = {};
+  selctValue:any;
 
   async ngOnInit() {
     this.userRole = this.userData.getUserData().role;
@@ -122,6 +127,14 @@ export class UploaderComponent implements OnInit, AfterViewChecked {
     }
     const source = interval(3000);
     actionSubscribe = source.subscribe((val) => this.actions());
+  }
+
+  formSubmit(form){
+    console.log('Submitted Form' , form.value)
+  }
+  onChangeradion(selectValue: any) {
+    this.selctValue = selectValue;
+    console.log('selectValue', this.selctValue);
   }
 
   /*Get template by id*/
@@ -517,59 +530,73 @@ export class UploaderComponent implements OnInit, AfterViewChecked {
 
   /*Get template by id*/
   getTemplateById(id) {
-    this.loadingService.apiStart();
 
-    this.backendService.getSingleTemplateForm(id).subscribe(
-      (result) => {
-        this.loadingService.apiStop();
-        if (result.code == 200) {
-          this.formData = result.data;
+    this.procyservice.getFormById(id).subscribe((res)=>{
+      console.log( 'result',res)
+      this.jsonForm = res;
+      // let pro = Object.values(res)
+      // console.log('http res',pro); 
+      // this.templates = pro;
+      // console.log( 'form array',this.templates);
+      
+    } , (err)=>{
+      console.log('error' , err);
+      
+    })
 
-          /*Replace magic tag names*/
-          if (this.userRole != Constants.SUPER_ADMIN) {
-            while (
-              this.formData.content.includes(
-                Constants.ORGANISATION_EMPTY_PLACEHOLDER
-              )
-            ) {
-              this.formData.content = this.formData.content.replace(
-                Constants.ORGANISATION_EMPTY_PLACEHOLDER,
-                this.userData.getUserData().organization_name.trim()
-              );
-            }
-          }
+    // this.loadingService.apiStart();
 
-          /*Set content of form*/
-          this.formData.content = this.sanitizer.bypassSecurityTrustHtml(
-            this.formData.content
-          );
+    // this.backendService.getSingleTemplateForm(id).subscribe(
+    //   (result) => {
+    //     this.loadingService.apiStop();
+    //     if (result.code == 200) {
+    //       this.formData = result.data;
 
-          /*Set policy of form*/
-          if (this.formData.policy != undefined) {
-            this.formData.policyid = this.formData.policy[0];
-          }
+    //       /*Replace magic tag names*/
+    //       if (this.userRole != Constants.SUPER_ADMIN) {
+    //         while (
+    //           this.formData.content.includes(
+    //             Constants.ORGANISATION_EMPTY_PLACEHOLDER
+    //           )
+    //         ) {
+    //           this.formData.content = this.formData.content.replace(
+    //             Constants.ORGANISATION_EMPTY_PLACEHOLDER,
+    //             this.userData.getUserData().organization_name.trim()
+    //           );
+    //         }
+    //       }
 
-          /*Other form action*/
-          setTimeout(function () {
-            let q = document.getElementsByClassName("question");
-            for (let i = 0; i < q.length; ++i) {
-              _this.pasteTextAsPlainText(q[i]);
-            }
+    //       /*Set content of form*/
+    //       this.formData.content = this.sanitizer.bypassSecurityTrustHtml(
+    //         this.formData.content
+    //       );
 
-            let b = document.getElementsByClassName("block");
-            for (let i = 0; i < b.length; ++i) {
-              _this.pasteTextAsPlainText(b[i]);
-            }
+    //       /*Set policy of form*/
+    //       if (this.formData.policy != undefined) {
+    //         this.formData.policyid = this.formData.policy[0];
+    //       }
 
-            _this.actions();
-          }, 2000);
-        }
-      },
-      (error) => {
-        this.loadingService.apiStop();
-        console.log("Error");
-      }
-    );
+    //       /*Other form action*/
+    //       setTimeout(function () {
+    //         let q = document.getElementsByClassName("question");
+    //         for (let i = 0; i < q.length; ++i) {
+    //           _this.pasteTextAsPlainText(q[i]);
+    //         }
+
+    //         let b = document.getElementsByClassName("block");
+    //         for (let i = 0; i < b.length; ++i) {
+    //           _this.pasteTextAsPlainText(b[i]);
+    //         }
+
+    //         _this.actions();
+    //       }, 2000);
+    //     }
+    //   },
+    //   (error) => {
+    //     this.loadingService.apiStop();
+    //     console.log("Error");
+    //   }
+    // );
   }
 
   /*This is only for super admin to add new question*/
@@ -1323,6 +1350,10 @@ export class UploaderComponent implements OnInit, AfterViewChecked {
         this.toastr.error(error);
       }
     );
+  }
+  submitForm(formValue){
+    console.log(formValue);
+    
   }
 
   ngOnDestroy() {

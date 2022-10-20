@@ -105,6 +105,7 @@ export class AssignNewFormComponent implements OnInit {
       expiretime: new Date(this.date).getTime()
     })
     .subscribe(result => {
+      console.log('assign new form',result , this.selectedTemplate.id)
       this.loadingService.apiStop();
       this.toastr.success("Assigned successfully!");
       this.closeOverlay('assignForm')
