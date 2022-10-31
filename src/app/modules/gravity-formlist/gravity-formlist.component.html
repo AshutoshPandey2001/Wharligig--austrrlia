@@ -1,0 +1,45 @@
+<!-- <p>gravity-formlist works!</p> -->
+<h1>List Of All Form Present In Gravity From</h1>
+<!-- <div class="row">
+    <div class="card  cardstyle"  *ngFor="let template of templates" >
+      <div class="card-header">{{template.title}} {{template.id}}</div>
+      <div class="card-footer">
+        <button class="btn btn-outline-warning"   (click)="viewForm(template.id)">View From</button>
+      </div>
+    </div>
+  </div> -->
+
+
+
+<ng-container 
+>
+<section class=" row " >
+    <!-- <div class="actions" *ngIf="userDataService.getUserData().role == constants.SUPER_ADMIN"> -->
+      <!-- <div class="dropdown dropdown-menu-right">
+        <button type="button" class="btn" data-toggle="dropdown">
+          <img src="/assets/menu.svg">
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" [routerLink]="'/edit-template/' + formtemplate.id" >Edit Form</a>
+          <a class="dropdown-item" href="javascript:void(0)" (click)="onDeleteClicked(formtemplate)" >Delete Form</a>
+        </div>
+      </div> -->
+    <!-- </div> -->
+    <div class="formTemlate" *ngFor="let template of templates" >
+      <h2 class="formTemlateHeading">Form Name</h2>
+      <h3 class="formTemlateName">{{template.title}}</h3>
+      <!-- <h2 class="formTemlateHeading">Description</h2>
+      <h3 class="formTemlateDescription">{{template.description}}</h3> -->
+      <h2 class="formTemlateHeading">Form Id</h2>
+      <h3 class="formTemlateDate">{{template.id}}</h3>
+      <div class="formTemplateline"></div>  
+      <!-- <a *ngIf="userDataService.getUserData().role == constants.ADMIN || userDataService.getUserData().role == constants.MANAGER || userDataService.getSelectedOrg()" class="formTemplate-btn button-value" (click)="openOverlay(formtemplate)">Assign Form</a> -->
+       <a class="formTemplate-btn button-value" (click)="viewForm(template.id)" >View Form</a>
+      <!--<span class="submit-form">
+        <a *ngIf="userDataService.getUserData().role == constants.EMPLOYEE" class="formTemplate-btn button-value" (click)="getUserDetailsById(formtemplate)" >Submit Form</a>
+        
+      </span> -->
+    </div>
+  </section></ng-container>
+ 
+  

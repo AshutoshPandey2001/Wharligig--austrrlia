@@ -1,0 +1,161 @@
+<!-- <p>get-gravity-formby-id works!</p> -->
+<div class="container mt-5">
+    <div class="text-right" style="margin-bottom: 25px;">
+        <span class="float-left"><button class="btn btn-danger " style="border-radius: 25px;" (click)="backButton()">BACK & EXIT</button></span>
+    <span class="float-right"><button class="btn btn-success " style="border-radius: 25px;
+        " (click)=" superAdminAddnewForm()" >SUBMIT FORM</button>
+    </span>
+    </div>
+</div>
+
+    
+
+
+<div class="container pt-5"  id="gravityForm"> 
+        <div>
+          <h1>
+            {{jsonForm?.title ? jsonForm?.title:''}}
+          </h1>
+        </div>
+        
+        <form #form="ngForm" (ngSubmit)="formSubmit(form)">
+          <div class="row" *ngIf="jsonForm && jsonForm.fields?.length">
+            <ng-container [ngSwitch]="item.type" *ngFor="let item of jsonForm.fields">
+              <div [ngClass]="item.layoutGridColumnSpan ?'col-lg-'+item.layoutGridColumnSpan:'col-lg-12'">
+                <span *ngIf="item.conditionalLogic">
+                  <ng-container *ngFor="let conditionLogic of item.conditionalLogic.rules">
+                    <ng-container *ngIf="conditionLogic.value == selctValue">
+                      <div class="form-group" *ngSwitchCase="'text'" style="margin-top: 10px;">
+                        <label>{{item.label}}</label><strong class="text-danger" *ngIf="item.isRequired">*</strong>
+                        <input type="{{item.type}}" class="form-control" placeholder="{{item.placeholder}}"
+                          required="{{item.isRequired}}"  name="fullName" ngModel>
+                      </div>
+                    </ng-container>
+                  </ng-container>
+                </span>
+                <span *ngIf="!item.conditionalLogic">
+                  <div class="form-group" *ngSwitchCase="'text'">
+                    <label>{{item.label}}</label><strong class="text-danger" *ngIf="item.isRequired">*</strong>
+                    <input type="{{item.type}}" class="form-control" placeholder="{{item.placeholder}}"
+                      required="{{item.isRequired}}" (change)="onChangeradion($event.target)" name="fullName" ngModel>
+                  </div>
+                </span>
+        
+                <span *ngIf="item.conditionalLogic">
+                  <ng-container *ngFor="let conditionLogic of item.conditionalLogic.rules">
+                    <ng-container *ngIf="conditionLogic.value == selctValue">
+                  <div class="form-group" *ngSwitchCase="'select'">
+                    <label>{{item.label}}</label><strong class="text-danger" *ngIf="item.isRequired">*</strong>
+          
+                    <select class="form-control" required="{{item.isRequired}}" name="countryName" ngModel>
+                      <option *ngFor="let opt of item.choices" [value]="opt.value">{{opt.text}}</option>
+                    </select>
+                  </div>
+                    </ng-container>
+                  </ng-container>
+                </span>
+                <span *ngIf="!item.conditionalLogic">
+                  
+                  <div class="form-group" *ngSwitchCase="'select'">
+                    <label>{{item.label}}</label><strong class="text-danger" *ngIf="item.isRequired">*</strong>
+          
+                    <select class="form-control" required="{{item.isRequired}}" name="countryName" ngModel>
+                      <option *ngFor="let opt of item.choices" [value]="opt.value">{{opt.text}}</option>
+                    </select>
+                  </div>
+                </span>
+        
+                <span *ngIf="item.conditionalLogic">
+                  <ng-container *ngFor="let conditionLogic of item.conditionalLogic.rules">
+                    <ng-container *ngIf="conditionLogic.value == selctValue">
+                  <div class="form-group " *ngSwitchCase=" 'number'">
+                        <label>{{item.label}}</label><strong class="text-danger" *ngIf="item.isRequired">*</strong>
+                        <input type="{{item.type}}" class="form-control" placeholder="{{item.placeholder}}"
+                          required="{{item.isRequired}}" name="mobileNo." ngModel>
+                      </div>
+                    </ng-container>
+                  </ng-container>
+        
+                </span>
+                <span *ngIf="!item.conditionalLogic">
+                  <div class="form-group " *ngSwitchCase=" 'number'">
+        
+                    <label>{{item.label}}</label><strong class="text-danger" *ngIf="item.isRequired">*</strong>
+        
+                    <input type="{{item.type}}" class="form-control" placeholder="{{item.placeholder}}"
+                      required="{{item.isRequired}}" name="mobileNo." ngModel>
+                  </div>
+                </span>
+        
+                <span *ngIf="item.conditionalLogic">
+                  <ng-container *ngFor="let conditionLogic of item.conditionalLogic.rules">
+                    <ng-container *ngIf="conditionLogic.value == selctValue">
+                  <div class="form-check" *ngSwitchCase=" 'radio'">
+                    <label style="margin-left: -20px;">{{item.label}}</label><strong class="text-danger"
+                      *ngIf="item.isRequired">*</strong>
+                    <div *ngFor="let radio of item.choices">
+                      <label class="form-check-label">
+                        <input type="radio" class="form-check-input" [value]="radio.value" 
+                          required="{{item.isRequired}}" (change)="onChangeradion(radio.value)" name="gender" ngModel >{{radio.text}}
+                      </label>
+                    </div>
+          
+                  </div>
+                    </ng-container>
+                  </ng-container>
+                </span>
+                <span *ngIf="!item.conditionalLogic">
+        
+                  <div class="form-check" *ngSwitchCase=" 'radio'">
+                    <label style="margin-left: -20px;">{{item.label}}</label><strong class="text-danger"
+                      *ngIf="item.isRequired">*</strong>
+                    <div *ngFor="let radio of item.choices">
+                      <label class="form-check-label">
+                        <input type="radio" class="form-check-input" [value]="radio.value" 
+                          required="{{item.isRequired}}" (change)="onChangeradion(radio.value)" name="gender" ngModel>{{radio.text}}
+                      </label>
+                    </div>
+          
+                  </div>
+                </span>
+        
+                <span *ngIf="item.conditionalLogic">
+                  <ng-container *ngFor="let conditionLogic of item.conditionalLogic.rules">
+                    <ng-container *ngIf="conditionLogic.value == selctValue">
+                      <div class="form-check" *ngSwitchCase=" 'checkbox'">
+                         <label style="margin-left: -20px;">{{item.label}}</label><strong class="text-danger"
+                            *ngIf="item.isRequired">*</strong>      
+                              <div *ngFor="let check of item.choices">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" [value]="check.value"
+                                       required="{{item.isRequired}}" name="Hobby" ngModel>{{check.text}}</label>
+                                 </div>
+                      </div>
+                    </ng-container>
+                  </ng-container>
+                </span>
+                <span *ngIf="!item.conditionalLogic">
+        
+          <div class="form-check" *ngSwitchCase=" 'checkbox'">
+        
+            <label style="margin-left: -20px;">{{item.label}}</label><strong class="text-danger"
+              *ngIf="item.isRequired">*</strong>
+              
+              <div *ngFor="let check of item.choices">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" [value]="check.value"
+                  required="{{item.isRequired}}" name="Hobby" ngModel>{{check.text}}</label>
+            </div>
+        
+        
+          </div>
+                </span>
+              </div>
+            </ng-container>
+          </div>
+          <div style="margin-top: 10px;" *ngIf="jsonForm && jsonForm?.button">
+            <button type="submit" class="btn btn-primary">{{jsonForm?.button.text}}</button>
+          </div>
+        </form>
+        
+      </div> 

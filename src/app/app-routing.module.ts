@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { AuthGuard } from './auth.guard';
+import { GravityFormlistComponent } from './modules/gravity-formlist/gravity-formlist.component';
+import { GetGravityFormbyIdComponent } from './modules/get-gravity-formby-id/get-gravity-formby-id.component';
 
 const routes: Routes = [
   {
@@ -92,7 +94,15 @@ const routes: Routes = [
   /*Form uploader module*/
   {
     path: 'create-template',
-    loadChildren: './modules/uploader/uploader.module#UploaderModule',
+    component: GravityFormlistComponent,
+    data: {
+      role: 0
+    },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'preview-gravityFrom',
+    component: GetGravityFormbyIdComponent,
     data: {
       role: 0
     },

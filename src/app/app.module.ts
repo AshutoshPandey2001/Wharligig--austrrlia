@@ -20,6 +20,8 @@ import { CookiePolicyComponent } from './components/cookie-policy/cookie-policy.
 import { EditProfileModalComponent } from './components/edit-profile-modal/edit-profile-modal.component';
 import { LoginModalComponent } from './components/login-modal/login-modal.component';
 import { SuperAdminNavigationsOrgComponent } from './components/super-admin-navigations-org/super-admin-navigations-org.component';
+import { GravityFormlistComponent } from './modules/gravity-formlist/gravity-formlist.component';
+import { GetGravityFormbyIdComponent } from './modules/get-gravity-formby-id/get-gravity-formby-id.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { SuperAdminNavigationsOrgComponent } from './components/super-admin-navi
     CookiePolicyComponent,
     EditProfileModalComponent,
     LoginModalComponent,
-    SuperAdminNavigationsOrgComponent
+    SuperAdminNavigationsOrgComponent,
+    GravityFormlistComponent,
+    GetGravityFormbyIdComponent
   ],
   imports: [
     BrowserModule,

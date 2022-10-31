@@ -68,46 +68,46 @@ export class FormTemplatesComponent implements OnInit, OnDestroy {
 
   gettemplatelist(){
     this.loadingService.apiStart();
-    this.procyservice.getFormList().subscribe((res)=>{
-      console.log( 'result',res)
-      let pro = Object.values(res)
-      console.log('http res',pro); 
-      this.templates = pro;
-    this.loadingService.apiStop();
+    // this.procyservice.getFormList().subscribe((res)=>{
+    //   console.log( 'result',res)
+    //   let pro = Object.values(res)
+    //   console.log('http res',pro); 
+    //   this.templates = pro;
+    // this.loadingService.apiStop();
 
-      console.log( 'form array',this.templates);
+    //   console.log( 'form array',this.templates);
       
-    } , (err)=>{
-      console.log('error' , err);
+    // } , (err)=>{
+    //   console.log('error' , err);
       
-    })    
+    // })    
 
-    // let term = "?limit=" + this.limit + "&page=" + this.pageNo + "&q=" + (this.searchTerm != undefined && this.searchTerm != null && this.searchTerm != '' ? this.searchTerm : '');
+    let term = "?limit=" + this.limit + "&page=" + this.pageNo + "&q=" + (this.searchTerm != undefined && this.searchTerm != null && this.searchTerm != '' ? this.searchTerm : '');
 
-    // this.loadingService.apiStart();
-    // this.listLoading = true;
-    // this.backendService.gettemplatelist(term)
-    // .subscribe(result => {
-    //   this.loadingService.apiStop();
-    //   if(result.code == 200) {
+    this.loadingService.apiStart();
+    this.listLoading = true;
+    this.backendService.gettemplatelist(term)
+    .subscribe(result => {
+      this.loadingService.apiStop();
+      if(result.code == 200) {
 
-    //     if(this.pageNo == 1) {
-    //       this.templates = [];
-    //       this.templates = result.data.form;
-    //     }else{
-    //       this.templates = this.templates.concat(result.data.form);
-    //     }
-    //     this.totalCount = result.data.countform;
-    //     this.pageNo++;
-    //     this.listLoading = false;
-    //     this.loadingService.apiStop();
-    //   }
-    // },
-    // error => {
-    //   this.loadingService.apiStop();
-    //   console.log('Error');
+        if(this.pageNo == 1) {
+          this.templates = [];
+          this.templates = result.data.form;
+        }else{
+          this.templates = this.templates.concat(result.data.form);
+        }
+        this.totalCount = result.data.countform;
+        this.pageNo++;
+        this.listLoading = false;
+        this.loadingService.apiStop();
+      }
+    },
+    error => {
+      this.loadingService.apiStop();
+      console.log('Error');
       
-    // });
+    });
   }
 
   onDeleteTemplate(data){

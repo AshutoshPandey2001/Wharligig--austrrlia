@@ -204,7 +204,7 @@
       </div>
     </div>  -->
 
-    <div class="col-sm-12 col-md-12 ">
+    <div class="col-sm-12 col-md-12" style="margin-top: 50px;">
       <div class="row button-section" [ngClass]="{'super-nav-open': userData.getSelectedOrg()}" >
         <div class="col-sm-12 text-right" *ngIf="userRole == constants.SUPER_ADMIN && (!userData.getSelectedOrg())">
           <button *ngIf="isPreviewMode" class="btn-gray btn-hover-anim" type="button" (click)="isPreviewMode=false;" >BACK TO EDIT</button>
@@ -240,7 +240,7 @@
 
       </div>
       <!-------------------- Dyanamic gravity Form Preview for Super admin start----------------------->
-      <div class="container pt-5 mt-5">
+      <!-- <div class="container pt-5 mt-5">
         <div>
           <h1>
             {{jsonForm?.title ? jsonForm?.title:''}}
@@ -251,7 +251,7 @@
           <div class="row" *ngIf="jsonForm && jsonForm.fields?.length">
             <ng-container [ngSwitch]="item.type" *ngFor="let item of jsonForm.fields">
               <div [ngClass]="item.layoutGridColumnSpan ?'col-lg-'+item.layoutGridColumnSpan:'col-lg-12'">
-        <!-------------   Text Type -------------------->
+        -----------   Text Type ------------------
                 <span *ngIf="item.conditionalLogic">
                   <ng-container *ngFor="let conditionLogic of item.conditionalLogic.rules">
                     <ng-container *ngIf="conditionLogic.value == selctValue">
@@ -270,7 +270,7 @@
                       required="{{item.isRequired}}" (change)="onChangeradion($event.target)" name="fullName" ngModel>
                   </div>
                 </span>
-        <!-------------   Select Type -------------------->
+        -----------   Select Type ------------------
         
                 <span *ngIf="item.conditionalLogic">
                   <ng-container *ngFor="let conditionLogic of item.conditionalLogic.rules">
@@ -295,7 +295,7 @@
                     </select>
                   </div>
                 </span>
-        <!-------------   Number Type -------------------->
+        -----------   Number Type ------------------
         
                 <span *ngIf="item.conditionalLogic">
                   <ng-container *ngFor="let conditionLogic of item.conditionalLogic.rules">
@@ -318,7 +318,7 @@
                       required="{{item.isRequired}}" name="mobileNo." ngModel>
                   </div>
                 </span>
-        <!-------------   Radio Type -------------------->
+        -----------   Radio Type ------------------
         
                 <span *ngIf="item.conditionalLogic">
                   <ng-container *ngFor="let conditionLogic of item.conditionalLogic.rules">
@@ -351,7 +351,7 @@
           
                   </div>
                 </span>
-        <!-------------   Checkbox Type -------------------->
+        -----------   Checkbox Type ------------------
         
                 <span *ngIf="item.conditionalLogic">
                   <ng-container *ngFor="let conditionLogic of item.conditionalLogic.rules">
@@ -392,10 +392,10 @@
           </div>
         </form>
         
-      </div>
+      </div> -->
        <!-------------------- Dyanamic gravity Form Preview for Super admin end----------------------->
 
-      <!-- <div class="row">
+      <div class="row">
         <div class="col-sm-10">
           <div class="header-section" *ngIf="userRole == constants.SUPER_ADMIN && !isPreviewMode">
             <div class="row">
@@ -451,13 +451,13 @@
             <img [src]="env.S3_BASE_URL + '/production/assets/Cam.svg'">
           </button>
         </div>
-      </div> -->
+      </div>
     </div>
   </form>
 </section>  
 
 <!-- Add table modal start -->
- <!-- <div class="modal fade add-table-modal form-uploader" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="addTableModal" aria-hidden="true">
+ <div class="modal fade add-table-modal form-uploader" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="addTableModal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -498,7 +498,7 @@
       </div>
     </div>
   </div>
-</div>  -->
+</div> 
 <!-- Add table modal end -->
 
 <!-- Send for rework modal start -->

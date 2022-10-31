@@ -531,72 +531,67 @@ export class UploaderComponent implements OnInit, AfterViewChecked {
   /*Get template by id*/
   getTemplateById(id) {
 
-    this.procyservice.getFormById(id).subscribe((res)=>{
-      console.log( 'result',res)
-      this.jsonForm = res;
-      // let pro = Object.values(res)
-      // console.log('http res',pro); 
-      // this.templates = pro;
-      // console.log( 'form array',this.templates);
+    // this.procyservice.getFormById(id).subscribe((res)=>{
+    //   console.log( 'result',res)
+    //   this.jsonForm = res;      
+    // } , (err)=>{
+    //   console.log('error' , err);
       
-    } , (err)=>{
-      console.log('error' , err);
-      
-    })
+    // })
 
-    // this.loadingService.apiStart();
+    this.loadingService.apiStart();
 
-    // this.backendService.getSingleTemplateForm(id).subscribe(
-    //   (result) => {
-    //     this.loadingService.apiStop();
-    //     if (result.code == 200) {
-    //       this.formData = result.data;
+    this.backendService.getSingleTemplateForm(id).subscribe(
+      (result) => {
+        this.loadingService.apiStop();
+        if (result.code == 200) {
+          this.formData = result.data;
 
-    //       /*Replace magic tag names*/
-    //       if (this.userRole != Constants.SUPER_ADMIN) {
-    //         while (
-    //           this.formData.content.includes(
-    //             Constants.ORGANISATION_EMPTY_PLACEHOLDER
-    //           )
-    //         ) {
-    //           this.formData.content = this.formData.content.replace(
-    //             Constants.ORGANISATION_EMPTY_PLACEHOLDER,
-    //             this.userData.getUserData().organization_name.trim()
-    //           );
-    //         }
-    //       }
+          /*Replace magic tag names*/
+          if (this.userRole != Constants.SUPER_ADMIN) {
+            while (
+              this.formData.content.includes(
+                Constants.ORGANISATION_EMPTY_PLACEHOLDER
+              )
+            ) {
+              this.formData.content = this.formData.content.replace(
+                Constants.ORGANISATION_EMPTY_PLACEHOLDER,
+                this.userData.getUserData().organization_name.trim()
+              );
+            }
+          }
 
-    //       /*Set content of form*/
-    //       this.formData.content = this.sanitizer.bypassSecurityTrustHtml(
-    //         this.formData.content
-    //       );
+          /*Set content of form*/
+          this.formData.content = this.sanitizer.bypassSecurityTrustHtml(
+            this.formData.content
+          );
 
-    //       /*Set policy of form*/
-    //       if (this.formData.policy != undefined) {
-    //         this.formData.policyid = this.formData.policy[0];
-    //       }
+          /*Set policy of form*/
+          if (this.formData.policy != undefined) {
+            this.formData.policyid = this.formData.policy[0];
+          }
 
-    //       /*Other form action*/
-    //       setTimeout(function () {
-    //         let q = document.getElementsByClassName("question");
-    //         for (let i = 0; i < q.length; ++i) {
-    //           _this.pasteTextAsPlainText(q[i]);
-    //         }
+          /*Other form action*/
+          setTimeout(function () {
+            let q = document.getElementsByClassName("question");
+            for (let i = 0; i < q.length; ++i) {
+              _this.pasteTextAsPlainText(q[i]);
+            }
 
-    //         let b = document.getElementsByClassName("block");
-    //         for (let i = 0; i < b.length; ++i) {
-    //           _this.pasteTextAsPlainText(b[i]);
-    //         }
+            let b = document.getElementsByClassName("block");
+            for (let i = 0; i < b.length; ++i) {
+              _this.pasteTextAsPlainText(b[i]);
+            }
 
-    //         _this.actions();
-    //       }, 2000);
-    //     }
-    //   },
-    //   (error) => {
-    //     this.loadingService.apiStop();
-    //     console.log("Error");
-    //   }
-    // );
+            _this.actions();
+          }, 2000);
+        }
+      },
+      (error) => {
+        this.loadingService.apiStop();
+        console.log("Error");
+      }
+    );
   }
 
   /*This is only for super admin to add new question*/
