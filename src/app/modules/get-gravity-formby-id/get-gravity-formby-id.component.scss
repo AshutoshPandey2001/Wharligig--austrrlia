@@ -1,0 +1,29 @@
+.button-section button{
+    min-width: 160px;
+    padding: 10px 20px;
+    text-decoration: none;
+    outline: none;
+    font-family: HKGrotesk-Bold;
+    font-size: 12px;
+    border-radius: 30px;
+    display: inline-block;
+    text-align: center;
+    margin: 0 5px;
+    box-shadow: none;
+    border-color: transparent;
+  }
+
+.btn-gray{
+    background-color: #e8e8e8;
+    color: #a1a1a1;
+  }
+  .btn-color{
+    background-color: #3adb64;
+    color: #fff;
+  }
+  .btn-cancel{
+    color: #a1a1a1;
+    font-family: HKGrotesk-Bold;
+    text-decoration: underline;
+    background: transparent;
+  }

@@ -1,45 +1,46 @@
-<!-- <p>gravity-formlist works!</p> -->
-<h1>List Of All Form Present In Gravity Form</h1>
-<!-- <div class="row">
-    <div class="card  cardstyle"  *ngFor="let template of templates" >
-      <div class="card-header">{{template.title}} {{template.id}}</div>
-      <div class="card-footer">
-        <button class="btn btn-outline-warning"   (click)="viewForm(template.id)">View From</button>
+
+
+<section class="template">
+  <div class="temppadding">
+    <div class="row">
+      <div class="col-sm-6">
+        <h1 class="main-heading">Gravity Form Templates</h1>
+        <p class="sub-heading">Browse through our repository of compliance forms.</p>
+      </div>
+      <div class="col-sm-6">
       </div>
     </div>
-  </div> -->
-
-
-
-<ng-container 
->
-<section class=" row " >
-    <!-- <div class="actions" *ngIf="userDataService.getUserData().role == constants.SUPER_ADMIN"> -->
-      <!-- <div class="dropdown dropdown-menu-right">
-        <button type="button" class="btn" data-toggle="dropdown">
-          <img src="/assets/menu.svg">
-        </button>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" [routerLink]="'/edit-template/' + formtemplate.id" >Edit Form</a>
-          <a class="dropdown-item" href="javascript:void(0)" (click)="onDeleteClicked(formtemplate)" >Delete Form</a>
-        </div>
-      </div> -->
-    <!-- </div> -->
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="line"></div> 
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <input type="text" class=" search-org-name" placeholder="Search by Name of the Form" name="0" id="formSearch">
+        <img class="search-icon" src="assets/search-icon-img.png">
+      </div>
+    </div>
+  </div>
+  
+<!-- <ng-container > -->
+  <div class="temppadding">
+    <section class="row " >   
     <div class="formTemlate" *ngFor="let template of templates" >
       <h2 class="formTemlateHeading">Form Name</h2>
-      <h3 class="formTemlateName">{{template.title}}</h3>
-      <!-- <h2 class="formTemlateHeading">Description</h2>
-      <h3 class="formTemlateDescription">{{template.description}}</h3> -->
+      <h3 class="formTemlateName">{{template.title}}</h3>     
       <h2 class="formTemlateHeading">Form Id</h2>
       <h3 class="formTemlateDate">{{template.id}}</h3>
       <div class="formTemplateline"></div>  
-      <!-- <a *ngIf="userDataService.getUserData().role == constants.ADMIN || userDataService.getUserData().role == constants.MANAGER || userDataService.getSelectedOrg()" class="formTemplate-btn button-value" (click)="openOverlay(formtemplate)">Assign Form</a> -->
        <a class="formTemplate-btn button-value" (click)="viewForm(template.id)" >View Form</a>
-      <!--<span class="submit-form">
-        <a *ngIf="userDataService.getUserData().role == constants.EMPLOYEE" class="formTemplate-btn button-value" (click)="getUserDetailsById(formtemplate)" >Submit Form</a>
-        
-      </span> -->
+      
     </div>
-  </section></ng-container>
+  </section>
+
+  </div>
+<!-- </ng-container> -->
+
+</section>
+  
  
   

@@ -1,14 +1,26 @@
 <!-- <p>get-gravity-formby-id works!</p> -->
-<div class="container mt-5">
+<!-- <div class="container mt-5">
     <div class="text-right" style="margin-bottom: 25px;">
         <span class="float-left"><button class="btn btn-danger " style="border-radius: 25px;" (click)="backButton()">BACK & EXIT</button></span>
     <span class="float-right"><button class="btn btn-success " style="border-radius: 25px;
         " (click)=" superAdminAddnewForm()" >SUBMIT FORM</button>
     </span>
     </div>
-</div>
+</div> -->
 
     
+
+  <div class="col-sm-12 text-right container mt-5 button-section" >
+    <!-- <button  class="btn-gray btn-hover-anim" type="button" (click)="isPreviewMode=false;" >BACK TO EDIT</button> -->
+    <button  class="btn-cancel btn-hover-anim" type="button" (click)="exitForm()" > Cancel &amp; Exit</button>
+    <!-- <button  class="btn-gray btn-hover-anim" type="button" (click)="isPreviewMode=true;onClickPreview()" >PREVIEW FORM</button> -->
+    <button  type="submit" class="btn-color btn-hover-anim" (click)=" superAdminAddnewForm()" >SUBMIT FORM</button>
+  </div> 
+
+
+
+
+
 
 
 <div class="container pt-5"  id="gravityForm"> 

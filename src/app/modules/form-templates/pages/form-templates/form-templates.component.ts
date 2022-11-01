@@ -88,6 +88,8 @@ export class FormTemplatesComponent implements OnInit, OnDestroy {
     this.listLoading = true;
     this.backendService.gettemplatelist(term)
     .subscribe(result => {
+      console.log( 'whirligig form template result',result);
+      
       this.loadingService.apiStop();
       if(result.code == 200) {
 

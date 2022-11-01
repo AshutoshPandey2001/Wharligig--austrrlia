@@ -1,3 +1,59 @@
+.template{
+  background-color: #f8f8f8;
+  // padding: 0 30px;
+  
+  min-height: 100vh;
+}
+.temppadding{
+  padding-top: 40px;
+  padding-left: 40px;
+  // padding-right: 30px;
+}
+.template .main-heading{
+ color: #d81f29;
+ font-family: HKGrotesk-Bold;
+ margin: 0;
+ font-size: 26px;
+}
+.template .sub-heading{
+ color: #181818;
+ font-family: HKGrotesk-Light;
+ font-size: 17px;
+}
+.template .line{
+ background-color: #dedbdb;
+ height: 1px;
+ margin-top: 15px;
+ margin-bottom: 5px;
+}
+.template .user-img{
+ border-radius: 100px;
+ height: 50px;
+ width: 50px;
+}
+
+
+.search-org-name{
+  background-color: #f8f8f8;
+  color: #a1a1a1;
+  margin: 30px 0;
+  width: 90%;
+  border-radius: 43px;
+  border: solid 1px #a1a1a1;
+  padding: 10px 35px 10px 25px;
+  font-family: HKGrotesk-Italic;
+  font-size: 14px;
+  outline: none;
+  position: relative;
+}
+.search-icon {
+  position: absolute;
+  top: 50%;
+  right: 17%;
+  transform: translateY(-50%);
+}
+
+
 .formTemlate{
     margin-top: 15px;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
@@ -5,7 +61,7 @@
     padding:10px 20px;
     margin-left: 10px;
     margin-right: 10px;
-    width: 200px;
+    width: 275px;
   }
   .formTemlate:hover{
     margin-top: 15px;
@@ -18,6 +74,7 @@
     margin: 0px;
     padding-top: 15px;
   }
+  
   .formTemlateName{
     font-family: HKGrotesk-Bold;
     font-size: 20px;

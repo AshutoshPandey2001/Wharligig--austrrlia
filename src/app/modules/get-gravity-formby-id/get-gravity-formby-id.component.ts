@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Constants } from 'src/app/constants/constants';
 import { ProxyService } from 'src/app/proxy.service';
 import { BackendService } from 'src/app/services/backend.service';
+import { EventService } from 'src/app/services/event.service';
 import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
@@ -14,9 +16,10 @@ export class GetGravityFormbyIdComponent implements OnInit {
   formId:any;
   jsonForm: any;  
   selctValue:any;
+
   formData:any={};
-  constructor(private route: ActivatedRoute, private Route: Router , private proxyservice: ProxyService ,     private backendService: BackendService,
-    private loadingService: LoadingService ,     private toastr: ToastrService
+  constructor(private route: ActivatedRoute, private router: Router , private proxyservice: ProxyService ,     private backendService: BackendService,
+    private loadingService: LoadingService ,     private toastr: ToastrService , private event: EventService
     ) { }
 
   ngOnInit() {
@@ -43,7 +46,7 @@ export class GetGravityFormbyIdComponent implements OnInit {
     })
   }
   backButton(){
-    this.Route.navigate(['/create-template'])
+    this.router.navigate(['/create-template'])
   }
   onChangeradion(selectValue: any) {
     this.selctValue = selectValue;
@@ -53,12 +56,27 @@ export class GetGravityFormbyIdComponent implements OnInit {
     console.log('Submitted Form' , form.value)
 
   }
+  exitForm(){
+    this.event.sendMessage({
+      type: Constants.OPEN_CONFIRMATION_OVERLAY,
+      data: {
+        heading: "Cancel template?",
+        inline: true,
+        callback: function () {
+          window.history.back();
+        },
+      },
+    });
+  }
 
   superAdminAddnewForm(){
    let payload = JSON.parse(JSON.stringify(this.formData));
-   payload.content = document.getElementById("gravityForm").innerHTML ;
+  //  payload.content = JSON.stringify(this.jsonForm);
+   payload.content = document.getElementById('gravityForm').innerHTML
+  //  payload.conditionallogic = this.jsonForm
 
 console.log( 'docinnerhtml', payload);
+
 this.loadingService.apiStart();
 
 this.backendService.templateFormSubmit(payload).subscribe(

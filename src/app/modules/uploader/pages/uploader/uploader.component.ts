@@ -544,9 +544,12 @@ export class UploaderComponent implements OnInit, AfterViewChecked {
     this.backendService.getSingleTemplateForm(id).subscribe(
       (result) => {
         this.loadingService.apiStop();
+        console.log('single form temp',result);
+        
         if (result.code == 200) {
           this.formData = result.data;
-
+          // console.log('jsondata' , JSON.parse(result.data.content));
+          
           /*Replace magic tag names*/
           if (this.userRole != Constants.SUPER_ADMIN) {
             while (
@@ -1151,10 +1154,10 @@ export class UploaderComponent implements OnInit, AfterViewChecked {
       }
     }
 
-    if (questions.length == 0) {
-      this.toastr.error("Please add at least one question");
-      return;
-    }
+    // if (questions.length == 0) {
+    //   this.toastr.error("Please add at least one question");
+    //   return;
+    // }
 
     /*If template id present then edit form otherwise add new form*/
     this.templateId == undefined
@@ -1196,7 +1199,8 @@ export class UploaderComponent implements OnInit, AfterViewChecked {
   superAdminEditForm(form) {
     let payload = JSON.parse(JSON.stringify(this.formData));
     payload.content = document.getElementById("formEditor").innerHTML;
-
+    console.log( 'editform payload',payload);
+    
     if (
       payload.policyid != null &&
       payload.policyid != undefined &&
@@ -1209,6 +1213,8 @@ export class UploaderComponent implements OnInit, AfterViewChecked {
 
     this.backendService.templateFormEdit(payload).subscribe(
       (result) => {
+        console.log('edit',result);
+        
         this.loadingService.apiStop();
         if (result.code == 200) {
           this.toastr.success("Form Edited successfully!!");

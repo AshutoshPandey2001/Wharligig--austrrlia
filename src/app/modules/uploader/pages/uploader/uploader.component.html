@@ -397,7 +397,7 @@
 
       <div class="row">
         <div class="col-sm-10">
-          <div class="header-section" *ngIf="userRole == constants.SUPER_ADMIN && !isPreviewMode">
+          <!-- <div class="header-section" *ngIf="userRole == constants.SUPER_ADMIN && !isPreviewMode">
             <div class="row">
               <div class="col-sm-12">
                 <div class="">
@@ -416,31 +416,31 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
-          <div class="header-section" *ngIf="userRole != constants.SUPER_ADMIN || isPreviewMode">
+          <!-- <div class="header-section" *ngIf="userRole != constants.SUPER_ADMIN || isPreviewMode">
             <div class="row">
               <div class="col-sm-12">
                 <h1 class="title-input">{{formData.title}}</h1>
                 <p class="desc-input">{{formData.description}}</p>
               </div>
             </div>
-          </div>
+          </div> -->
 
-          <div *ngIf="userRole == constants.SUPER_ADMIN  && !isPreviewMode" id="formEditor" class="form-editor sortable" [innerHtml]="formData.content">
-            <div class="question-container">
+          <div *ngIf="userRole == constants.SUPER_ADMIN  && !isPreviewMode" id="formEditor" class="form-editor sortable container pt-5" [innerHtml]="formData.content">
+            <!-- <div class="question-container">
               <div class="question" data-text="Enter text here">When is the bomb going to explode? OR When will the substance be released?</div>
               <div class="answer"></div>
-            </div>
+            </div> -->
           </div> 
           <div *ngIf="userRole == constants.SUPER_ADMIN && !isPreviewMode">
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-sm-7">
                 <div class="add-question">
                   Click to add Block
                 </div>
               </div>
-            </div>
+            </div> -->
           </div> 
 
           <div id="formEditor" [ngClass]="{'preview': isPreviewMode}" class="form-editor" *ngIf="userRole != constants.SUPER_ADMIN || isPreviewMode">

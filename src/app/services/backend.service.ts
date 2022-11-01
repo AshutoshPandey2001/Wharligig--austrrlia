@@ -71,6 +71,7 @@ export class BackendService {
   }
 
   templateFormEdit(payload){
+    console.log('api payload',payload)
     return this.restClient.post(ServerConstants.TEMPLATE_FORM_EDIT, payload);
   }
 
