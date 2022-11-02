@@ -549,7 +549,7 @@ export class UploaderComponent implements OnInit, AfterViewChecked {
         if (result.code == 200) {
           this.formData = result.data;
           // console.log('jsondata' , JSON.parse(result.data.content));
-          
+          this.jsonForm = JSON.parse(result.data.content);
           /*Replace magic tag names*/
           if (this.userRole != Constants.SUPER_ADMIN) {
             while (
@@ -1247,10 +1247,10 @@ export class UploaderComponent implements OnInit, AfterViewChecked {
     // console.log(form);
     payload["act"] = 0;
     payload["assignid"] = this.assignId;
+    // payload.content = Object.values(this.formData.content);
 
     payload["content"] = document.getElementById("formEditor").innerHTML;
-    // console.log(payload["content"]);
-
+    console.log( 'payloaded',payload);
     this.loadingService.apiStart();
 
     this.backendService.publishMyForm(payload).subscribe(

@@ -71,8 +71,8 @@ export class GetGravityFormbyIdComponent implements OnInit {
 
   superAdminAddnewForm(){
    let payload = JSON.parse(JSON.stringify(this.formData));
-  //  payload.content = JSON.stringify(this.jsonForm);
-   payload.content = document.getElementById('gravityForm').innerHTML
+   payload.content = JSON.stringify(this.jsonForm);
+  //  payload.content = document.getElementById('gravityForm').innerHTML
   //  payload.conditionallogic = this.jsonForm
 
 console.log( 'docinnerhtml', payload);

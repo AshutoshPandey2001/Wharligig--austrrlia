@@ -47,7 +47,7 @@ export class MyFormsComponent implements OnInit {
     this.backendService.myFormList(term)
     .subscribe(result => {
       this.loadingService.apiStop();
-
+      
       if(this.pageNo == 1) {
         this.myForms = result.data.assignform;
       }else{
